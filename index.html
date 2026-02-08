@@ -98,7 +98,7 @@ header {
 }
 
 .logo {
-  max-width: 180px; /* ajustável */
+  max-width: 300px; /* ajustável */
   width: 100%;
   height: auto;
 }
@@ -283,6 +283,33 @@ section {
   font-style: italic;
   opacity: 0.9;
 }
+/* ==========================
+   SPARKLES EM FORMATO CRUZ
+========================== */
+.testimonial-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-item .sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);;
+  clip-path: polygon(
+    50% 0%, 60% 35%, 100% 50%, 60% 65%, 
+    50% 100%, 40% 65%, 0% 50%, 40% 35%
+  ); /* formato cruz/estrela pequena */
+  opacity: 0;
+  pointer-events: none;
+  animation: sparkle-fade 2s infinite;
+}
+
+@keyframes sparkle-fade {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(45deg); }
+}
+
 
 /* ==========================
    FOOTER
