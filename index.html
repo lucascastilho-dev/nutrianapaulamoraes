@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ana Paula de Moraes | Nutricionista</title>
+<meta name="description" content="Nutricionista Ana Paula de Moraes - atendimento online, personalizado e focado em performance, estética corporal e resultados reais.">
+<meta property="og:title" content="Ana Paula de Moraes | Nutricionista">
+<meta property="og:description" content="Atendimento nutricional online, personalizado e focado em performance, estética corporal e resultados reais.">
+<meta property="og:image" content="img/perfil.jpeg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- FONTES -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- CSS Tailwind CDN -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+
+<!-- GSAP para Parallax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script
+
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Ana Paula de Moraes",
+  "image": "https://seusite.com/img/perfil.jpeg",
+  "description": "Nutricionista com atendimento online, focado em performance, estética corporal e resultados reais.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cidade",
+    "addressCountry": "BR"
+  },
+  "telephone": "+5512982055557",
+  "url": "https://seusite.com"
+}
+</script>
+
+<style>
+/* ==========================
+   FONTES
+========================== */
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('fonts/myriad-pro-webfont/MYRIADPRO-REGULAR.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('fonts/myriad-pro-webfont/MYRIADPRO-BOLD.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================
+   RESET & BASE
+========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Myriad Pro', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #FBE39B;
+}
+
+/* ==========================
+   LOGO & HEADER
+========================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+}
+
+.logo {
+  max-width: 180px; /* ajustável */
+  width: 100%;
+  height: auto;
+}
+
+/* ==========================
+   BOTÕES
+========================== */
+.btn-agendar, .floating-btn {
+  background: linear-gradient(to right, #FBE39B, #A57234);
+  color: #16261B;
+  padding: 14px 26px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.3s;
+  display: inline-block;
+}
+.btn-agendar:hover, .floating-btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-whatsapp {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #25D366;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* ==========================
+   SEÇÕES & HERO
+========================== */
+section {
+  padding: 80px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.hero {
+  text-align: center;
+  padding-top: 60px;
+}
+.hero h1 {
+  font-size: 44px;
+  margin-bottom: 20px;
+  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p {
+  font-size: 22px;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 40px;
+}
+
+/* ==========================
+   TÍTULOS
+========================== */
+.section-title {
+  font-size: 36px;
+  margin-bottom: 30px;
+  background: #FBE39B;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================
+   CARDS & STEPS
+========================== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 25px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.journey {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.step {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+.step:hover {
+  transform: translateY(-6px);
+  border-color: #FBE39B;
+}
+.step-number {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================
+   STATS
+========================== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 40px;
+  margin-top: 50px;
+  text-align: center;
+}
+.stat-number {
+  font-size: 48px;
+  font-weight: bold;
+  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================
+   HABILIDADES / RADAR
+========================== */
+/* RADAR CHART */
+.radar-wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0; /* remove o padding interno */
+  border-radius: 0; /* remove borda arredondada */
+  background: transparent; /* remove o fundo */
+  box-shadow: none; /* remove sombra */
+}
+
+.habilidades h2 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 30px; /* espaço antes do gráfico */
+  color: #FBE39B;
+}
+
+.habilidades p.sub {
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: 20px; /* separação do gráfico */
+}
+
+/* ==========================
+   DEPOIMENTOS
+========================== */
+.testimonial-carousel {
+  overflow: hidden;
+  margin-top: 40px;
+  position: relative;
+}
+.testimonial-track {
+  display: flex;
+  gap: 40px;
+}
+.testimonial-item {
+  min-width: 350px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 12px;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+footer {
+  text-align: center;
+  padding: 30px;
+  opacity: 0.8;
+}
+.social-footer {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-bottom: 15px;
+}
+.social-footer a {
+  font-size: 28px;
+  text-decoration: none;
+  background: linear-gradient(to right, #FBE39B, #A57234);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s;
+}
+.social-footer a:hover {
+  transform: scale(1.15);
+}
+
+/* ==========================
+   BOTÃO FLUTUANTE AGENDAR
+========================== */
+.floating-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 100px; /* distancia do WhatsApp */
+  border-radius: 50px;
+  z-index: 998;
+}
+
+/* ==========================
+   SOBRE / ABOUT
+========================== */
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+.about-photo {
+  width: 260px;
+  aspect-ratio: 992/1600;
+  overflow: hidden;
+  margin: 0 auto 30px;
+}
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.about-text {
+  flex: 1;
+  font-size: 20px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+.crn {
+  margin-top: -15px;
+  margin-bottom: 25px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  .hero p {
+    font-size: 18px;
+  }
+  .cards, .journey, .stats {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .about-text {
+    font-size: 18px;
+  }
+}
+
+/* ==========================
+   LINHAS HORIZONTAIS PARALLAX
+========================== */
+section {
+  position: relative; /* necessário para ::before */
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0; /* no topo da seção */
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(251,227,155,0.4), transparent);
+  pointer-events: none; /* não interfere em cliques */
+  z-index: 1;
+}
+
+/* Opcional: linhas animadas para efeito parallax */
+
+
+</style>
+</head>
+
+<body>
+<header class="flex justify-between items-center p-5 px-10">
+  <img src="img/logo.png" alt="Logo Ana Paula de Moraes" class="logo">
+  <a href="https://wa.me/5512982055557?text=Olá! Vim pelo site e gostaria de agendar uma consulta nutricional online." target="_blank" class="btn-whatsapp" aria-label="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Transforme sua saúde com acompanhamento profissional</h1>
+    <p>Atendimento nutricional personalizado, 100% online, com foco em performance, estética corporal e resultados reais.</p>
+    <a href="https://forms.gle/P2GjHFcBDFWkP1CC6" target="_blank" class="btn-agendar">Quero agendar minha consulta</a>
+  </section>
+
+  <!-- SOBRE -->
+  <section>
+    <div class="section-title">Sobre Ana Paula</div>
+    <div class="crn">CRN-3 75260</div>
+
+    <div class="about-container">
+      <div class="about-photo">
+        <img src="img/perfil.jpeg" alt="Ana Paula de Moraes" loading="lazy">
+      </div>
+      <div class="about-text">
+        <p>Nutricionista com atuação focada em nutrição clínica e funcional, 
+        em constante aprimoramento profissional por meio de formação complementar na área.				
+        Seu trabalho é baseado na compreensão da rotina, do biotipo e dos objetivos de cada paciente, 
+        construindo estratégias alimentares realistas e sustentáveis.</p>
+        <p>O objetivo é transformar sua relação com a alimentação e promover resultados consistentes
+        na saúde, estética corporal e performance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat">
+      <div class="stat-number" data-target="4920" data-suffix="+">0</div>
+      <div class="stat-label">Horas dedicadas em estudos</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-target="2500" data-suffix="+">0</div>
+      <div class="stat-label">Pessoas Impactadas</div>            
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-target="98">0</div>
+      <div class="stat-label">% de Satisfação</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" data-target="4">0</div>
+      <div class="stat-label">Anos de Atuação</div>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+	<section class="habilidades" id="sec-habilidades">
+	  <h2>Áreas de Atuação</h2>
+	  <p class="sub">Distribuição das principais frentes de trabalho</p>
+	  <div class="radar-wrapper">
+		<canvas id="radarChart"></canvas>
+	  </div>
+	</section>
+
+
+  <!-- SERVIÇOS -->
+  <section>
+    <div class="section-title">Serviços</div>
+    <div class="cards">
+      <div class="card">
+        <h3>Consulta Nutricional</h3>
+        <p>Avaliação completa do seu perfil e objetivos.</p>
+      </div>
+      <div class="card">
+        <h3>Plano Alimentar Personalizado</h3>
+        <p>Plano alimentar estratégico para seu biotipo.</p>
+      </div>
+      <div class="card">
+        <h3>Acompanhamento Online</h3>
+        <p>Suporte contínuo durante toda sua jornada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- JORNADA -->
+  <section>
+    <div class="section-title">Sua Jornada</div>
+    <div class="journey">
+      <div class="step"><div class="step-number">01</div><h3>Agendamento</h3><p>Você escolhe o melhor horário e inicia seu processo de cuidado nutricional.</p></div>
+      <div class="step"><div class="step-number">02</div><h3>Avaliação Completa</h3><p>Análise detalhada do seu histórico, rotina, exames e objetivos.</p></div>
+      <div class="step"><div class="step-number">03</div><h3>Plano Alimentar Personalizado</h3><p>Estratégia alimentar exclusiva, pensada para o seu biotipo e metas.</p></div>
+      <div class="step"><div class="step-number">04</div><h3>Acompanhamento Contínuo</h3><p>Suporte semanal para ajustes, dúvidas e evolução constante.</p></div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+ <section>
+    <div class="section-title">Insights que Mudam Sua Vida</div>
+
+    <div class="testimonial-carousel">
+        <div class="testimonial-track">
+            <div class="testimonial-item">
+                “Hoje me sinto no controle da minha saúde, e sei que posso ir ainda mais longe!”<br><strong>- Herói</strong>
+            </div>
+            <div class="testimonial-item">
+                “Percebi que pequenas escolhas consistentes mudam mais do que semanas de esforço intenso.”<br><strong>- Sábio</strong>
+            </div>
+            <div class="testimonial-item">
+                “Não espere pelo momento perfeito — comece hoje e veja a transformação acontecer.”<br><strong>- Mentor</strong>
+            </div>
+            <div class="testimonial-item">
+                “Cada passo que dei me revelou um caminho que eu nem sabia que existia.”<br><strong>- Explorador</strong>
+            </div>
+            <div class="testimonial-item">
+                “Nunca acreditei que poderia me sentir tão bem comendo de forma prazerosa e equilibrada.”<br><strong>- Rebelde</strong>
+            </div>
+            <div class="testimonial-item">
+                “Aprendi a me valorizar de verdade cuidando da minha alimentação e do meu corpo.”<br><strong>- Amante</strong>
+            </div>
+            <div class="testimonial-item">
+                “Transformar minha rotina parecia impossível, mas cada pequeno passo me deu confiança.”<br><strong>- Herói</strong>
+            </div>
+            <div class="testimonial-item">
+                “Compreendi que mudança real vem de hábitos consistentes, não de soluções rápidas.”<br><strong>- Sábio</strong>
+            </div>
+            <div class="testimonial-item">
+                “Ao dar o primeiro passo, descobri que meu potencial era maior do que imaginava.”<br><strong>- Mentor</strong>
+            </div>
+            <div class="testimonial-item">
+                “Cada nova estratégia de alimentação me abriu portas para energia e disposição que eu nem lembrava.”<br><strong>- Explorador</strong>
+            </div>
+            <div class="testimonial-item">
+                “Quebrar velhos padrões me deu liberdade de viver melhor e mais leve.”<br><strong>- Rebelde</strong>
+            </div>
+            <div class="testimonial-item">
+                “Cuidar de mim se tornou um ato de amor próprio, e não uma obrigação.”<br><strong>- Amante</strong>
+            </div>
+            <div class="testimonial-item">
+                “Senti que cada conquista, por menor que fosse, me aproximava da minha melhor versão.”<br><strong>- Herói</strong>
+            </div>
+            <div class="testimonial-item">
+                “Percebi que o verdadeiro progresso não está na rapidez, mas na consistência diária.”<br><strong>- Sábio</strong>
+            </div>
+            <div class="testimonial-item">
+                “Aprender a escutar meu corpo me deu clareza e motivação que nunca tive antes.”<br><strong>- Mentor</strong>
+            </div>
+            <div class="testimonial-item">
+                “Explorar novas formas de me alimentar me trouxe energia e confiança inéditas.”<br><strong>- Explorador</strong>
+            </div>
+            <div class="testimonial-item">
+                “Decidi desafiar minhas crenças sobre alimentação e me surpreendi com os resultados.”<br><strong>- Rebelde</strong>
+            </div>
+            <div class="testimonial-item">
+                “Ame-se no processo — cuidar de si mesmo é a maior transformação que existe.”<br><strong>- Amante</strong>
+            </div>
+            <div class="testimonial-item">
+                “Cada meta atingida me mostrou que sou capaz de superar meus próprios limites.”<br><strong>- Herói</strong>
+            </div>
+            <div class="testimonial-item">
+                “Aprender sobre meu corpo me deu ferramentas para decisões mais inteligentes e duradouras.”<br><strong>- Sábio</strong>
+            </div>
+
+            <!-- duplicado para loop infinito -->
+            <div class="testimonial-item">
+                “Hoje me sinto no controle da minha saúde, e sei que posso ir ainda mais longe!”<br><strong>- Herói</strong>
+            </div>
+            <div class="testimonial-item">
+                “Percebi que pequenas escolhas consistentes mudam mais do que semanas de esforço intenso.”<br><strong>- Sábio</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="social-footer">
+    <a href="https://instagram.com/nutri.anapaulamoraes" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://linkedin.com/in/nutrianapaulamoraes" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+  </div>
+  © 2026 Ana Paula de Moraes - Nutricionista • CRN-3 12345 - Todos os direitos reservados
+</footer>
+
+<a href="https://forms.gle/P2GjHFcBDFWkP1CC6" target="_blank" class="floating-btn">Agendar Agora</a>
+
+<script src="js/animations.js" type="module"></script>
+</body>
+</html>
