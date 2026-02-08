@@ -175,3 +175,22 @@ document.querySelectorAll('section::before').forEach((line) => {
     }
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const testimonials = document.querySelectorAll('.testimonial-item');
+
+  testimonials.forEach(item => {
+    for (let i = 0; i < 5; i++) {
+      const sparkle = document.createElement('span');
+      sparkle.classList.add('sparkle');
+      
+      sparkle.style.top = `${Math.random() * 90}%`;
+      sparkle.style.left = `${Math.random() * 90}%`;
+      const size = Math.random() * 6 + 4; // 4px a 10px
+      sparkle.style.width = `${size}px`;
+      sparkle.style.height = `${size}px`;
+      sparkle.style.animationDelay = `${Math.random() * 3}s`;
+
+      item.appendChild(sparkle);
+    }
+  });
+});
