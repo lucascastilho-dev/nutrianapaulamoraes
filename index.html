@@ -72,9 +72,23 @@
 }
 
 body {
-  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32);
-  color: white;
+  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32)!important;
+  color: white!important;
   overflow-x: hidden;
+}
+
+* Forçar modo claro e ignorar dark mode do navegador */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light; /* força navegador a usar cores claras */
+  }
+  
+body {
+  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32)!important;
+  color: white!important;
+  overflow-x: hidden;
+}
+
 }
 
 /* Links */
