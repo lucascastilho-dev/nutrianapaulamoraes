@@ -76,19 +76,31 @@ body {
   color: white!important;
   overflow-x: hidden;
 }
-
-* Forçar modo claro e ignorar dark mode do navegador */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: light; /* força navegador a usar cores claras */
-  }
-  
-body {
-  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32)!important;
-  color: white!important;
-  overflow-x: hidden;
+/* ==========================
+   FORÇAR MODO CLARO
+========================== */
+:root {
+  color-scheme: light; /* indica que só usamos cores claras */
 }
 
+/* Forçar cores do body */
+body, html {
+  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32) !important;
+  color: white !important;
+}
+
+/* Forçar cores para elementos comuns */
+section, header, footer, .card, .btn-agendar, .hero, .stats, .journey, .about-text, .testimonial-item {
+  background: unset !important; /* remove possíveis mudanças de background do navegador */
+  color: inherit !important;
+}
+
+/* Desativa dark mode do navegador via media query (caso respeite) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: transparent !important;
+    color: inherit !important;
+  }
 }
 
 /* Links */
