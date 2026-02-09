@@ -53,6 +53,7 @@ function criarGrafico(dataInicial){
   
   function getFontSize() {
 	const w = window.innerWidth;
+	if (w < 350) return 8;      // celular pequeno
 	if (w < 480) return 10;      // celular pequeno
 	if (w < 768) return 12;      // celular grande
 	if (w < 1024) return 14;     // tablet
