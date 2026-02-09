@@ -91,7 +91,7 @@ body, html {
 }
 
 /* Forçar cores para elementos comuns */
-section, header, footer, .card, .btn-agendar, .hero, .stats, .journey, .about-text, .testimonial-item {
+section, header {
   background: unset !important; /* remove possíveis mudanças de background do navegador */
   color: inherit !important;
 }
@@ -268,13 +268,35 @@ section {
 ========================== */
 /* RADAR CHART */
 .radar-wrapper {
+  width: 100%;
   max-width: 760px;
   margin: 0 auto;
-  padding: 0; /* remove o padding interno */
-  border-radius: 0; /* remove borda arredondada */
-  background: transparent; /* remove o fundo */
-  box-shadow: none; /* remove sombra */
+  position: relative;
+
+  /* ALTURA CONTROLADA */
+  --height: 420px;
 }
+
+.radar-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+@media (max-width: 768px) {
+  .radar-wrapper {
+   -- height: 300px;   /* reduz a altura no mobile */
+  }
+
+  .habilidades h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .habilidades p.sub {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+}
+
 
 .habilidades h2 {
   font-size: 32px;

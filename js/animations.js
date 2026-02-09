@@ -50,6 +50,15 @@ const valoresZerados = [0, 0, 0, 0, 0];
 
 function criarGrafico(dataInicial){
   const ctx = document.getElementById('radarChart');
+  
+  function getFontSize() {
+	const w = window.innerWidth;
+	if (w < 480) return 10;      // celular pequeno
+	if (w < 768) return 12;      // celular grande
+	if (w < 1024) return 14;     // tablet
+	return 16;                   // desktop
+	
+}
 
   radarChart = new Chart(ctx, {
     type: 'radar',
@@ -73,6 +82,8 @@ function criarGrafico(dataInicial){
       }]
     },
     options: {
+	  responsive: true,
+	  maintainAspectRatio: true,
       animation: { duration: 1200 },
       plugins: { legend: { display: false } },
       scales: {
@@ -88,13 +99,17 @@ function criarGrafico(dataInicial){
           angleLines: { color: 'rgba(251,227,155,0.25)' },
           pointLabels: {
             color: '#FBE39B',
-            font: { size: 16, weight: '600' }
+            font: { 
+				size: getFontSize(), 
+				weight: '600' 
+				}
           }
         }
       }
     }
   });
 }
+
 
 function animarGrafico(){
   radarChart.data.datasets[0].data = valoresReais;
