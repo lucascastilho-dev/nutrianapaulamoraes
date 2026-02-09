@@ -501,7 +501,7 @@ section::before {
 
 .icone-dourado-grande {
   font-size: 120px;
-  background: linear-gradient(to right,#FBE39B 30%,#A57234 60%);
+  background: linear-gradient(to right,#FBE39B 40%,#A57234 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
@@ -518,6 +518,19 @@ section::before {
 
 .mensagem-impacto.invertido .texto-destaque {
   grid-column: 1;
+}
+.dropcap {
+  font-family: 'Belly Betty';
+  float: left;
+  font-size: 80px;
+  line-height: 70px;
+  padding-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 12px;
+
+  background: linear-gradient(to bottom, #FBE39B, #A57234);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 /* MOBILE */
 @media (max-width: 768px) {
@@ -569,6 +582,13 @@ section::before {
     flex: unset;
   
 }
+}
+.about-paragrafo {
+  text-align: justify;
+}
+
+
+
 
 </style>
 </head>
@@ -599,7 +619,8 @@ section::before {
         <img src="img/perfil.jpeg" alt="Ana Paula de Moraes" loading="lazy">
       </div>
       <div class="about-text">
-        <p>Nutricionista com atuação focada em nutrição clínica e funcional, 
+        <p class="about-paragrafo">
+		 <span class="dropcap">N</span>utricionista com atuação focada em nutrição clínica e funcional, 
         em constante aprimoramento profissional por meio de formação complementar na área.				
         Seu trabalho é baseado na compreensão da rotina, do biotipo e dos objetivos de cada paciente, 
         construindo estratégias alimentares realistas e sustentáveis.</p>
