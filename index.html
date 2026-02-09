@@ -61,6 +61,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Belly Betty';
+  src: url('fonts/Belly_Betty.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ==========================
    RESET & BASE
@@ -149,7 +156,7 @@ header {
 .btn-whatsapp {
   position: fixed;
   bottom: 25px;
-  right: 25px;
+  left: 25px;
   background: #25D366;
   color: white;
   padding: 15px;
@@ -192,7 +199,7 @@ section {
    TÍTULOS
 ========================== */
 .section-title {
-  font-size: 36px;
+  font-size: 46px;
   margin-bottom: 30px;
   background: #FBE39B;
   -webkit-background-clip: text;
@@ -244,6 +251,8 @@ section {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+
 
 /* ==========================
    STATS
@@ -392,7 +401,7 @@ footer {
 ========================== */
 .floating-btn {
   position: fixed;
-  bottom: 90px;
+  bottom: 25px;
   right: 25px; /* distancia do WhatsApp */
   border-radius: 50px;
   z-index: 998;
@@ -421,7 +430,7 @@ footer {
   object-position: center top;
   display: block;
 }
-.about-text {
+.about-text {  
   flex: 1;
   font-size: 20px;
   line-height: 1.6;
@@ -435,24 +444,16 @@ footer {
   opacity: 0.7;
 }
 
-/* ==========================
-   RESPONSIVIDADE
-========================== */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 32px;
-  }
-  .hero p {
-    font-size: 18px;
-  }
-  .cards, .journey, .stats {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .about-text {
-    font-size: 18px;
-  }
+.section-title.cursive{
+	font-family: 'Belly Betty', cursive;
+	padding: 2px;
 }
+.section-title.center{
+	font-family: 'Belly Betty', cursive;
+	padding: 2px;
+	text-align: center;
+}
+
 
 /* ==========================
    LINHAS HORIZONTAIS PARALLAX
@@ -473,8 +474,100 @@ section::before {
   z-index: 1;
 }
 
-/* Opcional: linhas animadas para efeito parallax */
 
+.texto-destaque {
+  --font-family: 'Belly Betty', cursive;
+  font-size: 20px;
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.7;
+  line-height: 1.5;
+  padding: 2px;
+}
+.mensagem-impacto {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 1/3 ícone | 2/3 texto */
+  align-items: center;
+  gap: 40px;
+  max-width: 1100px;
+ -- margin: 120px auto;
+}
+
+.mensagem-impacto.invertido {
+  grid-template-columns: 2fr 1fr; /* inverte */
+}
+
+.icone-dourado-grande {
+  font-size: 120px;
+  background: linear-gradient(to right,#FBE39B 30%,#A57234 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.mensagem-impacto.invertido .icone-dourado {
+  grid-column: 2;
+}
+
+.mensagem-impacto.invertido .texto-destaque {
+  grid-column: 1;
+}
+/* MOBILE */
+@media (max-width: 768px) {
+  .mensagem-impacto,
+  .mensagem-impacto.invertido {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 20px;
+   --margin: 80px 20px;
+  }
+
+  .icone-dourado-grande {
+    font-size: 70px;
+  }
+
+  .texto-destaque {
+    font-size: 20px;
+  }
+}
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  .hero p {
+    font-size: 18px;
+  }
+  .cards, .journey, .stats {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .about-text {
+    font-size: 18px;
+  }
+   .about-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-photo {
+    order: -1; /* joga a foto pra cima */
+    margin-bottom: 25px;
+  }
+
+  .about-text {
+    flex: unset;
+  
+}
 
 </style>
 </head>
@@ -490,14 +583,14 @@ section::before {
 <main>
   <!-- HERO -->
   <section class="hero">
-    <h1>Transforme sua saúde com acompanhamento profissional</h1>
+    <h1>Acompanhamento nutricional para transformar sua saúde, sua performance e sua qualidade de vida</h1>
     <p>Atendimento nutricional personalizado, 100% online, com foco em performance, estética corporal e resultados reais.</p>
     <a href="https://forms.gle/P2GjHFcBDFWkP1CC6" target="_blank" class="btn-agendar">Quero agendar minha consulta</a>
   </section>
 
   <!-- SOBRE -->
   <section>
-    <div class="section-title">Sobre Ana Paula</div>
+    <div class="section-title cursive">Sobre Ana Paula</div>
     <div class="crn">CRN-3 75260</div>
 
     <div class="about-container">
@@ -513,6 +606,13 @@ section::before {
         na saúde, estética corporal e performance.</p>
       </div>
     </div>
+  </section>
+  
+  <section class="mensagem-impacto">
+  <i class="fa-solid fa-baby icone-dourado-grande"></i>
+	<h2 class="texto-destaque">
+	A nutrição começa desde o nascimento, é o cuidado silencioso que constrói a saúde, escolhas e impactos por toda a vida
+	</h2>
   </section>
 
   <!-- STATS -->
@@ -534,20 +634,35 @@ section::before {
       <div class="stat-label">Anos de Atuação</div>
     </div>
   </section>
+  
+  <section class="mensagem-impacto invertido">  
+	<h2 class="texto-destaque">
+	Sua performance, estética e energia começam na alimentação e no cuidado diário com a própria saúde
+	</h2>
+	<div>
+		  <i class="fa-solid fa-bolt icone-dourado-grande"></i>
+	</div>
+  </section>
 
   <!-- HABILIDADES -->
 	<section class="habilidades" id="sec-habilidades">
-	  <h2>Áreas de Atuação</h2>
+	  <div class="section-title cursive center">Áreas de Atuação</div>
 	  <p class="sub">Distribuição das principais frentes de trabalho</p>
 	  <div class="radar-wrapper">
 		<canvas id="radarChart"></canvas>
 	  </div>
 	</section>
 
+  <section class="mensagem-impacto">
+    <i class="fa-solid fa-shield-heart icone-dourado-grande"></i>
+	<h2 class="texto-destaque">
+	A longevidade e a autonomia que você deseja dependem do acompanhamento nutricional que você decide ter hoje
+	</h2>
+  </section>
 
   <!-- SERVIÇOS -->
   <section>
-    <div class="section-title">Serviços</div>
+    <div class="section-title cursive">Serviços</div>
     <div class="cards">
       <div class="card">
         <h3>Consulta Nutricional</h3>
@@ -564,9 +679,18 @@ section::before {
     </div>
   </section>
 
+  <section class="mensagem-impacto invertido">    
+	<h2 class="texto-destaque">
+	Qualidade de vida na maturidade é o resultado direto do cuidado contínuo com a saúde e a nutrição
+	</h2>
+	<div>
+		<i class="fa-solid fa-person-walking icone-dourado-grande"></i>
+	</div>
+  </section>
+  
   <!-- JORNADA -->
   <section>
-    <div class="section-title">Sua Jornada</div>
+    <div class="section-title cursive">Sua Jornada</div>
     <div class="journey">
       <div class="step"><div class="step-number">01</div><h3>Agendamento</h3><p>Você escolhe o melhor horário e inicia seu processo de cuidado nutricional.</p></div>
       <div class="step"><div class="step-number">02</div><h3>Avaliação Completa</h3><p>Análise detalhada do seu histórico, rotina, exames e objetivos.</p></div>
@@ -577,7 +701,7 @@ section::before {
 
   <!-- DEPOIMENTOS -->
  <section>
-    <div class="section-title">Insights que Mudam Sua Vida</div>
+    <div class="section-title cursive">Insights que Mudam Sua Vida</div>
 
     <div class="testimonial-carousel">
         <div class="testimonial-track">
