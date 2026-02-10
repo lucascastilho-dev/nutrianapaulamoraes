@@ -101,17 +101,47 @@ function initCarousel() {
   if (!track) return;
 
   const content = track.innerHTML;
-  track.innerHTML += content; // duplica
+  track.innerHTML += content;
 
   let pos = 0;
   const speed = 0.3;
+  let isPaused = false;
+  let isDragging = false;
+  let startX = 0;
+  let lastX = 0;
 
   function loop() {
-    pos -= speed;
-    if (Math.abs(pos) >= track.scrollWidth / 2) pos = 0;
-    track.style.transform = `translate3d(${pos}px,0,0)`;
+    if (!isPaused && !isDragging) {
+      pos -= speed;
+      if (Math.abs(pos) >= track.scrollWidth / 2) pos = 0;
+      track.style.transform = `translate3d(${pos}px,0,0)`;
+    }
     requestAnimationFrame(loop);
   }
+
+  // Hover pausa
+  track.addEventListener('mouseenter', () => isPaused = true);
+  track.addEventListener('mouseleave', () => isPaused = false);
+
+  // Touch / mouse drag
+  track.addEventListener('pointerdown', (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    lastX = pos;
+    track.style.cursor = 'grabbing';
+  });
+
+  window.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    pos = lastX + dx;
+    track.style.transform = `translate3d(${pos}px,0,0)`;
+  });
+
+  window.addEventListener('pointerup', () => {
+    isDragging = false;
+    track.style.cursor = 'grab';
+  });
 
   loop();
 }
