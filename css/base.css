@@ -504,7 +504,8 @@ section::before {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 
@@ -612,24 +613,6 @@ section::before {
 }
 
 
-/* MOBILE */
-@media (max-width: 768px) {
-  .mensagem-aplicativo,
-  .mensagem-impacto.invertido {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 20px;
-   --margin: 80px 20px;
-  }
-
-  .icone-dourado-grande {
-    font-size: 70px;
-  }
-
-  .texto-destaque {
-    font-size: 20px;
-  }
-}
 /* ==========================
    RESPONSIVIDADE
 ========================== */
@@ -717,6 +700,7 @@ section::before {
 .foto-ken-burns {
     width: 100%;
     height: 100%;
+	max-width: 560px;
     background-size: cover;
     background-position: center;
 
@@ -797,3 +781,22 @@ section::before {
     }
 }
 
+/* MOBILE */
+@media (max-width: 768px) {
+  .mensagem-aplicativo,
+  .mensagem-impacto.invertido {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 20px;
+   --margin: 80px 20px;
+  }
+
+  .icone-dourado-grande {
+    font-size: 70px;
+  }
+
+  .texto-destaque {
+    font-size: 20px;
+	max-width: none;
+  }
+}
