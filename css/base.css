@@ -1,0 +1,798 @@
+
+
+/* ==========================
+   FONTES
+========================== */
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../fonts/myriad-pro-webfont/MYRIADPRO-REGULAR.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../fonts/myriad-pro-webfont/MYRIADPRO-BOLD.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Belly Betty';
+  src: url('../fonts/Belly_Betty.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================
+   RESET & BASE
+========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Myriad Pro', sans-serif;
+  caret-color: transparent;
+}
+
+body {
+  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32)!important;
+  color: white!important;
+  overflow-x: hidden;
+}
+
+/* ==========================
+   FORÇAR MODO CLARO
+========================== */
+:root {
+  color-scheme: light; /* indica que só usamos cores claras */
+}
+
+/* Forçar cores do body */
+body, html {
+  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32) !important;
+  color: white !important;
+}
+
+/* Forçar cores para elementos comuns */
+section, header {
+  background: unset !important; /* remove possíveis mudanças de background do navegador */
+  color: inherit !important;
+}
+
+/* Desativa dark mode do navegador via media query (caso respeite) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: transparent !important;
+    color: inherit !important;
+  }
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #FBE39B;
+}
+
+/* ==========================
+   LOGO & HEADER
+========================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+}
+
+.logo {
+  max-width: 400px; /* ajustável */
+  width: 100%;
+  height: auto;
+}
+
+h3 {
+	margin-bottom: 9px;
+}
+
+/* ==========================
+   BOTÕES
+========================== */
+.btn-agendar, .floating-btn {
+  background: linear-gradient(to right, #FBE39B, #A57234);
+  color: #16261B;
+  padding: 14px 26px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.3s;
+  display: inline-block;
+  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(20px); /* leve subida elegante */
+}
+
+/* ==========================
+   BOTÃO FLUTUANTE AGENDAR
+========================== */
+.floating-btn,
+.btn-whatsapp {
+  position: fixed;
+  bottom: 25px;
+  transition: opacity .6s ease, transform .6s ease;
+  pointer-events: none;
+}
+
+.floating-btn {  
+  right: 25px; /* distancia do WhatsApp */
+  border-radius: 50px;
+  z-index: 998;
+  opacity: 0;
+
+}
+.btn-agendar:hover, .floating-btn:hover {
+  transform: scale(1.05);
+}
+
+.btn-whatsapp {
+  bottom: 25px;
+  left: 25px;
+  background: linear-gradient(to right, #FBE39B, #A57234);;
+  color: #16261B;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(20px); /* leve subida elegante */
+}
+
+
+.floating-btn.show,
+.btn-whatsapp.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ==========================
+   SEÇÕES & HERO
+========================== */
+section {
+  padding: 80px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.hero {
+  text-align: center;
+  padding-top: 60px;
+}
+.hero h1 {
+  font-size: 44px;
+  margin-bottom: 30px;
+  margin-top: 40px;
+  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+}
+.hero p {
+  font-size: 22px;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.hero{
+  
+}
+
+/* ==========================
+   TÍTULOS
+========================== */
+.section-title {
+  font-size: 46px;
+  margin-bottom: 30px;
+  background: #FBE39B;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================
+   CARDS & STEPS
+========================== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+.card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 25px;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.journey {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+.step {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+.step:hover {
+  transform: translateY(-6px);
+  border-color: #FBE39B;
+}
+.step-number {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+/* ==========================
+   STATS
+========================== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 40px;
+  margin-top: 50px;
+  text-align: center;
+}
+.stat-number {
+  font-size: 48px;
+  font-weight: bold;
+  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================
+   HABILIDADES / RADAR
+========================== */
+/* RADAR CHART */
+.radar-wrapper {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+
+  /* ALTURA CONTROLADA */
+  --height: 420px;
+}
+
+.radar-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+@media (max-width: 768px) {
+  .radar-wrapper {
+   -- height: 300px;   /* reduz a altura no mobile */
+  }
+
+  .habilidades h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .habilidades p.sub {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+}
+
+
+.habilidades h2 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 30px; /* espaço antes do gráfico */
+  color: #FBE39B;
+}
+
+.habilidades p.sub {
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: 20px; /* separação do gráfico */
+}
+
+/* ==========================
+   DEPOIMENTOS
+========================== */
+.testimonial-carousel {
+  overflow: hidden;
+  margin-top: 40px;
+  position: relative;
+}
+.testimonial-track {
+  display: flex;
+  gap: 40px;
+}
+.testimonial-item {
+  min-width: 350px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 12px;
+  font-style: italic;
+  opacity: 0.9;
+}
+/* ==========================
+   SPARKLES EM FORMATO CRUZ
+========================== */
+.testimonial-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-item .sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);;
+  clip-path: polygon(
+    50% 0%, 60% 35%, 100% 50%, 60% 65%, 
+    50% 100%, 40% 65%, 0% 50%, 40% 35%
+  ); /* formato cruz/estrela pequena */
+  opacity: 0;
+  pointer-events: none;
+  animation: sparkle-fade 2s infinite;
+}
+
+@keyframes sparkle-fade {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(45deg); }
+}
+
+
+/* ==========================
+   FOOTER
+========================== */
+footer {
+  text-align: center;
+  padding: 30px;
+  padding-bottom: 100px;
+  opacity: 0.8;
+}
+.social-footer {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-bottom: 15px;
+}
+.social-footer a {
+  font-size: 28px;
+  text-decoration: none;
+  background: linear-gradient(to right, #FBE39B, #A57234);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s;
+}
+.social-footer a:hover {
+  transform: scale(1.15);
+}
+
+/* ==========================
+   SOBRE / ABOUT
+========================== */
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+.about-photo {
+  width: 260px;
+  aspect-ratio: 992/1600;
+  overflow: hidden;
+  margin: 0 auto 30px;
+}
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.about-text {  
+  flex: 1;
+  font-size: 20px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+.crn {
+  margin-top: -15px;
+  margin-bottom: 25px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.section-title.cursive{
+	font-family: 'Belly Betty', cursive;
+	padding: 3px;
+}
+.section-title.center{
+	font-family: 'Belly Betty', cursive;
+	padding: 2px;
+	text-align: center;
+}
+
+
+/* ==========================
+   LINHAS HORIZONTAIS PARALLAX
+========================== */
+section {
+  position: relative; /* necessário para ::before */
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0; /* no topo da seção */
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(251,227,155,0.4), transparent);
+  pointer-events: none; /* não interfere em cliques */
+  z-index: 1;
+}
+
+.hidden{
+  opacity: 0;
+  height: 1px;
+  pointer-events: none;
+  padding: 0;
+  border: 0;
+}
+
+.texto-destaque {
+  font-family: 'Myriad Pro', sans-serif;
+  font-size: 15px;
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.7;
+  line-height: 1.5;
+  padding: 2px;
+  letter-spacing: 2px;
+  font-weight: 300;
+}
+.mensagem-aplicativo {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 1/3 ícone | 2/3 texto */
+  align-items: center;
+  gap: 40px;
+  max-width: 1100px;
+ -- margin: 120px auto;
+}
+
+.mensagem-impacto.invertido {
+  grid-template-columns: 2fr 1fr; /* inverte */
+}
+
+.icone-dourado-grande {
+  font-size: 120px;
+  background: linear-gradient(to right,#FBE39B 40%,#A57234 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.mensagem-impacto.invertido .icone-dourado {
+  grid-column: 2;
+}
+
+.mensagem-impacto.invertido .texto-destaque {
+  grid-column: 1;
+}
+.dropcap {
+  font-family: 'Belly Betty';
+  float: left;
+  font-size: 80px;
+  line-height: 70px;
+  padding-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 12px;
+
+  background: linear-gradient(to bottom, #FBE39B, #A57234);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Container Principal */
+.mensagem-impacto {
+    position: relative;
+    height: 60vh; /* Ajuste a altura conforme preferir */
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Esconde a sobra do zoom da imagem */
+    color: #fff;
+    text-align: center;
+	background-color: transparent; /* Garante que o container não bloqueie a transparência */
+}
+
+/* Efeito Ken Burns - Estado Inicial */
+.bg-ken-burns {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+
+    transform: scale(1);
+    transition: transform 20s linear;
+
+    will-change: transform;
+
+    -webkit-mask-image: linear-gradient(to right, transparent 5%, black 20%, black 80%, transparent 95%);
+    mask-image: linear-gradient(to right, transparent 5%, black 20%, black 80%, transparent 95%);
+}
+
+.bg-ken-burns.animating {
+    transform: scale(1.15);
+}
+
+
+
+/* Camada Escura (Overlay) recomendada */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 30, 20, 0.5); /* O verde escuro com transparência */
+    z-index: 2;
+	
+	/* A máscara do overlay deve ser igual à da foto para não escurecer o vazio lateral */
+    -webkit-mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        black 20%, 
+        black 80%, 
+        transparent 100%);
+    mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        black 20%, 
+        black 80%, 
+        transparent 100%);
+}
+
+/* Conteúdo (Texto e Ícone) acima de tudo */
+.conteudo-impacto {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.icone-dourado-grande {
+    color: #D4AF37; /* Tom de dourado */
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.texto-destaque {
+    --font-family: 'Myriad Pro', serif; /* Ou a fonte do seu site */
+    font-size: 0.5rem;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .mensagem-aplicativo,
+  .mensagem-impacto.invertido {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 20px;
+   --margin: 80px 20px;
+  }
+
+  .icone-dourado-grande {
+    font-size: 70px;
+  }
+
+  .texto-destaque {
+    font-size: 20px;
+  }
+}
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  .hero p {
+    font-size: 18px;
+  }
+  .cards, .journey, .stats {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .about-text {
+    font-size: 18px;
+  }
+   .about-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-photo {
+    order: -1; /* joga a foto pra cima */
+    margin-bottom: 25px;
+  }
+
+  .about-text {
+    flex: unset;
+  
+}
+}
+.about-paragrafo {
+  text-align: justify;
+}
+
+/* Estilo específico para a imagem do celular */
+.mockup-app {
+  width: 100%;
+  max-width: 350px; /* Tamanho ideal para não dominar a tela */
+  height: auto;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); /* Sombra para dar profundidade */
+  animation: float 4s ease-in-out infinite; /* Efeito de flutuação suave */
+  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;  
+  max-width: 320px; /* Evita que o celular fique gigante no desktop */
+}
+
+/* Animação de flutuação */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Ajuste para o texto não ficar colado na imagem no mobile */
+@media (max-width: 768px) {
+  .mockup-app {
+    max-width: 250px;
+    margin-bottom: 20px;
+  }
+}
+
+
+
+.secao-split {
+    display: flex;
+    align-items: stretch;
+    min-height: 500px;
+    background-color: #001E14; /* A cor verde escura do site */
+    overflow: hidden;
+    flex-wrap: wrap; /* Garante que no celular o texto vá para baixo */
+}
+
+/* Lado da Imagem */
+.split-imagem {
+    position: relative;
+    flex: 1 1 500px; /* Base de 500px, cresce conforme a tela */
+    min-height: 500px;
+}
+
+.foto-ken-burns {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+
+    transform: scale(1);
+    //transition: transform 10s linear;
+}
+
+.secao-split.animating .foto-ken-burns {
+    transform: scale(1.12);
+}
+
+.secao-split.animating .foto-ken-burns {
+    animation: kenburns 10s linear forwards;
+}
+
+@keyframes kenburns {
+    from { transform: scale(1); }
+    to   { transform: scale(1.12); }
+}
+
+/* O FADE que mescla a imagem com o fundo do texto */
+.fade-lateral {
+    position: absolute;
+    top: 0;
+    right: 0; /* Alinhado à direita para encontrar o texto */
+    width: 40%; /* Largura da zona de transição */
+    height: 100%;
+    /* Gradiente da cor do site para o transparente */
+    background: linear-gradient(to left, #001E14 0%, transparent 100%);
+    z-index: 2;
+}
+
+/* Lado do Conteúdo */
+.split-conteudo {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px;
+    background-color: #001E14;
+    z-index: 3;
+}
+
+.icone-dourado {
+    color: #D4AF37;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.texto-destaque {
+    color: #ffffff;
+    font-family: 'Myriad Pro', serif;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    max-width: 500px;
+}
+
+/* Animação suave de zoom */
+@keyframes kenburns-simple {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* Ajuste para Celular */
+@media (max-width: 768px) {
+    .fade-lateral {
+        width: 100%;
+        height: 30%;
+        bottom: 0;
+        top: auto;
+        background: linear-gradient(to top, #001E14 0%, transparent 100%);
+    }
+    .split-conteudo {
+        padding: 40px 20px;
+        text-align: center;
+        align-items: center;
+    }
+}
+

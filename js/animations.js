@@ -149,17 +149,19 @@ function initSparkles() {
 /* ================= FLOATING BUTTONS ================= */
 function initFloatingButtons() {
   const hero = document.querySelector('.hero');
-  const floating = document.querySelector('.floating-btn');
-  const whatsapp = document.querySelector('.btn-whatsapp');
+  const floatingBtn = document.querySelector('.floating-btn');
+  const whatsappBtn = document.querySelector('.btn-whatsapp');
 
-  const obs = new IntersectionObserver(entries => {
-    const show = !entries[0].isIntersecting;
-    floating.classList.toggle('show', show);
-    whatsapp.classList.toggle('show', show);
-  });
+  const observer = new IntersectionObserver(([entry]) => {
+    const show = !entry.isIntersecting;
+    floatingBtn.classList.toggle('show', show);
+    whatsappBtn.classList.toggle('show', show);
+  }, { threshold: 0.1 });
 
-  obs.observe(hero);
+  observer.observe(hero);
 }
+
+document.addEventListener('DOMContentLoaded', initFloatingButtons);
 
 /* ================= KEN BURNS ================= */
 function initKenBurns() {
