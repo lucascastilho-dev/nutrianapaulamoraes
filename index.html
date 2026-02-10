@@ -139,6 +139,10 @@ header {
   height: auto;
 }
 
+h3 {
+	margin-bottom: 9px;
+}
+
 /* ==========================
    BOTÕES
 ========================== */
@@ -150,13 +154,27 @@ header {
   font-weight: bold;
   transition: transform 0.3s;
   display: inline-block;
+  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(20px); /* leve subida elegante */
+}
+
+/* ==========================
+   BOTÃO FLUTUANTE AGENDAR
+========================== */
+.floating-btn {
+  position: relative;
+  bottom: 25px;
+  right: 25px; /* distancia do WhatsApp */
+  border-radius: 50px;
+  z-index: 998;
+  opacity: 0;
 }
 .btn-agendar:hover, .floating-btn:hover {
   transform: scale(1.05);
 }
 
 .btn-whatsapp {
-  position: fixed;
+  position: relative;
   bottom: 25px;
   left: 25px;
   background: linear-gradient(to right, #FBE39B, #A57234);;
@@ -168,6 +186,16 @@ header {
   align-items: center;
   justify-content: center;
   z-index: 999;
+  opacity: 0;
+  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(20px); /* leve subida elegante */
+}
+
+.floating-btn.show,
+.btn-whatsapp.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 /* ==========================
@@ -185,16 +213,22 @@ section {
 }
 .hero h1 {
   font-size: 44px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  margin-top: 40px;
   background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  
 }
 .hero p {
   font-size: 22px;
   max-width: 700px;
   margin: auto;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.hero{
+  
 }
 
 /* ==========================
@@ -399,17 +433,6 @@ footer {
 }
 
 /* ==========================
-   BOTÃO FLUTUANTE AGENDAR
-========================== */
-.floating-btn {
-  position: fixed;
-  bottom: 25px;
-  right: 25px; /* distancia do WhatsApp */
-  border-radius: 50px;
-  z-index: 998;
-}
-
-/* ==========================
    SOBRE / ABOUT
 ========================== */
 .about-container {
@@ -476,18 +499,27 @@ section::before {
   z-index: 1;
 }
 
+.hidden{
+  opacity: 0;
+  height: 1px;
+  pointer-events: none;
+  padding: 0;
+  border: 0;
+}
 
 .texto-destaque {
-  --font-family: 'Belly Betty', cursive;
-  font-size: 20px;
+  font-family: 'Myriad Pro', sans-serif;
+  font-size: 15px;
   background: white;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   opacity: 0.7;
   line-height: 1.5;
   padding: 2px;
+  letter-spacing: 2px;
+  font-weight: 300;
 }
-.mensagem-impacto {
+.mensagem-aplicativo {
   display: grid;
   grid-template-columns: 1fr 2fr; /* 1/3 ícone | 2/3 texto */
   align-items: center;
@@ -533,9 +565,104 @@ section::before {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Container Principal */
+.mensagem-impacto {
+    position: relative;
+    height: 60vh; /* Ajuste a altura conforme preferir */
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Esconde a sobra do zoom da imagem */
+    color: #fff;
+    text-align: center;
+	background-color: transparent; /* Garante que o container não bloqueie a transparência */
+}
+
+/* Efeito Ken Burns na Imagem de Fundo */
+.bg-ken-burns {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    animation: kenburns 20s infinite alternate; /* O zoom lento acontece aqui */
+	
+	/* APLICA TRANSPARÊNCIA NAS BORDAS (MÁSCARA ALFA) */
+    /* O valor 'transparent' define opacidade 0 e 'black' define opacidade 1 */
+    -webkit-mask-image: linear-gradient(to right, 
+        transparent 10%, 
+        black 20%, 
+        black 80%, 
+        transparent 90%);
+    mask-image: linear-gradient(to right, 
+        transparent 10%, 
+        black 20%, 
+        black 80%, 
+        transparent 90%);
+}
+
+/* Camada Escura (Overlay) recomendada */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 30, 20, 0.5); /* O verde escuro com transparência */
+    z-index: 2;
+	
+	/* A máscara do overlay deve ser igual à da foto para não escurecer o vazio lateral */
+    -webkit-mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        black 20%, 
+        black 80%, 
+        transparent 100%);
+    mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        black 20%, 
+        black 80%, 
+        transparent 100%);
+}
+
+/* Conteúdo (Texto e Ícone) acima de tudo */
+.conteudo-impacto {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.icone-dourado-grande {
+    color: #D4AF37; /* Tom de dourado */
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.texto-destaque {
+    --font-family: 'Myriad Pro', serif; /* Ou a fonte do seu site */
+    font-size: 0.5rem;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+/* Definição da Animação Ken Burns */
+@keyframes kenburns {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.15); /* Aumenta 15% lentamente */
+    }
+}
 /* MOBILE */
 @media (max-width: 768px) {
-  .mensagem-impacto,
+  .mensagem-aplicativo,
   .mensagem-impacto.invertido {
     grid-template-columns: 1fr;
     text-align: center;
@@ -588,7 +715,120 @@ section::before {
   text-align: justify;
 }
 
+/* Estilo específico para a imagem do celular */
+.mockup-app {
+  width: 100%;
+  max-width: 350px; /* Tamanho ideal para não dominar a tela */
+  height: auto;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); /* Sombra para dar profundidade */
+  animation: float 4s ease-in-out infinite; /* Efeito de flutuação suave */
+  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;  
+  max-width: 320px; /* Evita que o celular fique gigante no desktop */
+}
 
+/* Animação de flutuação */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Ajuste para o texto não ficar colado na imagem no mobile */
+@media (max-width: 768px) {
+  .mockup-app {
+    max-width: 250px;
+    margin-bottom: 20px;
+  }
+}
+
+
+
+.secao-split {
+    display: flex;
+    align-items: stretch;
+    min-height: 500px;
+    background-color: #001E14; /* A cor verde escura do site */
+    overflow: hidden;
+    flex-wrap: wrap; /* Garante que no celular o texto vá para baixo */
+}
+
+/* Lado da Imagem */
+.split-imagem {
+    position: relative;
+    flex: 1 1 500px; /* Base de 500px, cresce conforme a tela */
+    min-height: 500px;
+}
+
+.foto-ken-burns {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    animation: kenburns-simple 20s infinite alternate;
+}
+
+/* O FADE que mescla a imagem com o fundo do texto */
+.fade-lateral {
+    position: absolute;
+    top: 0;
+    right: 0; /* Alinhado à direita para encontrar o texto */
+    width: 40%; /* Largura da zona de transição */
+    height: 100%;
+    /* Gradiente da cor do site para o transparente */
+    background: linear-gradient(to left, #001E14 0%, transparent 100%);
+    z-index: 2;
+}
+
+/* Lado do Conteúdo */
+.split-conteudo {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px;
+    background-color: #001E14;
+    z-index: 3;
+}
+
+.icone-dourado {
+    color: #D4AF37;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.texto-destaque {
+    color: #ffffff;
+    font-family: 'Myriad Pro', serif;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    max-width: 500px;
+}
+
+/* Animação suave de zoom */
+@keyframes kenburns-simple {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* Ajuste para Celular */
+@media (max-width: 768px) {
+    .fade-lateral {
+        width: 100%;
+        height: 30%;
+        bottom: 0;
+        top: auto;
+        background: linear-gradient(to top, #001E14 0%, transparent 100%);
+    }
+    .split-conteudo {
+        padding: 40px 20px;
+        text-align: center;
+        align-items: center;
+    }
+}
 
 
 </style>
@@ -608,7 +848,22 @@ section::before {
     <h1>Acompanhamento nutricional para transformar sua saúde, sua performance e sua qualidade de vida</h1>
     <p>Atendimento nutricional personalizado, 100% online, com foco em performance, estética corporal e resultados reais.</p>
     <a href="https://forms.gle/P2GjHFcBDFWkP1CC6" target="_blank" class="btn-agendar">Quero agendar minha consulta</a>
-  </section>
+  </section>  
+  
+<section class="mensagem-aplicativo">
+  <div class="flex justify-center items-center">
+    <img src="img/imagem-celular-app-transparent.png" alt="Aplicativo exclusivo de acompanhamento nutricional" class="mockup-app">
+  </div>
+
+  <div class="texto-coluna">
+    <div class="section-title cursive">Tecnologia no seu Acompanhamento</div>
+    <h2 class="texto-destaque">
+      Esqueça papéis ou PDFs perdidos. Você terá acesso a uma <strong>plataforma exclusiva para pacientes</strong>, 
+      onde seu plano, evolução antropométrica, lista de compras e canal de comunicação direto comigo estão 
+      centralizados em um único lugar.
+    </h2>
+  </div>
+</section>
 
   <!-- SOBRE -->
   <section>
@@ -629,14 +884,8 @@ section::before {
         na saúde, estética corporal e performance.</p>
       </div>
     </div>
-  </section>
-  
-  <section class="mensagem-impacto">
-  <i class="fa-solid fa-baby icone-dourado-grande"></i>
-	<h2 class="texto-destaque">
-	A nutrição começa desde o nascimento, é o cuidado silencioso que constrói a saúde, escolhas e impactos por toda a vida
-	</h2>
-  </section>
+  </section>  
+
 
   <!-- STATS -->
   <section class="stats">
@@ -658,14 +907,19 @@ section::before {
     </div>
   </section>
   
-  <section class="mensagem-impacto invertido">  
-	<h2 class="texto-destaque">
-	Sua performance, estética e energia começam na alimentação e no cuidado diário com a própria saúde
-	</h2>
-	<div>
-		  <i class="fa-solid fa-bolt icone-dourado-grande"></i>
-	</div>
-  </section>
+  <section class="secao-split">
+    <div class="split-imagem">
+        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-1.png');"></div>
+        <div class="fade-lateral"></div>
+    </div>
+
+    <div class="split-conteudo">
+        <i class="fa-solid fa-baby icone-dourado-grande"></i>
+        <h2 class="texto-destaque">
+             A nutrição começa desde o nascimento, é o cuidado silencioso que constrói a saúde, escolhas e impactos por toda a vida
+        </h2>
+    </div>
+</section>
 
   <!-- HABILIDADES -->
 	<section class="habilidades" id="sec-habilidades">
@@ -675,57 +929,85 @@ section::before {
 		<canvas id="radarChart"></canvas>
 	  </div>
 	</section>
+  
+  <section class="secao-split">
+    <div class="split-imagem">
+        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-2.png');"></div>
+        <div class="fade-lateral"></div>
+    </div>
 
-  <section class="mensagem-impacto">
-    <i class="fa-solid fa-shield-heart icone-dourado-grande"></i>
-	<h2 class="texto-destaque">
-	A longevidade e a autonomia que você deseja dependem do acompanhamento nutricional que você decide ter hoje
-	</h2>
-  </section>
-
+    <div class="split-conteudo">
+        <i class="fa-solid fa-bolt icone-dourado-grande"></i>
+        <h2 class="texto-destaque">
+            Sua performance, estética e energia começam na alimentação e no cuidado diário com a própria saúde
+        </h2>
+    </div>
+</section>
+  
   <!-- SERVIÇOS -->
   <section>
     <div class="section-title cursive">Serviços</div>
     <div class="cards">
       <div class="card">
         <h3>Consulta Nutricional</h3>
-        <p>Avaliação completa do seu perfil e objetivos.</p>
+        <p>Avaliação completa do seu perfil e objetivos</p>
       </div>
       <div class="card">
         <h3>Plano Alimentar Personalizado</h3>
-        <p>Plano alimentar estratégico para seu biotipo.</p>
+        <p>Plano alimentar estratégico para seu biotipo</p>
       </div>
       <div class="card">
         <h3>Acompanhamento Online</h3>
-        <p>Suporte contínuo durante toda sua jornada.</p>
+        <p>Suporte contínuo durante toda sua jornada</p>
       </div>
     </div>
-  </section>
+  </section> 
+  
+    <section class="secao-split">
+    <div class="split-imagem">
+        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-3.png');"></div>
+        <div class="fade-lateral"></div>
+    </div>
 
-  <section class="mensagem-impacto invertido">    
-	<h2 class="texto-destaque">
-	Qualidade de vida na maturidade é o resultado direto do cuidado contínuo com a saúde e a nutrição
-	</h2>
-	<div>
-		<i class="fa-solid fa-person-walking icone-dourado-grande"></i>
-	</div>
-  </section>
+    <div class="split-conteudo">
+        <i class="fa-solid fa-shield-heart icone-dourado-grande"></i>
+        <h2 class="texto-destaque">
+            A longevidade e a autonomia que você deseja dependem do acompanhamento nutricional que você decide ter hoje
+        </h2>
+    </div>
+    </section>
   
   <!-- JORNADA -->
   <section>
     <div class="section-title cursive">Sua Jornada</div>
     <div class="journey">
-      <div class="step"><div class="step-number">01</div><h3>Agendamento</h3><p>Você escolhe o melhor horário e inicia seu processo de cuidado nutricional.</p></div>
-      <div class="step"><div class="step-number">02</div><h3>Avaliação Completa</h3><p>Análise detalhada do seu histórico, rotina, exames e objetivos.</p></div>
-      <div class="step"><div class="step-number">03</div><h3>Plano Alimentar Personalizado</h3><p>Estratégia alimentar exclusiva, pensada para o seu biotipo e metas.</p></div>
-      <div class="step"><div class="step-number">04</div><h3>Acompanhamento Contínuo</h3><p>Suporte semanal para ajustes, dúvidas e evolução constante.</p></div>
+      <div class="step"><div class="step-number">01</div><h3>Agendamento</h3><p>Você escolhe o melhor horário e inicia seu processo de cuidado nutricional</p></div>
+      <div class="step"><div class="step-number">02</div><h3>Avaliação Completa</h3><p>Análise detalhada do seu histórico, rotina, exames e objetivos</p></div>
+      <div class="step"><div class="step-number">03</div><h3>Plano Alimentar Personalizado</h3><p>Estratégia alimentar exclusiva, pensada para o seu biotipo e metas</p></div>
+      <div class="step"><div class="step-number">04</div><h3>Acompanhamento Contínuo</h3><p>Suporte via aplicativo para ajustes, dúvidas e evolução constante</p></div>
+    </div>
+  </section>
+
+  
+      <section class="secao-split">
+    <div class="split-imagem">
+        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-4.png');"></div>
+        <div class="fade-lateral"></div>
+    </div>
+
+    <div class="split-conteudo">
+        <i class="fa-solid fa-person-walking icone-dourado-grande"></i>
+        <h2 class="texto-destaque">
+            Qualidade de vida na maturidade é o resultado direto do cuidado contínuo com a saúde e a nutrição
+        </h2>
     </div>
   </section>
 
   <!-- DEPOIMENTOS -->
  <section>
-    <div class="section-title cursive">Insights que Mudam Sua Vida</div>
+    <div class="section-title cursive">O jeito de pensar de quem se cuida de verdade</div>
 
+	<sub>Frases inspiradas em perfis comportamentais de pessoas que alcançam resultados reais</sub>
     <div class="testimonial-carousel">
         <div class="testimonial-track">
             <div class="testimonial-item">

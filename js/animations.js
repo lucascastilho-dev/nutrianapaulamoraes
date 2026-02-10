@@ -11,21 +11,28 @@ document.addEventListener("DOMContentLoaded", function () {
   const startCounter = (counter) => {
     const target = +counter.getAttribute('data-target');
     const suffix = counter.getAttribute('data-suffix') || '';
-    let count = 0;
-    const increment = target / 120;
+	const duration = 3500; //velocidade stats
+	
+	let startTime = null;
+	
+    const animate = (timestamp) => {
+    if (!startTime) startTime = timestamp;
+    const progress = timestamp - startTime;
 
-    const update = () => {
-      count += increment;
-      if (count < target) {
-        counter.innerText = Math.floor(count) + suffix;
-        requestAnimationFrame(update);
-      } else {
-        counter.innerText = target + suffix;
-      }
-    };
+    const current = Math.min(
+      Math.floor((progress / duration) * target),
+      target
+    );
 
-    update();
+    counter.innerText = current + suffix;
+
+    if (progress < duration) {
+      requestAnimationFrame(animate);
+    }
   };
+
+  requestAnimationFrame(animate);
+};
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -85,7 +92,7 @@ function criarGrafico(dataInicial){
     options: {
 	  responsive: true,
 	  maintainAspectRatio: true,
-      animation: { duration: 1200 },
+      animation: { duration: 2200 },
       plugins: { legend: { display: false } },
       scales: {
         r: {
@@ -136,30 +143,82 @@ document.addEventListener("DOMContentLoaded", function(){
 // TESTIMONIAL CAROUSEL
 // ====================
 document.addEventListener("DOMContentLoaded", () => {
-    const track = document.querySelector('.testimonial-track');
-    const items = Array.from(track.children);
+  const track = document.querySelector('.testimonial-track');
+  const items = Array.from(track.children);
 
-    // Clona os itens para permitir loop infinito suave
-    items.forEach(item => {
-        const clone = item.cloneNode(true);
-        track.appendChild(clone);
-    });
+  // Clona para loop infinito
+  items.forEach(item => track.appendChild(item.cloneNode(true)));
 
-    let x = 0;
-    const speed = 0.5; // ajuste a velocidade
+  let x = 0;
+  let speed = 0.4; // velocidade automática
+  let isPaused = false;
+  let isDragging = false;
+  let startX = 0;
+  let currentX = 0;
 
-    function animate() {
-        x -= speed;
-        if (x <= -track.scrollWidth / 2) {
-            x = 0; // reseta suavemente
-        }
-        track.style.transform = `translateX(${x}px)`;
-        requestAnimationFrame(animate);
+  const halfWidth = () => track.scrollWidth / 2;
+
+  function animate() {
+    if (!isPaused && !isDragging) {
+      x -= speed;
+      if (Math.abs(x) >= halfWidth()) x = 0;
+      track.style.transform = `translateX(${x}px)`;
     }
+    requestAnimationFrame(animate);
+  }
 
-    animate();
+  // =====================
+  // PAUSAR NO HOVER
+  // =====================
+  track.addEventListener('mouseenter', () => isPaused = true);
+  track.addEventListener('mouseleave', () => isPaused = false);
+
+  // =====================
+  // ARRASTAR COM MOUSE
+  // =====================
+  track.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    currentX = x;
+    track.style.cursor = 'grabbing';
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    x = currentX + dx;
+    track.style.transform = `translateX(${x}px)`;
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    track.style.cursor = 'grab';
+  });
+
+  // =====================
+  // ARRASTAR NO MOBILE
+  // =====================
+  track.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    currentX = x;
+  });
+
+  track.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - startX;
+    x = currentX + dx;
+    track.style.transform = `translateX(${x}px)`;
+  });
+
+  track.addEventListener('touchend', () => {
+    isDragging = false;
+  });
+
+  track.style.cursor = 'grab';
+
+  animate();
 });
-
 // ====================
 // GSAP PARALLAX & REVEAL
 // ====================
@@ -209,4 +268,35 @@ document.addEventListener("DOMContentLoaded", () => {
       item.appendChild(sparkle);
     }
   });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const gatilho = document.querySelector('.hero');
+  const floatingBtn = document.querySelector('.floating-btn');
+  const whatsappBtn = document.querySelector('.btn-whatsapp');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // Quando a seção NÃO está mais visível
+      if (!entry.isIntersecting) {
+        floatingBtn.classList.add('show');
+        whatsappBtn.classList.add('show');
+		Object.assign(floatingBtn.style, {
+          position: 'fixed'});
+		Object.assign(whatsappBtn.style, {
+          position: 'fixed'});
+      } else {
+        floatingBtn.classList.remove('show');
+        whatsappBtn.classList.remove('show');
+		Object.assign(floatingBtn.style, {
+          position: 'relative'});
+		Object.assign(whatsappBtn.style, {
+          position: 'relative'});
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  observer.observe(gatilho);
 });
