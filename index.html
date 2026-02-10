@@ -13,19 +13,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light">
 
-<!-- FONTES -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- FONT AWESOME -->
+<link rel="stylesheet" href="css/all.min.css">
 
 <!-- CSS Tailwind CDN -->
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
-
-<!-- GSAP para Parallax -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script
-
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="css/tailwind.min.css" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -580,31 +572,28 @@ section::before {
 	background-color: transparent; /* Garante que o container não bloqueie a transparência */
 }
 
-/* Efeito Ken Burns na Imagem de Fundo */
+/* Efeito Ken Burns - Estado Inicial */
 .bg-ken-burns {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-size: cover;
     background-position: center;
     z-index: 1;
-    animation: kenburns 20s infinite alternate; /* O zoom lento acontece aqui */
-	
-	/* APLICA TRANSPARÊNCIA NAS BORDAS (MÁSCARA ALFA) */
-    /* O valor 'transparent' define opacidade 0 e 'black' define opacidade 1 */
-    -webkit-mask-image: linear-gradient(to right, 
-        transparent 10%, 
-        black 20%, 
-        black 80%, 
-        transparent 90%);
-    mask-image: linear-gradient(to right, 
-        transparent 10%, 
-        black 20%, 
-        black 80%, 
-        transparent 90%);
+
+    transform: scale(1);
+    transition: transform 20s linear;
+
+    will-change: transform;
+
+    -webkit-mask-image: linear-gradient(to right, transparent 5%, black 20%, black 80%, transparent 95%);
+    mask-image: linear-gradient(to right, transparent 5%, black 20%, black 80%, transparent 95%);
 }
+
+.bg-ken-burns.animating {
+    transform: scale(1.15);
+}
+
+
 
 /* Camada Escura (Overlay) recomendada */
 .overlay {
@@ -651,15 +640,7 @@ section::before {
     font-weight: 300;
 }
 
-/* Definição da Animação Ken Burns */
-@keyframes kenburns {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.15); /* Aumenta 15% lentamente */
-    }
-}
+
 /* MOBILE */
 @media (max-width: 768px) {
   .mensagem-aplicativo,
@@ -767,7 +748,22 @@ section::before {
     height: 100%;
     background-size: cover;
     background-position: center;
-    animation: kenburns-simple 20s infinite alternate;
+
+    transform: scale(1);
+    //transition: transform 10s linear;
+}
+
+.secao-split.animating .foto-ken-burns {
+    transform: scale(1.12);
+}
+
+.secao-split.animating .foto-ken-burns {
+    animation: kenburns 10s linear forwards;
+}
+
+@keyframes kenburns {
+    from { transform: scale(1); }
+    to   { transform: scale(1.12); }
 }
 
 /* O FADE que mescla a imagem com o fundo do texto */
@@ -852,7 +848,7 @@ section::before {
   
 <section class="mensagem-aplicativo">
   <div class="flex justify-center items-center">
-    <img src="img/imagem-celular-app-transparent.png" alt="Aplicativo exclusivo de acompanhamento nutricional" class="mockup-app">
+    <img src="img/imagem-celular-app-transparent.webp" alt="Aplicativo exclusivo de acompanhamento nutricional" class="mockup-app">
   </div>
 
   <div class="texto-coluna">
@@ -909,7 +905,7 @@ section::before {
   
   <section class="secao-split">
     <div class="split-imagem">
-        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-1.png');"></div>
+        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-1.webp');"></div>
         <div class="fade-lateral"></div>
     </div>
 
@@ -932,7 +928,7 @@ section::before {
   
   <section class="secao-split">
     <div class="split-imagem">
-        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-2.png');"></div>
+        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-2.webp');"></div>
         <div class="fade-lateral"></div>
     </div>
 
@@ -965,7 +961,7 @@ section::before {
   
     <section class="secao-split">
     <div class="split-imagem">
-        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-3.png');"></div>
+        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-3.webp');"></div>
         <div class="fade-lateral"></div>
     </div>
 
@@ -991,7 +987,7 @@ section::before {
   
       <section class="secao-split">
     <div class="split-imagem">
-        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-4.png');"></div>
+        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-4.webp');"></div>
         <div class="fade-lateral"></div>
     </div>
 
@@ -1094,6 +1090,11 @@ section::before {
 
 <a href="https://forms.gle/P2GjHFcBDFWkP1CC6" target="_blank" class="floating-btn">Agendar Agora</a>
 
-<script src="js/animations.js" type="module"></script>
+<!-- GSAP para Parallax -->
+<script src="js/gsap.min.js" defer></script>
+<script src="js/ScrollTrigger.min.js" defer></script>
+<!-- Chart.js -->
+<script src="js/chart.js" defer></script>
+<script src="js/animations.js" type="module" defer></script>
 </body>
 </html>
