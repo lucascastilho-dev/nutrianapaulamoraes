@@ -1,5 +1,3 @@
-
-
 /* ==========================
    FONTES
 ========================== */
@@ -26,6 +24,74 @@
 }
 
 /* ==========================
+   VARIÁVEIS DE TEMA (BASE LIGHT)
+   - Light mode é a base técnica.
+   - Dark mode é aplicado via prefers-color-scheme.
+========================== */
+:root {
+  /* Backgrounds */
+  --bg: #ffffff;
+  --bg-gradient: linear-gradient(135deg, #f5f5f5, #eaeaea, #dcdcdc);
+
+  /* Text */
+  --text: #111111;            /* texto principal em light base */
+  --text-inverse: #ffffff;    /* texto claro usado no dark */
+
+  /* Accent / Brand */
+  --accent: #A57234;          /* marrom/dourado escuro */
+  --accent-light: #FBE39B;    /* dourado claro */
+
+  /* Cards / surfaces */
+  --card-bg: rgba(0,0,0,0.05);    /* usado como superfície sutil (adapta-se via dark) */
+  --card-border: rgba(0,0,0,0.1);
+
+  /* Overlay / dark layer */
+  --overlay: rgba(0,0,0,0.4);
+
+  /* Split / seção com cor sólida */
+  --split-bg: #f0f4f2;
+
+  /* Gold tone */
+  --gold: #D4AF37;
+
+  /* Sombras (mantidas) */
+  --shadow-1: 0 8px 20px rgba(0,0,0,.35);
+  --shadow-2: 0 12px 30px rgba(0,0,0,.5);
+
+  /* Botão texto (originalmente #16261B) */
+  --btn-text-dark: #16261B;
+
+  /* Scrollbar thumb fallback */
+  --scroll-thumb: var(--accent);
+}
+
+/* Dark mode: redefine variáveis para reproduzir o design escuro original */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16261B;
+    --bg-gradient: linear-gradient(135deg, #25301F, #16261B, #3C4E32);
+    --text: #ffffff;
+    --text-inverse: #111111;
+
+    --accent: #A57234;
+    --accent-light: #FBE39B;
+
+    --card-bg: rgba(255,255,255,0.05);
+    --card-border: rgba(255,255,255,0.1);
+
+    --overlay: rgba(0,30,20,0.5);
+
+    --split-bg: #001E14;
+
+    --gold: #D4AF37;
+
+    --btn-text-dark: #16261B;
+
+    --scroll-thumb: var(--accent);
+  }
+}
+
+/* ==========================
    RESET & BASE
 ========================== */
 * {
@@ -37,36 +103,41 @@
 }
 
 body {
-  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32)!important;
-  color: white!important;
+  background: var(--bg-gradient) !important;
+  color: var(--text) !important;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* svg { */
-    /* fill: currentColor; */
-    /* width: 0.7em; */
-    /* height: 0.7em; */
+/*   fill: currentColor; */
+/*   width: 0.7em; */
+/*   height: 0.7em; */
 /* } */
+
 /* ==========================
-   FORÇAR MODO CLARO
+   FORÇAR MODO CLARO (compat com navegadores que tentam forçar)
+   Observação: mantemos color-scheme para permitir que imagens e controles
+   não sejam invertidos indevidamente.
 ========================== */
 :root {
-  color-scheme: light; /* indica que só usamos cores claras */
+  color-scheme: light;
 }
 
-/* Forçar cores do body */
+/* Forçar cores do body (variável já controla) */
 body, html {
-  background: linear-gradient(135deg, #25301F, #16261B, #3C4E32) !important;
-  color: white !important;
+  background: var(--bg-gradient) !important;
+  color: var(--text) !important;
 }
 
 /* Forçar cores para elementos comuns */
 section, header {
-  background: unset !important; /* remove possíveis mudanças de background do navegador */
+  background: unset !important;
   color: inherit !important;
 }
 
-/* Desativa dark mode do navegador via media query (caso respeite) */
+/* Se o navegador respeitar prefers-color-scheme: dark, usamos as variáveis do dark */
 @media (prefers-color-scheme: dark) {
   body {
     background: transparent !important;
@@ -81,7 +152,7 @@ a {
   transition: color 0.3s;
 }
 a:hover {
-  color: #FBE39B;
+  color: var(--accent-light);
 }
 
 /* ==========================
@@ -101,15 +172,15 @@ header {
 }
 
 h3 {
-	margin-bottom: 9px;
+  margin-bottom: 9px;
 }
 
 /* ==========================
    BOTÕES
 ========================== */
 .btn-agendar, .floating-btn {
-  background: linear-gradient(to right, #FBE39B, #A57234);
-  color: #16261B;
+  background: linear-gradient(to right, var(--accent-light), var(--accent));
+  color: var(--btn-text-dark);
   padding: 14px 26px;
   border-radius: 8px;
   font-weight: bold;
@@ -130,12 +201,11 @@ h3 {
   pointer-events: none;
 }
 
-.floating-btn {  
+.floating-btn {
   right: 25px; /* distancia do WhatsApp */
   border-radius: 50px;
   z-index: 998;
   opacity: 0;
-
 }
 .btn-agendar:hover, .floating-btn:hover {
   transform: scale(1.05);
@@ -144,8 +214,8 @@ h3 {
 .btn-whatsapp {
   bottom: 25px;
   left: 25px;
-  background: linear-gradient(to right, #FBE39B, #A57234);;
-  color: #16261B;
+  background: linear-gradient(to right, var(--accent-light), var(--accent));
+  color: var(--btn-text-dark);
   padding: 15px;
   border-radius: 50%;
   font-size: 28px;
@@ -156,7 +226,6 @@ h3 {
   opacity: 0;
   transform: translateY(20px); /* leve subida elegante */
 }
-
 
 .floating-btn.show,
 .btn-whatsapp.show {
@@ -172,6 +241,7 @@ section {
   padding: 80px 20px;
   max-width: 1100px;
   margin: auto;
+  position: relative;
 }
 
 .hero {
@@ -182,10 +252,9 @@ section {
   font-size: 44px;
   margin-bottom: 30px;
   margin-top: 40px;
-  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
+  background: radial-gradient(circle, var(--accent-light) 0%, var(--accent) 70%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  
 }
 .hero p {
   font-size: 22px;
@@ -194,17 +263,13 @@ section {
   margin-bottom: 20px;
 }
 
-.hero{
-  
-}
-
 /* ==========================
    TÍTULOS
 ========================== */
 .section-title {
   font-size: 46px;
   margin-bottom: 30px;
-  background: #FBE39B;
+  background: linear-gradient(0deg, var(--accent-light), var(--accent-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -218,8 +283,8 @@ section {
   gap: 30px;
 }
 .card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   padding: 25px;
   border-radius: 10px;
   transition: transform 0.3s;
@@ -235,8 +300,8 @@ section {
   margin-top: 40px;
 }
 .step {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   padding: 30px 20px;
   border-radius: 12px;
   text-align: center;
@@ -244,18 +309,16 @@ section {
 }
 .step:hover {
   transform: translateY(-6px);
-  border-color: #FBE39B;
+  border-color: var(--accent-light);
 }
 .step-number {
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 15px;
-  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
+  background: radial-gradient(circle, var(--accent-light) 0%, var(--accent) 70%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-
 
 /* ==========================
    STATS
@@ -270,7 +333,7 @@ section {
 .stat-number {
   font-size: 48px;
   font-weight: bold;
-  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);
+  background: radial-gradient(circle, var(--accent-light) 0%, var(--accent) 70%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -295,7 +358,7 @@ section {
 }
 @media (max-width: 768px) {
   .radar-wrapper {
-   -- height: 300px;   /* reduz a altura no mobile */
+    --height: 300px;   /* reduz a altura no mobile */
   }
 
   .habilidades h2 {
@@ -309,12 +372,11 @@ section {
   }
 }
 
-
 .habilidades h2 {
   font-size: 32px;
   text-align: center;
   margin-bottom: 30px; /* espaço antes do gráfico */
-  color: #FBE39B;
+  color: var(--accent-light);
 }
 
 .habilidades p.sub {
@@ -337,13 +399,14 @@ section {
 }
 .testimonial-item {
   min-width: 350px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   padding: 30px;
   border-radius: 12px;
   font-style: italic;
   opacity: 0.9;
 }
+
 /* ==========================
    SPARKLES EM FORMATO CRUZ
 ========================== */
@@ -356,9 +419,9 @@ section {
   position: absolute;
   width: 8px;
   height: 8px;
-  background: radial-gradient(circle,#FBE39B 0%,#A57234 70%);;
+  background: radial-gradient(circle, var(--accent-light) 0%, var(--accent) 70%);
   clip-path: polygon(
-    50% 0%, 60% 35%, 100% 50%, 60% 65%, 
+    50% 0%, 60% 35%, 100% 50%, 60% 65%,
     50% 100%, 40% 65%, 0% 50%, 40% 35%
   ); /* formato cruz/estrela pequena */
   opacity: 0;
@@ -370,7 +433,6 @@ section {
   0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
   50% { opacity: 1; transform: scale(1) rotate(45deg); }
 }
-
 
 /* ==========================
    FOOTER
@@ -390,7 +452,7 @@ footer {
 .social-footer a {
   font-size: 28px;
   text-decoration: none;
-  background: linear-gradient(to right, #FBE39B, #A57234);
+  background: linear-gradient(to right, var(--accent-light), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: transform 0.3s;
@@ -422,7 +484,7 @@ footer {
   object-position: center top;
   display: block;
 }
-.about-text {  
+.about-text {
   flex: 1;
   font-size: 20px;
   line-height: 1.6;
@@ -437,15 +499,14 @@ footer {
 }
 
 .section-title.cursive{
-	font-family: 'Belly Betty', cursive;
-	padding: 3px;
+  font-family: 'Belly Betty', cursive;
+  padding: 3px;
 }
 .section-title.center{
-	font-family: 'Belly Betty', cursive;
-	padding: 2px;
-	text-align: center;
+  font-family: 'Belly Betty', cursive;
+  padding: 2px;
+  text-align: center;
 }
-
 
 /* ==========================
    LINHAS HORIZONTAIS PARALLAX
@@ -477,7 +538,7 @@ section::before {
 .texto-destaque {
   font-family: 'Myriad Pro', sans-serif;
   font-size: 15px;
-  background: white;
+  background: var(--text); /* usa cor de texto para clip */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   opacity: 0.7;
@@ -492,10 +553,11 @@ section::before {
   align-items: center;
   gap: 40px;
   max-width: 1100px;
- -- margin: 120px auto;
- /* Estado Inicial */
-  opacity: 0; 
-  transform: translateY(50px); 
+  /* margin: 120px auto; (corrigido: estava com --) */
+  margin: 120px auto;
+  /* Estado Inicial */
+  opacity: 0;
+  transform: translateY(50px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
   visibility: hidden; /* Garante que não apareça antes do JS carregar */
 }
@@ -512,7 +574,7 @@ section::before {
 
 .icone-dourado-grande {
   font-size: 120px;
-  background: linear-gradient(to right,#FBE39B 40%,#A57234 60%);
+  background: linear-gradient(to right, var(--accent-light) 40%, var(--accent) 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
@@ -523,7 +585,6 @@ section::before {
   padding-top: 6px;
   padding-bottom: 6px;
 }
-
 
 .mensagem-impacto.invertido .icone-dourado {
   grid-column: 2;
@@ -541,93 +602,90 @@ section::before {
   padding-top: 8px;
   padding-bottom: 12px;
 
-  background: linear-gradient(to bottom, #FBE39B, #A57234);
+  background: linear-gradient(to bottom, var(--accent-light), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Container Principal */
 .mensagem-impacto {
-    position: relative;
-    height: 60vh; /* Ajuste a altura conforme preferir */
-    min-height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Esconde a sobra do zoom da imagem */
-    color: #fff;
-    text-align: center;
-	background-color: transparent; /* Garante que o container não bloqueie a transparência */
+  position: relative;
+  height: 60vh; /* Ajuste a altura conforme preferir */
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Esconde a sobra do zoom da imagem */
+  color: var(--text);
+  text-align: center;
+  background-color: transparent; /* Garante que o container não bloqueie a transparência */
 }
 
 /* Efeito Ken Burns - Estado Inicial */
 .bg-ken-burns {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
 
-    transform: scale(1);
-    transition: transform 20s linear;
+  transform: scale(1);
+  transition: transform 20s linear;
 
-    will-change: transform;
+  will-change: transform;
 
-    -webkit-mask-image: linear-gradient(to right, transparent 5%, black 20%, black 80%, transparent 95%);
-    mask-image: linear-gradient(to right, transparent 5%, black 20%, black 80%, transparent 95%);
+  -webkit-mask-image: linear-gradient(to right, transparent 5%, black 20%, black 80%, transparent 95%);
+  mask-image: linear-gradient(to right, transparent 5%, black 20%, black 80%, transparent 95%);
 }
 
 .bg-ken-burns.animating {
-    transform: scale(1.15);
+  transform: scale(1.15);
 }
-
-
 
 /* Camada Escura (Overlay) recomendada */
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 30, 20, 0.5); /* O verde escuro com transparência */
-    z-index: 2;
-	
-	/* A máscara do overlay deve ser igual à da foto para não escurecer o vazio lateral */
-    -webkit-mask-image: linear-gradient(to right, 
-        transparent 0%, 
-        black 20%, 
-        black 80%, 
-        transparent 100%);
-    mask-image: linear-gradient(to right, 
-        transparent 0%, 
-        black 20%, 
-        black 80%, 
-        transparent 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay); /* O verde escuro com transparência */
+  z-index: 2;
+
+  /* A máscara do overlay deve ser igual à da foto para não escurecer o vazio lateral */
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%);
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 20%,
+      black 80%,
+      transparent 100%);
 }
 
 /* Conteúdo (Texto e Ícone) acima de tudo */
 .conteudo-impacto {
-    position: relative;
-    z-index: 3;
-    max-width: 800px;
-    padding: 0 20px;
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  padding: 0 20px;
 }
 
 .icone-dourado-grande {
-    color: #D4AF37; /* Tom de dourado */
-    font-size: 3rem;
-    margin-bottom: 20px;
-    display: block;
+  color: var(--gold); /* Tom de dourado */
+  font-size: 3rem;
+  margin-bottom: 20px;
+  display: block;
 }
 
 .texto-destaque {
-    --font-family: 'Myriad Pro', serif; /* Ou a fonte do seu site */
-    font-size: 0.5rem;
-    line-height: 1.4;
-    font-weight: 300;
+  font-family: 'Myriad Pro', serif; /* Ou a fonte do seu site */
+  font-size: 0.5rem;
+  line-height: 1.4;
+  font-weight: 300;
 }
-
 
 /* ==========================
    RESPONSIVIDADE
@@ -646,7 +704,7 @@ section::before {
   .about-text {
     font-size: 18px;
   }
-   .about-container {
+  .about-container {
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -659,8 +717,7 @@ section::before {
 
   .about-text {
     flex: unset;
-  
-}
+  }
 }
 .about-paragrafo {
   text-align: justify;
@@ -673,10 +730,10 @@ section::before {
   height: auto;
   filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); /* Sombra para dar profundidade */
   animation: float 4s ease-in-out infinite; /* Efeito de flutuação suave */
-  
+
   display: block;
   margin-left: auto;
-  margin-right: auto;  
+  margin-right: auto;
   max-width: 320px; /* Evita que o celular fique gigante no desktop */
 }
 
@@ -695,106 +752,104 @@ section::before {
   }
 }
 
-
-
 .secao-split {
-    display: flex;
-    align-items: stretch;
-    min-height: 500px;
-    background-color: #001E14; /* A cor verde escura do site */
-    overflow: hidden;
-    flex-wrap: wrap; /* Garante que no celular o texto vá para baixo */
+  display: flex;
+  align-items: stretch;
+  min-height: 500px;
+  background-color: var(--split-bg); /* A cor verde escura do site em dark */
+  overflow: hidden;
+  flex-wrap: wrap; /* Garante que no celular o texto vá para baixo */
 }
 
 /* Lado da Imagem  - imagem impacto*/
 .split-imagem {
-    position: relative;
-    flex: 1 1 500px; /* Base de 500px, cresce conforme a tela */
-    min-height: 500px;
+  position: relative;
+  flex: 1 1 500px; /* Base de 500px, cresce conforme a tela */
+  min-height: 500px;
 }
 
 .foto-ken-burns {
-    width: 100%;
-    height: 100%;
-	--max-width: 560px;
-    background-size: cover;
-    background-position: center;
+  width: 100%;
+  height: 100%;
+  --max-width: 560px;
+  background-size: cover;
+  background-position: center;
 
-    transform: scale(1);
-    --transition: transform 10s linear;
+  transform: scale(1);
+  --transition: transform 10s linear;
 }
 
 .secao-split.animating .foto-ken-burns {
-    transform: scale(1.12);
+  transform: scale(1.12);
 }
 
 .secao-split.animating .foto-ken-burns {
-    animation: kenburns 10s linear forwards;
+  animation: kenburns 10s linear forwards;
 }
 
 @keyframes kenburns {
-    from { transform: scale(1); }
-    to   { transform: scale(1.12); }
+  from { transform: scale(1); }
+  to   { transform: scale(1.12); }
 }
 
 /* O FADE que mescla a imagem com o fundo do texto */
 .fade-lateral {
-    position: absolute;
-    top: 0;
-    right: 0; /* Alinhado à direita para encontrar o texto */
-    width: 40%; /* Largura da zona de transição */
-    height: 100%;
-    /* Gradiente da cor do site para o transparente */
-    background: linear-gradient(to left, #001E14 0%, transparent 100%);
-    z-index: 2;
+  position: absolute;
+  top: 0;
+  right: 0; /* Alinhado à direita para encontrar o texto */
+  width: 40%; /* Largura da zona de transição */
+  height: 100%;
+  /* Gradiente da cor do site para o transparente */
+  background: linear-gradient(to left, var(--split-bg) 0%, transparent 100%);
+  z-index: 2;
 }
 
 /* Lado do Conteúdo */
 .split-conteudo {
-    flex: 1 1 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 60px;
-    background-color: #001E14;
-    z-index: 3;
+  flex: 1 1 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px;
+  background-color: var(--split-bg);
+  z-index: 3;
 }
 
 .icone-dourado {
-    color: #D4AF37;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+  color: var(--gold);
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
 .texto-destaque {
-    color: #ffffff;
-    font-family: 'Myriad Pro', serif;
-    font-size: 1.3rem;
-    line-height: 1.3;
-    max-width: 500px;
+  color: var(--text);
+  font-family: 'Myriad Pro', serif;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  max-width: 500px;
 }
 
 /* Animação suave de zoom */
 @keyframes kenburns-simple {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
 }
 
 /* Ajuste para Celular */
 @media (max-width: 768px) {
-    .fade-lateral {
-        width: 100%;
-        height: 30%;
-        bottom: 0;
-        top: auto;
-        background: linear-gradient(to top, #001E14 0%, transparent 100%);
-    }
-    .split-conteudo {
-        padding: 0px 40px 40px 40px;
-        text-align: center;
-        align-items: center;		
-    }
+  .fade-lateral {
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+    top: auto;
+    background: linear-gradient(to top, var(--split-bg) 0%, transparent 100%);
+  }
+  .split-conteudo {
+    padding: 0px 40px 40px 40px;
+    text-align: center;
+    align-items: center;
+  }
 }
 
 /* MOBILE */
@@ -804,7 +859,7 @@ section::before {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 20px;
-   --margin: 80px 20px;
+    margin: 80px 20px;
   }
 
   .icone-dourado-grande {
@@ -813,10 +868,9 @@ section::before {
 
   .texto-destaque {
     font-size: 20px;
-	max-width: none;
+    max-width: none;
   }
 }
-
 
 /*Tela de Agendamento*/
 
@@ -835,7 +889,7 @@ section::before {
   padding: 0 16px;
   border: 1px solid var(--accent);
   background: var(--card-bg);
-  color: #fff;
+  color: var(--text);
   font-size: 16px;
   cursor: pointer;
 }
@@ -852,7 +906,7 @@ section::before {
   cursor: pointer;
 
   background: var(--accent);
-  color: #16261B;
+  color: var(--btn-text-dark);
 
   display: flex;
   align-items: center;
@@ -870,24 +924,24 @@ section::before {
 
 .week-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); 
+  grid-template-columns: repeat(5, 1fr);
   gap: 12px;
   margin-top: 30px;
   align-items: center;
   /* Garante uma largura mínima para os slots não esmagarem no mobile */
-  min-width: 600px; 
+  min-width: 600px;
 }
 
 .header-col{
   font-weight:700;
-  color:var(--accent);
+  color: var(--accent);
   text-align:center;
   font-size:1.1rem;
 }
 
 .header-col span{
   font-size:1.6rem;
-  color:white;
+  color: var(--text);
 }
 
 .hour-col{
@@ -906,25 +960,25 @@ section::before {
 
 .cell.empty{
   opacity:.08;
-  border:1px dashed #ffffff22;
+  border:1px dashed rgba(255,255,255,0.13);
   border-radius:12px;
 }
 
 .slot{
-  background:var(--accent);
-  color:#16261B;
+  background: var(--accent);
+  color: var(--btn-text-dark);
   border:none;
   padding:14px 18px;
   border-radius:18px;
   font-weight:700;
   cursor:pointer;
   transition:.25s;
-  box-shadow:0 8px 20px rgba(0,0,0,.35);
+  box-shadow: var(--shadow-1);
 }
 
 .slot:hover{
   transform:translateY(-4px) scale(1.05);
-  box-shadow:0 12px 30px rgba(0,0,0,.5);
+  box-shadow: var(--shadow-2);
 }
 .week-nav {
   display: flex;
@@ -942,9 +996,9 @@ section::before {
   cursor: pointer;
 }
 .slot.disabled {
-  background: rgba(255, 255, 255, 0.05); /* Fundo bem sutil */
-  color: rgba(255, 255, 255, 0.2);      /* Texto quase sumindo */
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--card-bg); /* Fundo bem sutil */
+  color: rgba(255, 255, 255, 0.2);      /* Texto quase sumindo (mantido para dark) */
+  border: 1px solid var(--card-border);
   box-shadow: none;
   cursor: not-allowed;
   transform: none !important;            /* Remove o efeito de hover */
@@ -953,7 +1007,7 @@ section::before {
 @media (max-width: 768px) {
   /* Ajusta o cabeçalho da página */
   h1 { font-size: 1.8rem; }
-  
+
   .week-nav {
     flex-direction: row;
     gap: 10px;
@@ -997,7 +1051,7 @@ section::before {
 }
 
 #calendar::-webkit-scrollbar-thumb {
-  background: var(--accent);
+  background: var(--scroll-thumb);
   border-radius: 10px;
 }
 
@@ -1007,11 +1061,9 @@ section::before {
     font-size: 0.8rem;
     text-align: center;
   }
-  
+
   .week-nav button {
     flex: 1; /* Botões ocupam espaço igual */
     text-align: center;
   }
 }
-
-
