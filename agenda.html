@@ -218,11 +218,9 @@ function sortTimes(a,b){
 }
 
 /* ================= MONTA O GRID ================= */
-
 function renderWeekGrid(days, weekData) {
   calendarEl.innerHTML = '';
 
-  // pega todos horários únicos (UTC fix já aplicado)
   const allTimes = new Set();
   weekData.forEach(daySlots=>{
     daySlots.forEach(d=>{
@@ -232,13 +230,11 @@ function renderWeekGrid(days, weekData) {
 
   const times = Array.from(allTimes).sort(sortTimes);
 
-  // container principal
   const grid = document.createElement('div');
   grid.className = 'week-grid';
 
-  // Header (dias da semana)
+  // Header: Removemos a div "Horário" e mantemos apenas os dias
   grid.innerHTML += `
-    <div class="hour-col header-col">Horário</div>
     ${days.map(d=>`
       <div class="day-col header-col">
         ${d.toLocaleDateString('pt-BR',{weekday:'short'})}<br>
@@ -247,9 +243,10 @@ function renderWeekGrid(days, weekData) {
     `).join('')}
   `;
 
-  // Linhas (horários)
+  // Linhas: Removemos a div que mostrava a hora na lateral
   times.forEach(time=>{
-    grid.innerHTML += `<div class="hour-col">${time}</div>`;
+    // A linha abaixo foi removida para tirar a legenda da esquerda
+    // grid.innerHTML += `<div class="hour-col">${time}</div>`;
 
     days.forEach((day,i)=>{
       const slots = weekData[i];
@@ -273,11 +270,9 @@ function renderWeekGrid(days, weekData) {
 
   calendarEl.appendChild(grid);
 
-  // label da semana
   document.getElementById('weekLabel').innerText =
     `${days[0].toLocaleDateString('pt-BR')} — ${days[4].toLocaleDateString('pt-BR')}`;
 }
-
 /* ================= ENVIAR AGENDAMENTO ================= */
 
 document.getElementById('formAgendamento').onsubmit = async (e) => {
