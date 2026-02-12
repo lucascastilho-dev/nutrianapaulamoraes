@@ -181,10 +181,15 @@ function formatISO(date){
 async function loadWeek() {
   calendarEl.innerHTML = "<p>Carregando agenda...</p>";
 
-  const days = [];
-  for(let i=0;i<5;i++){
-    const d = new Date(currentWeekStart);
-    d.setDate(d.getDate()+i);
+const days = [];
+  for(let i=0; i<5; i++){
+    // Criamos uma nova data baseada no início da semana
+    const d = new Date(currentWeekStart.getTime());
+    // Ajustamos o dia
+    d.setDate(d.getDate() + i);
+    // Forçamos a hora para o meio do dia (12:00) para evitar que 
+    // variações de fuso joguem a data para o dia anterior ou seguinte
+    d.setHours(12, 0, 0, 0);
     days.push(d);
   }
 
