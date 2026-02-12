@@ -844,14 +844,22 @@ section::before {
   font-size: 18px;
 }
 
-/*calendário*/
-.week-grid{
-  display:grid;
-    /* Altere de: 100px repeat(5,1fr) para apenas: repeat(5,1fr) */
+/* Container pai do calendário para permitir scroll lateral no mobile */
+#calendar {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
+  padding-bottom: 10px;
+}
+
+.week-grid {
+  display: grid;
   grid-template-columns: repeat(5, 1fr); 
-  gap:12px;
-  margin-top:30px;
-  align-items:center;
+  gap: 12px;
+  margin-top: 30px;
+  align-items: center;
+  /* Garante uma largura mínima para os slots não esmagarem no mobile */
+  min-width: 600px; 
 }
 
 .header-col{
@@ -924,5 +932,69 @@ section::before {
   box-shadow: none;
   cursor: not-allowed;
   transform: none !important;            /* Remove o efeito de hover */
+}
+
+@media (max-width: 768px) {
+  /* Ajusta o cabeçalho da página */
+  h1 { font-size: 1.8rem; }
+  
+  .week-nav {
+    flex-direction: row;
+    gap: 10px;
+    font-size: 0.9rem;
+  }
+
+  /* Reduz o tamanho dos slots para caberem melhor */
+  .slot {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    border-radius: 12px;
+  }
+
+  .header-col {
+    font-size: 0.9rem;
+  }
+
+  .header-col span {
+    font-size: 1.3rem;
+  }
+
+  /* Ajusta a altura das células */
+  .cell {
+    height: 60px;
+  }
+
+  /* Melhora o toque no mobile (área clicável) */
+  .week-nav button {
+    padding: 10px 15px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Estilização sutil da barra de rolagem para não ficar feia */
+#calendar::-webkit-scrollbar {
+  height: 4px;
+}
+
+#calendar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#calendar::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+/* Para telas muito pequenas (iPhone SE, etc) */
+@media (max-width: 480px) {
+  #weekLabel {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  
+  .week-nav button {
+    flex: 1; /* Botões ocupam espaço igual */
+    text-align: center;
+  }
 }
 
