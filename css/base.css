@@ -42,6 +42,11 @@ body {
   overflow-x: hidden;
 }
 
+/* svg { */
+    /* fill: currentColor; */
+    /* width: 0.7em; */
+    /* height: 0.7em; */
+/* } */
 /* ==========================
    FORÇAR MODO CLARO
 ========================== */
@@ -997,4 +1002,5 @@ section::before {
     text-align: center;
   }
 }
+
 
