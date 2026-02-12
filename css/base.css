@@ -847,7 +847,8 @@ section::before {
 /*calendário*/
 .week-grid{
   display:grid;
-  grid-template-columns: 100px repeat(5,1fr);
+    /* Altere de: 100px repeat(5,1fr) para apenas: repeat(5,1fr) */
+  grid-template-columns: repeat(5, 1fr); 
   gap:12px;
   margin-top:30px;
   align-items:center;
