@@ -183,19 +183,23 @@ function formatISO(date){
 async function loadWeek() {
   calendarEl.innerHTML = "<p>Carregando agenda...</p>";
 
-const days = [];
+  // IMPORTANTE: Gerar os dias sempre a partir da currentWeekStart atualizada
+  const days = [];
   for(let i=0; i<5; i++){
-    // Criamos uma nova data baseada no início da semana
-    const d = new Date(currentWeekStart.getTime());
-    // Ajustamos o dia
+    const d = new Date(currentWeekStart.getTime()); // Use getTime() para copiar o valor real
     d.setDate(d.getDate() + i);
-    // Forçamos a hora para o meio do dia (12:00) para evitar que 
-    // variações de fuso joguem a data para o dia anterior ou seguinte
-    d.setHours(12, 0, 0, 0);
+    d.setHours(12, 0, 0, 0); 
     days.push(d);
   }
 
-  // Busca horários dos 5 dias em paralelo
+  // Atualiza a legenda IMEDIATAMENTE antes de fazer o fetch
+  // Isso garante que mesmo que a API demore, a data no topo já mudou
+  const label = document.getElementById('weekLabel');
+  if(label) {
+    label.innerText = `${days[0].toLocaleDateString('pt-BR')} — ${days[4].toLocaleDateString('pt-BR')}`;
+  }
+
+  // Agora segue com a busca dos dados...
   const responses = await Promise.all(
     days.map(d =>
       fetch(`${API}/availability?date=${formatISO(d)}`)
@@ -360,11 +364,16 @@ window.onclick = (event) => {
 
 /* ================= NAVEGAÇÃO SEMANA ================= */
 
-function changeWeek(offset){
-  // Garante que ao mudar a semana, a global seja atualizada e normalizada
-  const novaData = new Date(currentWeekStart);
+function changeWeek(offset) {
+  // 1. Calculamos a nova data baseada na atual
+  const novaData = new Date(currentWeekStart.getTime());
   novaData.setDate(novaData.getDate() + (offset * 7));
+  
+  // 2. Forçamos a volta para a segunda-feira e limpamos o fuso
   currentWeekStart = getStartOfWeek(novaData);
+  currentWeekStart.setHours(12, 0, 0, 0);
+
+  // 3. Chamamos o carregamento
   loadWeek();
 }
 /* ================= MODAL ================= */
@@ -434,10 +443,9 @@ let isFirstLoad = true;
 async function inicializarAgenda() {
   if (isFirstLoad) {
     isFirstLoad = false;
-    // Só na primeira vez ele busca a semana disponível
+    // findFirstAvailableWeek já termina chamando loadWeek()
     await findFirstAvailableWeek();
   } else {
-    // Nas navegações manuais (setas), ele apenas carrega o que foi pedido
     loadWeek();
   }
 }
