@@ -800,3 +800,120 @@ section::before {
 	max-width: none;
   }
 }
+
+
+/*Tela de Agendamento*/
+
+.campo-data {
+  display: grid;
+  grid-template-columns: 1fr 48px;
+  gap: 8px;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.campo-data input[type="date"] {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  padding: 0 16px;
+  border: 1px solid var(--accent);
+  background: var(--card-bg);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* remove ícone padrão */
+.campo-data input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.btn-calendar {
+  height: 48px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  background: var(--accent);
+  color: #16261B;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/*calendário*/
+.week-grid{
+  display:grid;
+  grid-template-columns: 100px repeat(5,1fr);
+  gap:12px;
+  margin-top:30px;
+  align-items:center;
+}
+
+.header-col{
+  font-weight:700;
+  color:var(--accent);
+  text-align:center;
+  font-size:1.1rem;
+}
+
+.header-col span{
+  font-size:1.6rem;
+  color:white;
+}
+
+.hour-col{
+  text-align:right;
+  padding-right:10px;
+  font-weight:600;
+  opacity:.7;
+}
+
+.cell{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cell.empty{
+  opacity:.08;
+  border:1px dashed #ffffff22;
+  border-radius:12px;
+}
+
+.slot{
+  background:var(--accent);
+  color:#16261B;
+  border:none;
+  padding:14px 18px;
+  border-radius:18px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
+}
+
+.slot:hover{
+  transform:translateY(-4px) scale(1.05);
+  box-shadow:0 12px 30px rgba(0,0,0,.5);
+}
+.week-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.week-nav button {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
