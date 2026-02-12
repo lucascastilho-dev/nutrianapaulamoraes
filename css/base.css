@@ -917,4 +917,12 @@ section::before {
   border-radius: 8px;
   cursor: pointer;
 }
+.slot.disabled {
+  background: rgba(255, 255, 255, 0.05); /* Fundo bem sutil */
+  color: rgba(255, 255, 255, 0.2);      /* Texto quase sumindo */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none !important;            /* Remove o efeito de hover */
+}
 
