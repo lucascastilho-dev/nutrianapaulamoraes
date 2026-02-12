@@ -168,8 +168,10 @@ let currentWeekStart = getStartOfWeek(new Date());
 function getStartOfWeek(date) {
   const d = new Date(date);
   const day = d.getDay();
-  const diff = d.getDate() - day + (day === 0 ? -6 : 1); // segunda
-  return new Date(d.setDate(diff));
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1); // Segunda-feira
+  const monday = new Date(d.setDate(diff));
+  monday.setHours(12, 0, 0, 0); // Trava o fuso horário no meio do dia
+  return monday;
 }
 
 function formatISO(date){
@@ -220,56 +222,85 @@ function sortTimes(a,b){
 /* ================= MONTA O GRID ================= */
 function renderWeekGrid(days, weekData) {
   calendarEl.innerHTML = '';
+  const agora = new Date();
 
+  // 1. Consolidamos os horários (se houver algum)
   const allTimes = new Set();
-  weekData.forEach(daySlots=>{
-    daySlots.forEach(d=>{
-      allTimes.add(getUTCTimeKey(d));
-    });
+  weekData.forEach(daySlots => {
+    daySlots.forEach(d => allTimes.add(getUTCTimeKey(d)));
   });
 
   const times = Array.from(allTimes).sort(sortTimes);
 
+  // 2. Verificação de conteúdo
+  const isSemanaPassada = days[4] < agora; 
+  
+  // Contamos se existe qualquer slot retornado que ainda não passou da hora atual
+  const totalSlotsAtivos = weekData.reduce((acc, daySlots) => {
+    return acc + daySlots.filter(d => new Date(d) > agora).length;
+  }, 0);
+
+  // 3. Lógica de Mensagens
+  if (isSemanaPassada) {
+    calendarEl.innerHTML = `
+      <div style="text-align:center; padding:50px; opacity:0.6;">
+        <p>Esta semana já passou.</p>
+      </div>`;
+    return;
+  }
+
+  // Se a semana é atual/futura mas não há nenhum slot disponível para o usuário clicar
+  if (totalSlotsAtivos === 0) {
+    calendarEl.innerHTML = `
+      <div style="text-align:center; padding:50px; border: 1px dashed rgba(255,255,255,0.1); border-radius: 20px;">
+        <p style="color:var(--accent); font-weight:700; font-size:1.2rem; margin-bottom:10px;">
+          Agenda lotada para esta semana!
+        </p>
+        <p style="opacity:0.8;">Tente navegar para a próxima semana para encontrar horários disponíveis.</p>
+      </div>`;
+    return;
+  }
+
+  // 4. Renderização do Grid (Só acontece se totalSlotsAtivos > 0)
   const grid = document.createElement('div');
   grid.className = 'week-grid';
 
-  // Header: Removemos a div "Horário" e mantemos apenas os dias
-  grid.innerHTML += `
-    ${days.map(d=>`
-      <div class="day-col header-col">
-        ${d.toLocaleDateString('pt-BR',{weekday:'short'})}<br>
-        <span>${d.getDate()}</span>
-      </div>
-    `).join('')}
-  `;
+  grid.innerHTML += days.map(d => `
+    <div class="day-col header-col">
+      ${d.toLocaleDateString('pt-BR',{weekday:'short'})}<br>
+      <span>${d.getDate()}</span>
+    </div>
+  `).join('');
 
-  // Linhas: Removemos a div que mostrava a hora na lateral
-  times.forEach(time=>{
-    // A linha abaixo foi removida para tirar a legenda da esquerda
-    // grid.innerHTML += `<div class="hour-col">${time}</div>`;
+  times.forEach(time => {
+    days.forEach((day, i) => {
+      const slotsDaApi = weekData[i];
+      const match = slotsDaApi.find(d => getUTCTimeKey(d) === time);
+      
+      const [HH, MM] = time.split(':');
+      const dataSlot = new Date(day);
+      dataSlot.setHours(parseInt(HH), parseInt(MM), 0, 0);
 
-    days.forEach((day,i)=>{
-      const slots = weekData[i];
-      const match = slots.find(d => getUTCTimeKey(d) === time);
+      const isPassado = dataSlot < agora;
 
-      if(match){
+      if (match && !isPassado) {
         const horaBR = match.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
         grid.innerHTML += `
           <div class="cell">
-            <button class="slot"
-              onclick="abrirModal('${match.toISOString()}','${horaBR}')">
+            <button class="slot" onclick="abrirModal('${match.toISOString()}','${horaBR}')">
               ${horaBR}
             </button>
-          </div>
-        `;
+          </div>`;
       } else {
-        grid.innerHTML += `<div class="cell empty"></div>`;
+        grid.innerHTML += `
+          <div class="cell"><button class="slot disabled" disabled>${time}</button></div>`;
       }
     });
   });
 
   calendarEl.appendChild(grid);
 
+ // Atualiza o texto do intervalo de datas no topo
   document.getElementById('weekLabel').innerText =
     `${days[0].toLocaleDateString('pt-BR')} — ${days[4].toLocaleDateString('pt-BR')}`;
 }
@@ -330,10 +361,12 @@ window.onclick = (event) => {
 /* ================= NAVEGAÇÃO SEMANA ================= */
 
 function changeWeek(offset){
-  currentWeekStart.setDate(currentWeekStart.getDate() + (offset*7));
+  // Garante que ao mudar a semana, a global seja atualizada e normalizada
+  const novaData = new Date(currentWeekStart);
+  novaData.setDate(novaData.getDate() + (offset * 7));
+  currentWeekStart = getStartOfWeek(novaData);
   loadWeek();
 }
-
 /* ================= MODAL ================= */
 
 function abrirModal(dateISO, horaFormatada) {
@@ -354,9 +387,65 @@ function fecharModal() {
   document.getElementById('successMessage').style.display = 'none';
 }
 
+/* ================= BUSCA SEMANA DISPONÍVEL COM ATUALIZAÇÃO DE DATA ================= */
+
+async function findFirstAvailableWeek() {
+  let attempts = 0;
+  let found = false;
+  const agora = new Date();
+  let tempStart = new Date(currentWeekStart);
+
+  while (!found && attempts < 4) {
+    const days = [];
+    for (let i = 0; i < 5; i++) {
+      const d = new Date(tempStart);
+      d.setDate(d.getDate() + i);
+      d.setHours(12, 0, 0, 0); 
+      days.push(formatISO(d));
+    }
+
+    const weekResponses = await Promise.all(
+      days.map(date => fetch(`${API}/availability?date=${date}`).then(r => r.json()))
+    );
+
+    const totalSlotsAtivos = weekResponses.reduce((acc, daySlots) => {
+      return acc + daySlots.filter(d => new Date(d) > agora).length;
+    }, 0);
+
+    if (totalSlotsAtivos > 0) {
+      found = true;
+      // Atualiza a variável global para que a legenda e o loadWeek leiam a semana certa
+      currentWeekStart = new Date(tempStart); 
+    } else {
+      tempStart.setDate(tempStart.getDate() + 7);
+      attempts++;
+    }
+  }
+  loadWeek();
+}
+
 /* ================= INICIALIZA ================= */
 
-loadWeek();
+/* ================= INICIALIZAÇÃO INTELIGENTE ================= */
+
+// Criamos uma variável para controlar se é a primeira carga
+let isFirstLoad = true;
+
+async function inicializarAgenda() {
+  if (isFirstLoad) {
+    isFirstLoad = false;
+    // Só na primeira vez ele busca a semana disponível
+    await findFirstAvailableWeek();
+  } else {
+    // Nas navegações manuais (setas), ele apenas carrega o que foi pedido
+    loadWeek();
+  }
+}
+
+// Inicia o processo
+inicializarAgenda();
+
+//loadWeek();
 </script>
 
 </body>
