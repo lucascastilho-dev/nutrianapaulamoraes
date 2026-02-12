@@ -10,6 +10,7 @@ function init() {
   initSparkles();
   initFloatingButtons();
   initKenBurns();
+  initAppSection();
 }
 
 /* ================= COUNTERS ================= */
@@ -49,6 +50,11 @@ function initRadarChart() {
 
   const dataFinal = [7, 9, 8, 8, 6];
 
+	// Detecta o tamanho da tela para definir a fonte inicial
+  const getFontSize = () => {
+    return window.innerWidth < 768 ? 8 : 14; // 10px para celular, 14px para desktop
+  };
+  
   const chart = new Chart(ctx, {
     type: 'radar',
     data: {
@@ -78,7 +84,7 @@ function initRadarChart() {
           ticks: { display: false },
           grid: { color: 'rgba(251,227,155,0.2)' },
           angleLines: { color: 'rgba(251,227,155,0.2)' },
-          pointLabels: { color: '#FBE39B', font: { size: 14, weight: 600 } }
+          pointLabels: { color: '#FBE39B', font: { size: getFontSize(), weight: 600 } }
         }
       }
     }
@@ -146,23 +152,6 @@ function initCarousel() {
   loop();
 }
 
-/* ================= GSAP REVEAL ================= */
-function initGSAPReveal() {
-  gsap.utils.toArray('section').forEach(section => {
-    gsap.from(section, {
-      y: 60,
-      opacity: 0,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 85%",
-        toggleActions: "play none none reverse"
-      }
-    });
-  });
-}
-
 /* ================= SPARKLES LEVES ================= */
 function initSparkles() {
   document.querySelectorAll('.testimonial-item').forEach(item => {
@@ -201,7 +190,44 @@ function initKenBurns() {
     entries.forEach(entry => {
       entry.target.classList.toggle('animating', entry.isIntersecting);
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.8 });
 
   sections.forEach(s => obs.observe(s));
+}
+/* ================= SEÇÃO APLICATIVO (50% THRESHOLD) ================= */
+function initAppSection() {
+  const sessaoApp = document.getElementById('app-section');
+  if (!sessaoApp) return;
+
+  const observerApp = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      // Dispara quando 20% da seção estiver na tela
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+        sessaoApp.classList.add('revelar');
+        observerApp.unobserve(sessaoApp);
+      }
+    });
+  }, { 
+    threshold: [0.4] 
+  });
+
+  observerApp.observe(sessaoApp);
+}
+/* ================= GSAP REVEAL (AJUSTADO) ================= */
+function initGSAPReveal() {
+  // O ":not(.mensagem-aplicativo)" impede que o GSAP tente animar 
+  // o que o seu IntersectionObserver já está cuidando
+  gsap.utils.toArray('section:not(.hero):not(.mensagem-aplicativo)').forEach(section => {
+    gsap.from(section, {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 90%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  });
 }

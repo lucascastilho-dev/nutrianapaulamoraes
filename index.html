@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/ico" href="img/favicon.ico">
+<link rel="preload" as="image" href="img/logo.webp">
 <title>Ana Paula de Moraes | Nutricionista</title>
 <meta name="description" content="Nutricionista Ana Paula de Moraes - atendimento online, personalizado e focado em performance, estética corporal e resultados reais.">
 <meta property="og:title" content="Ana Paula de Moraes | Nutricionista">
@@ -69,9 +70,10 @@
     <a href="agenda.html" target="_blank" class="btn-agendar">Quero agendar minha consulta</a>
   </section>  
   
-<section class="mensagem-aplicativo" style="content-visibility: auto">
+<section id="app-section" class="mensagem-aplicativo" style="content-visibility: auto">
   <div class="flex justify-center items-center">
-    <img fetchpriority="high" src="img/imagem-celular-app-transparent.webp" alt="Aplicativo exclusivo de acompanhamento nutricional" class="mockup-app">
+    <img src="img/imagem-celular-app-transparent.webp" alt="Aplicativo exclusivo de acompanhamento nutricional" class="mockup-app"
+	loading="lazy">
   </div>
 
   <div class="texto-coluna">

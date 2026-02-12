@@ -493,6 +493,17 @@ section::before {
   gap: 40px;
   max-width: 1100px;
  -- margin: 120px auto;
+ /* Estado Inicial */
+  opacity: 0; 
+  transform: translateY(50px); 
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  visibility: hidden; /* Garante que não apareça antes do JS carregar */
+}
+/* Classe que o JS vai injetar */
+.mensagem-aplicativo.revelar {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  visibility: visible !important;
 }
 
 .mensagem-impacto.invertido {
