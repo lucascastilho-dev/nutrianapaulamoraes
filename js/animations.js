@@ -42,19 +42,63 @@ function initCounters() {
 
   obs.observe(document.querySelector('.stats'));
 }
-
-/* ================= RADAR ================= */
 function initRadarChart() {
   const ctx = document.getElementById('radarChart');
   if (!ctx) return;
 
   const dataFinal = [7, 9, 8, 8, 6];
 
-	// Detecta o tamanho da tela para definir a fonte inicial
+  // Detecta o tamanho da tela para definir a fonte inicial
   const getFontSize = () => {
-    return window.innerWidth < 768 ? 8 : 14; // 10px para celular, 14px para desktop
+    return window.innerWidth < 768 ? 10 : 14;
   };
-  
+
+  // Lê uma variável CSS e retorna cor em formato rgb/hex
+  const cssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+  // Função utilitária para converter hex/rgba para luminance (0..1)
+  const parseColorToRGB = (c) => {
+    if (!c) return null;
+    c = c.replace(/\s+/g, '');
+    // rgba(...)
+    if (c.startsWith('rgba') || c.startsWith('rgb')) {
+      const nums = c.match(/[\d.]+/g).map(Number);
+      return { r: nums[0], g: nums[1], b: nums[2], a: nums[3] ?? 1 };
+    }
+    // hex #rrggbb or #rgb
+    if (c[0] === '#') {
+      let hex = c.slice(1);
+      if (hex.length === 3) hex = hex.split('').map(h => h + h).join('');
+      const int = parseInt(hex, 16);
+      return { r: (int >> 16) & 255, g: (int >> 8) & 255, b: int & 255, a: 1 };
+    }
+    return null;
+  };
+
+  const luminance = (rgb) => {
+    if (!rgb) return 1;
+    const srgb = [rgb.r, rgb.g, rgb.b].map(v => {
+      v = v / 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * srgb[0] + 0.7152 * srgb[1] + 0.0722 * srgb[2];
+  };
+
+  // Tenta ler --bg (definida no CSS). Se não existir, pega background do body.
+  let bgVar = cssVar('--bg') || getComputedStyle(document.body).backgroundColor;
+  const bgRGB = parseColorToRGB(bgVar);
+  const lum = luminance(bgRGB);
+  const isLightBg = lum > 0.5; // threshold: >0.5 = claro
+
+  // Lê as variáveis do radar (fallbacks caso não existam)
+  const radarGrid = cssVar('--radar-grid') || (isLightBg ? 'rgba(0,0,0,0.06)' : 'rgba(251,227,155,0.12)');
+  const radarAngle = cssVar('--radar-angle-lines') || radarGrid;
+  const radarLabel = cssVar('--radar-label') || (isLightBg ? '#1b1b1b' : '#FBE39B');
+  const radarStroke = cssVar('--radar-stroke') || (isLightBg ? '#A57234' : '#FBE39B');
+  const radarFill = cssVar('--radar-fill') || (isLightBg ? 'rgba(251,227,155,0.18)' : 'rgba(251,227,155,0.18)');
+  const radarPoint = cssVar('--radar-point') || radarStroke;
+  const radarTick = cssVar('--radar-tick') || radarGrid;
+
   const chart = new Chart(ctx, {
     type: 'radar',
     data: {
@@ -67,8 +111,10 @@ function initRadarChart() {
       ],
       datasets: [{
         data: [0,0,0,0,0],
-        borderColor: '#FBE39B',
-        backgroundColor: 'rgba(251,227,155,0.2)',
+        borderColor: radarStroke,
+        backgroundColor: radarFill,
+        pointBackgroundColor: radarPoint,
+        pointBorderColor: radarPoint,
         pointRadius: 4,
         borderWidth: 2
       }]
@@ -81,15 +127,26 @@ function initRadarChart() {
         r: {
           min: 0,
           max: 10,
-          ticks: { display: false },
-          grid: { color: 'rgba(251,227,155,0.2)' },
-          angleLines: { color: 'rgba(251,227,155,0.2)' },
-          pointLabels: { color: '#FBE39B', font: { size: getFontSize(), weight: 600 } }
+          ticks: {
+            display: false,
+            color: radarTick
+          },
+          grid: {
+            color: radarGrid
+          },
+          angleLines: {
+            color: radarAngle
+          },
+          pointLabels: {
+            color: radarLabel,
+            font: { size: getFontSize(), weight: 600 }
+          }
         }
       }
     }
   });
 
+  // animação de entrada quando a seção aparece
   const obs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting) {
       chart.data.datasets[0].data = dataFinal;
@@ -100,6 +157,7 @@ function initRadarChart() {
 
   obs.observe(document.getElementById('sec-habilidades'));
 }
+
 
 /* ================= CAROUSEL (SEM SALTO) ================= */
 function initCarousel() {
@@ -153,17 +211,115 @@ function initCarousel() {
 }
 
 /* ================= SPARKLES LEVES ================= */
+
 function initSparkles() {
+  // limpa sparkles antigos e timers
+  document.querySelectorAll('.testimonial-item .sparkle').forEach(s => {
+    if (s._stop) s._stop();
+    s.remove();
+  });
+
+  const perItemMin = 1;
+  const perItemMax = 2;
+  const TICK_MS = 1000; // 1s on / 1s off
+  const initialStaggerMax = 0; // ms de stagger inicial para evitar piscar todos juntos
+
+  const rand = (min, max) => Math.random() * (max - min) + min;
+  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+  // função que gera posição aleatória segura (percentual)
+  const randomPos = () => {
+    const left = Math.round(rand(8, 92));
+    const top = Math.round(rand(8, 92));
+    return [left, top];
+  };
+
+  // estrutura para controlar todos os sparkles com um tick mestre
+  const sparkleInstances = [];
+
   document.querySelectorAll('.testimonial-item').forEach(item => {
-    for (let i = 0; i < 3; i++) {
+    const count = randInt(perItemMin, perItemMax);
+
+    for (let i = 0; i < count; i++) {
       const s = document.createElement('span');
       s.className = 'sparkle';
-      s.style.top = Math.random()*90 + '%';
-      s.style.left = Math.random()*90 + '%';
+
+      // posição inicial aleatória
+      const [l, t] = randomPos();
+      s.style.left = l + '%';
+      s.style.top = t + '%';
+
+      // aparência
+      s.style.background = 'radial-gradient(circle, rgba(255,243,198,0.95) 0%, rgba(251,227,155,0.9) 45%, rgba(165,114,52,0.9) 100%)';
+
       item.appendChild(s);
+
+      // estado
+      const instance = {
+        el: s,
+        isOn: false, // começa apagado
+        // optional: small initial offset so not all toggle same tick
+        offset: Math.round(rand(0, initialStaggerMax))
+      };
+
+      sparkleInstances.push(instance);
     }
   });
+
+  // Master tick: executa a alternância de todos os sparkles a cada TICK_MS
+  // Usamos setInterval para precisão e evitar drift acumulado
+  let masterTimer = null;
+  let startTime = performance.now();
+
+  const masterTick = () => {
+    const now = performance.now();
+
+    // Para cada sparkle: se está off -> escolher nova posição e ligar; se está on -> desligar
+    sparkleInstances.forEach(inst => {
+      // respeita offset inicial: só começa a alternar após offset ter passado
+      if (now - startTime < inst.offset) return;
+
+      if (!inst.isOn) {
+        // está off: reposiciona INSTANTANEAMENTE (sem transição) e liga
+        const [nl, nt] = randomPos();
+        inst.el.style.left = nl + '%';
+        inst.el.style.top = nt + '%';
+
+        // ligar (aplica classe visível)
+        inst.el.classList.add('sparkle--visible');
+        inst.isOn = true;
+      } else {
+        // está on: desligar (remove classe)
+        inst.el.classList.remove('sparkle--visible');
+        inst.isOn = false;
+      }
+    });
+  };
+
+  // start after a tiny delay so offsets work predictably
+  masterTimer = setInterval(masterTick, TICK_MS);
+
+  // opcional: executar o primeiro tick imediatamente after small delay so offsets apply
+  setTimeout(() => {
+    startTime = performance.now();
+    masterTick();
+  }, 50);
+
+  // expõe método de parada para limpeza futura
+  const stopAll = () => {
+    clearInterval(masterTimer);
+    sparkleInstances.forEach(inst => {
+      inst.el.remove();
+    });
+    sparkleInstances.length = 0;
+  };
+
+  // guarda referência global para permitir limpeza se initSparkles for chamado novamente
+  window.__sparkles_stop_all && window.__sparkles_stop_all();
+  window.__sparkles_stop_all = stopAll;
 }
+
+
 
 /* ================= FLOATING BUTTONS ================= */
 function initFloatingButtons() {
@@ -186,14 +342,35 @@ document.addEventListener('DOMContentLoaded', initFloatingButtons);
 function initKenBurns() {
   const sections = document.querySelectorAll('.secao-split');
 
+  // Observador com rootMargin negativo para manter "intersecting"
+  // mesmo quando a seção começa a sair da viewport.
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      entry.target.classList.toggle('animating', entry.isIntersecting);
+      // Mantemos animating enquanto pelo menos 25% da seção estiver visível.
+      // Isso evita que a classe seja removida assim que a seção começa a sair.
+      if (entry.intersectionRatio >= 0.25) {
+        entry.target.classList.add('animating');
+      } else {
+        // Pequeno debounce para evitar flicker quando o usuário faz scroll rápido
+        // (evita remover imediatamente se houver micro-flutuações)
+        clearTimeout(entry.target._kbTimeout);
+        entry.target._kbTimeout = setTimeout(() => {
+          if (entry.intersectionRatio < 0.15) {
+            entry.target.classList.remove('animating');
+          }
+        }, 200); // 120ms debounce
+      }
     });
-  }, { threshold: 0.8 });
+  }, {
+    // start a considerar a seção "visível" um pouco antes de entrar totalmente
+    root: null,
+    rootMargin: '0px 0px -30% 0px', // mantém intersecting até 30% após o topo inferior
+    threshold: [0, 0.15, 0.25, 0.5, 0.75, 1]
+  });
 
   sections.forEach(s => obs.observe(s));
 }
+
 /* ================= SEÇÃO APLICATIVO (50% THRESHOLD) ================= */
 function initAppSection() {
   const sessaoApp = document.getElementById('app-section');

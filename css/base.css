@@ -23,47 +23,83 @@
   font-display: swap;
 }
 
+
 /* ==========================
    VARIÁVEIS DE TEMA (BASE LIGHT)
-   - Light mode é a base técnica.
+   - Light mode é a base técnica com off-white harmonizado.
    - Dark mode é aplicado via prefers-color-scheme.
 ========================== */
 :root {
   /* Backgrounds */
-  --bg: #ffffff;
-  --bg-gradient: linear-gradient(135deg, #f5f5f5, #eaeaea, #dcdcdc);
+  --bg-offwhite: #F7F5F2; /* off-white harmonizado com tons dourados/terrosos */
+  --bg: var(--bg-offwhite);
+  --bg-gradient: linear-gradient(135deg, #FBF8F5, #F7F5F2 40%, #EFECE8 100%);
 
   /* Text */
-  --text: #111111;            /* texto principal em light base */
+  --text: #1b1b1b;            /* texto principal em light base */
   --text-inverse: #ffffff;    /* texto claro usado no dark */
+  --text-section-light: #25301F;
+  --text-section: #25301F;
 
-  /* Accent / Brand */
+  /* Accent / Brand (mantidos) */
   --accent: #A57234;          /* marrom/dourado escuro */
-  --accent-light: #FBE39B;    /* dourado claro */
+  --accent-light: #FBE39B;    /* dourado claro */  
+  --h1-accent: #25301f;          /* verde escuro escuro */
+  --h1-accent-light: #3c4e32;    /* ver mais claro claro */
 
   /* Cards / surfaces */
-  --card-bg: rgba(0,0,0,0.05);    /* usado como superfície sutil (adapta-se via dark) */
-  --card-border: rgba(0,0,0,0.1);
+  --card-bg: rgba(0,0,0,0.03);    /* superfície sutil em light */
+  --card-border: rgba(0,0,0,0.06);
 
   /* Overlay / dark layer */
-  --overlay: rgba(0,0,0,0.4);
+  --overlay: rgba(0,0,0,0.06);
 
-  /* Split / seção com cor sólida */
-  --split-bg: #f0f4f2;
+  /* Split / seção com cor sólida (light variant) */
+  --split-bg: #E9E6E2;
 
   /* Gold tone */
   --gold: #D4AF37;
 
-  /* Sombras (mantidas) */
-  --shadow-1: 0 8px 20px rgba(0,0,0,.35);
-  --shadow-2: 0 12px 30px rgba(0,0,0,.5);
+  /* Sombras */
+  --shadow-1: 0 8px 20px rgba(0,0,0,.06);
+  --shadow-2: 0 12px 30px rgba(0,0,0,.08);
 
-  /* Botão texto (originalmente #16261B) */
+  /* Botão texto (contraste sobre gradiente) */
   --btn-text-dark: #16261B;
 
   /* Scrollbar thumb fallback */
   --scroll-thumb: var(--accent);
+
+  /* Accessibility tuning (can be adjusted) */
+  --link-hover-contrast: var(--accent-light);
 }
+/**Radar**/
+
+/* Radar colors (light base) */
+:root {
+  --radar-grid: rgba(0,0,0,0.06);
+  --radar-angle-lines: rgba(0,0,0,0.06);
+  --radar-label: #1b1b1b;
+  --radar-stroke: #A57234;            /* usa seu accent */
+  --radar-fill: rgba(251,227,155,0.18);
+  --radar-point: #A57234;
+  --radar-tick: rgba(0,0,0,0.06);
+}
+
+
+/* Dark theme overrides (preserva visual escuro original) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --radar-grid: rgba(251,227,155,0.12);
+    --radar-angle-lines: rgba(251,227,155,0.12);
+    --radar-label: #FBE39B;
+    --radar-stroke: #FBE39B;
+    --radar-fill: rgba(251,227,155,0.18);
+    --radar-point: #FBE39B;
+    --radar-tick: rgba(251,227,155,0.12);
+  }
+}
+
 
 /* Dark mode: redefine variáveis para reproduzir o design escuro original */
 @media (prefers-color-scheme: dark) {
@@ -75,6 +111,10 @@
 
     --accent: #A57234;
     --accent-light: #FBE39B;
+	--h1-accent: #A57234;         
+    --h1-accent-light: #FBE39B;    
+	--text-section-light: #FBE39B;
+	--text-section: #A57234;
 
     --card-bg: rgba(255,255,255,0.05);
     --card-border: rgba(255,255,255,0.1);
@@ -102,12 +142,13 @@
   caret-color: transparent;
 }
 
-body {
+html, body {
   background: var(--bg-gradient) !important;
   color: var(--text) !important;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: light dark;
 }
 
 /* svg { */
@@ -117,9 +158,8 @@ body {
 /* } */
 
 /* ==========================
-   FORÇAR MODO CLARO (compat com navegadores que tentam forçar)
-   Observação: mantemos color-scheme para permitir que imagens e controles
-   não sejam invertidos indevidamente.
+   FORÇAR MODO CLARO (compat)
+   - Mantive color-scheme para preservar controles nativos.
 ========================== */
 :root {
   color-scheme: light;
@@ -152,7 +192,7 @@ a {
   transition: color 0.3s;
 }
 a:hover {
-  color: var(--accent-light);
+  color: var(--link-hover-contrast);
 }
 
 /* ==========================
@@ -252,7 +292,7 @@ section {
   font-size: 44px;
   margin-bottom: 30px;
   margin-top: 40px;
-  background: radial-gradient(circle, var(--accent-light) 0%, var(--accent) 70%);
+  background: radial-gradient(circle, var(--h1-accent-light) 0%, var(--h1-accent) 70%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -269,7 +309,7 @@ section {
 .section-title {
   font-size: 46px;
   margin-bottom: 30px;
-  background: linear-gradient(0deg, var(--accent-light), var(--accent-light));
+  background: linear-gradient(0deg, var(--text-section), var(--text-section-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -319,6 +359,22 @@ section {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Minimal: apenas muda fundo e texto dos steps (cole no final do base.css) */
+.journey .step {
+  background-color: var(--green-dark, #16261B) !important; /* fundo verde escuro */
+  color: var(--text-on-dark, #F6F5F0) !important;          /* texto claro sobre o verde */
+}
+
+/* Garante que o número do step seja legível */
+.journey  {
+  color: var(--accent-light, #FBE39B) !important;
+  --background: rgba(255,255,255,0.04) !important;
+}
+
+/* Se houver regras que escondem o número, força visibilidade */
+.journey .step .step-number { display: inline-flex !important; visibility: visible !important; opacity: 1 !important; }
+
 
 /* ==========================
    STATS
@@ -522,7 +578,7 @@ section::before {
   left: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(251,227,155,0.4), transparent);
+  background: linear-gradient(to right, transparent, var(--text-section), transparent);
   pointer-events: none; /* não interfere em cliques */
   z-index: 1;
 }
@@ -538,7 +594,7 @@ section::before {
 .texto-destaque {
   font-family: 'Myriad Pro', sans-serif;
   font-size: 15px;
-  background: var(--text); /* usa cor de texto para clip */
+  background: var(--text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   opacity: 0.7;
@@ -553,7 +609,6 @@ section::before {
   align-items: center;
   gap: 40px;
   max-width: 1100px;
-  /* margin: 120px auto; (corrigido: estava com --) */
   margin: 120px auto;
   /* Estado Inicial */
   opacity: 0;
@@ -649,7 +704,7 @@ section::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--overlay); /* O verde escuro com transparência */
+  background: var(--overlay); /* camada adaptativa */
   z-index: 2;
 
   /* A máscara do overlay deve ser igual à da foto para não escurecer o vazio lateral */
@@ -728,7 +783,7 @@ section::before {
   width: 100%;
   max-width: 350px; /* Tamanho ideal para não dominar a tela */
   height: auto;
-  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); /* Sombra para dar profundidade */
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.12)); /* sombra mais suave em light */
   animation: float 4s ease-in-out infinite; /* Efeito de flutuação suave */
 
   display: block;
@@ -756,7 +811,7 @@ section::before {
   display: flex;
   align-items: stretch;
   min-height: 500px;
-  background-color: var(--split-bg); /* A cor verde escura do site em dark */
+  background-color: var(--split-bg); /* cor adaptativa */
   overflow: hidden;
   flex-wrap: wrap; /* Garante que no celular o texto vá para baixo */
 }
@@ -960,7 +1015,7 @@ section::before {
 
 .cell.empty{
   opacity:.08;
-  border:1px dashed rgba(255,255,255,0.13);
+  border:1px dashed rgba(0,0,0,0.08);
   border-radius:12px;
 }
 
@@ -996,8 +1051,8 @@ section::before {
   cursor: pointer;
 }
 .slot.disabled {
-  background: var(--card-bg); /* Fundo bem sutil */
-  color: rgba(255, 255, 255, 0.2);      /* Texto quase sumindo (mantido para dark) */
+  background: var(--card-bg); /* Fundo sutil */
+  color: rgba(0,0,0,0.25);
   border: 1px solid var(--card-border);
   box-shadow: none;
   cursor: not-allowed;
@@ -1047,7 +1102,7 @@ section::before {
 }
 
 #calendar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0,0,0,0.03);
 }
 
 #calendar::-webkit-scrollbar-thumb {
@@ -1067,3 +1122,126 @@ section::before {
     text-align: center;
   }
 }
+
+/* ==========================
+   TESTIMONIALS: FORÇAR FUNDO ESCURO E MELHORAR BRILHOS
+   Cole no final do base.css
+========================== */
+
+/* Container escuro para toda a área de depoimentos */
+.testimonial-carousel {
+  --background: linear-gradient(135deg, #25301F 0%, #16261B 55%, #3C4E32 100%);
+  color: var(--text-on-dark, #F6F5F0) !important;
+  padding: 48px 20px;
+  --border-radius: 14px;
+  position: relative;
+  isolation: isolate; /* protege contra filtros/inversões globais */
+  -webkit-font-smoothing: antialiased;
+  --box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  overflow: visible;
+}
+
+/* Ajuste do track para não herdar backgrounds claros */
+.testimonial-track {
+  padding: 8px 0;
+}
+
+/* Itens com leve superfície translúcida para destacar texto */
+.testimonial-item {
+  min-width: 350px;
+  background: rgba(255,255,255,0.04); /* sutil sobre o fundo escuro */
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-inverse);
+  padding: 26px;
+  border-radius: 12px;
+  font-style: italic;
+  opacity: 0.98;
+  transition: transform .25s ease, box-shadow .25s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+/* Texto e autor com contraste */
+.testimonial-item strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--accent-light);
+  font-weight: 700;
+}
+
+/* Sparkles assíncronos e responsivos */
+
+/* Sparkles: transição apenas em opacity/transform; left/top sem transição */
+.testimonial-item { position: relative; overflow: visible; }
+
+.testimonial-item .sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 2px;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.28));
+  opacity: 0;
+  transition: opacity 160ms linear, transform 260ms ease; /* NOTA: sem left/top aqui */
+  will-change: transform, opacity;
+  background: radial-gradient(circle, rgba(255,243,198,0.95) 0%, rgba(251,227,155,0.9) 45%, rgba(165,114,52,0.9) 100%);
+}
+
+/* visível: brilho; enquanto presente, NÃO reposicionamos */
+.sparkle--visible { opacity: 0.9; transform: scale(1.05) rotate(6deg); }
+
+/* mobile ajustes */
+@media (max-width: 768px) {
+  .testimonial-item .sparkle { width: 6px; height: 6px; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.28)); }
+}
+
+
+/*--- fim sparkles ---*/
+
+/* Hover dos itens para destacar */
+.testimonial-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+}
+
+/* Ajustes responsivos (mantém legibilidade) */
+@media (max-width: 768px) {
+  .testimonial-carousel {
+    padding: 28px 12px;
+   -- border-radius: 10px;
+  }
+  .testimonial-item {
+    min-width: 280px;
+    padding: 20px;
+  }
+  .testimonial-item .sparkle { width: 8px; height: 8px; }
+}
+
+.testimonial-carousel {
+  --background: linear-gradient(135deg, #25301F 0%, #16261B 55%, #3C4E32 100%);
+  --border-radius: 14px;
+  overflow: hidden; /* garante que nada "vaze" para fora do contorno */
+  --box-shadow: 0 6px 18px rgba(0,0,0,0.28); /* sombra mais contida */
+  --border: 1px solid rgba(0,0,0,0.12); /* borda escura para definir o limite */
+}
+
+/* itens internos com superfície translúcida, sem sombra forte */
+.testimonial-item {
+  background: var(--green-dark, #16261B) !important;
+  border: 1px solid var(--card-border);
+  box-shadow: none;
+  border-radius: 12px;
+  color: var(--text-on-dark, #F6F5F0) !important; 
+}
+
+/* .step { */
+  /* background: var(--card-bg); */
+  /* border: 1px solid var(--card-border); */
+  /* padding: 30px 20px; */
+  /* border-radius: 12px; */
+  /* text-align: center; */
+  /* transition: transform 0.3s; */
+  
+    /* background-color: var(--green-dark, #16261B) !important; /* fundo verde escuro */ */
+  /* color: var(--text-on-dark, #F6F5F0) !important;          /* texto claro sobre o verde */ */
