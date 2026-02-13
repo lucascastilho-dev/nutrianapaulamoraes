@@ -1,3 +1,155 @@
+
+
+
+var globalDarkSamsung = false; 
+
+(function() {
+  if (window.__detectSamsungForcedDarkRun) return;
+  window.__detectSamsungForcedDarkRun = true;
+
+  const ua = navigator.userAgent || '';
+  const isSamsung = /SamsungBrowser/i.test(ua);
+  const forceTest = new URLSearchParams(location.search).get('samsung_forced_test') === '1';
+  if (!isSamsung && !forceTest) return; // roda só para Samsung ou teste
+
+  //alert('UA: ' + ua + '\nisSamsung: ' + (isSamsung ? 'SIM' : 'NÃO') + '\nforceTest: ' + (forceTest ? 'SIM' : 'NÃO'));
+
+  // cria imagem SVG branca (1x1)
+  const svgData = 'data:image/svg+xml;base64,' +
+    btoa('<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><rect width="1" height="1" fill="white"/></svg>');
+
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = function() {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1;
+      canvas.height = 1;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      const data = ctx.getImageData(0, 0, 1, 1).data; // [r,g,b,a]
+      const [r,g,b,a] = data;
+      // alert('Canvas pixel read: r=' + r + ' g=' + g + ' b=' + b + ' a=' + a);
+
+      // tolerância: considerar branco se >= 250
+      const isWhite = (r >= 250 && g >= 250 && b >= 250);
+      const isDark = !isWhite;
+  
+      // heurística: forced dark se canvas indica escuro OR body luminance baixa enquanto matchMedia=false
+      const forcedDark = isDark;
+
+//alert('isWhite=' + isWhite + ' => forcedDark=' + (forcedDark ? 'SIM' : 'NÃO'));
+
+      if (forcedDark) {
+		  globalDarkSamsung = true;
+        document.documentElement.classList.add('samsung-forced-dark');
+		
+        // alert('Classe samsung-forced-dark aplicada (teste).');
+		
+		try{
+			// showSamsungBanner();
+			alert('O seu navegador aplicou um modo escuro automático que pode alterar as cores do site. Para ver o visual original, desative o modo escuro do Samsung Internet nas configurações ou mude de navegador.');
+	  }catch (err){
+		  alert(err.message);
+	  }
+        // aqui você pode injetar banner ou overrides inline para testes
+      }
+    } catch (err) {
+      // alert('Erro no processamento do canvas: ' + err.message);
+    }
+  };
+  img.onerror = function() {
+    // alert('Erro ao carregar SVG data URI.');
+  };
+  img.src = svgData;
+})();
+
+
+  function showSamsungBanner() {
+  try {
+    if (document.querySelector('.samsung-banner')) return;
+    if (localStorage.getItem('samsung_forced_dark_dismissed') === '1') return;
+
+    // se body ainda não existe, aguarda DOMContentLoaded
+    if (!document.body) {
+      document.addEventListener('DOMContentLoaded', showSamsungBanner, { once: true });
+      return;
+    }
+
+    const banner = document.createElement('div');
+    banner.className = 'samsung-banner';
+    banner.setAttribute('role', 'status');
+    banner.innerHTML = `
+      <div class="sb-text">
+        O seu navegador aplicou um modo escuro automático que pode alterar as cores do site.
+        Para ver o visual original, desative o modo escuro do Samsung Internet nas configurações.
+      </div>
+      <div class="sb-actions">
+        <button class="sb-btn sb-dismiss">Entendi</button>
+        <button class="sb-link sb-help">Como desativar</button>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    banner.querySelector('.sb-dismiss').addEventListener('click', () => {
+      localStorage.setItem('samsung_forced_dark_dismissed', '1');
+      banner.remove();
+    });
+    banner.querySelector('.sb-help').addEventListener('click', () => {
+      window.open('https://help.samsung.com/', '_blank', 'noopener');
+    });
+
+    // fallback para garantir visibilidade
+    banner.style.position = 'fixed';
+    banner.style.bottom = '16px';
+    banner.style.left = '16px';
+    banner.style.zIndex = '99999';
+    banner.style.background = '#222';
+    banner.style.color = '#fff';
+    banner.style.padding = '12px 16px';
+    banner.style.borderRadius = '8px';
+    banner.style.boxShadow = '0 6px 20px rgba(0,0,0,0.3)';
+
+    setTimeout(() => { if (document.body.contains(banner)) banner.remove(); }, 12000);
+  } catch (err) {
+    console.error('showSamsungBanner error:', err);
+  }
+}
+
+
+
+
+  // function applyInline() {
+	  
+  // const selectors = ['.floating-btn', '.btn-whatsapp', '.btn-agendar'];
+	   // alert('gold');
+    // selectors.forEach(sel => {
+      // document.querySelectorAll(sel).forEach(el => {
+        // try {
+          // el.style.setProperty('background', 'linear-gradient(90deg, #ffeb3b, #ffeb3b)', 'important');
+          // el.style.setProperty('background-color', '#A57234', 'important');
+          // el.style.setProperty('color', '#16261B', 'important');
+          // el.style.setProperty('-webkit-text-fill-color', '#16261B', 'important');
+          // el.style.setProperty('filter', 'none', 'important');
+          // el.style.setProperty('mix-blend-mode', 'normal', 'important');
+          // el.style.setProperty('border', '1px solid rgba(0,0,0,0.08)', 'important');
+          // el.style.setProperty('box-shadow', '0 10px 30px rgba(0,0,0,0.32)', 'important');
+          // el.getBoundingClientRect();
+        // } catch(e){}
+      // });
+    // });
+	
+		// const el2 = document.querySelector('.habilidades h2');
+		// try {
+          // el2.style.setProperty('color', 'white', 'important');
+          // el2.getBoundingClientRect();
+        // } catch(e){}
+  // }
+
+
+
+/* fim validacao modo dark forçado da samsung */
+
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", init);
@@ -49,23 +201,19 @@ function initRadarChart() {
   const dataFinal = [7, 9, 8, 8, 6];
 
   // Detecta o tamanho da tela para definir a fonte inicial
-  const getFontSize = () => {
-    return window.innerWidth < 768 ? 10 : 14;
-  };
+  const getFontSize = () => window.innerWidth < 768 ? 10 : 14;
 
-  // Lê uma variável CSS e retorna cor em formato rgb/hex
+  // Lê uma variável CSS e retorna cor em formato string
   const cssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-  // Função utilitária para converter hex/rgba para luminance (0..1)
+  // Converte hex/rgba para objeto RGB
   const parseColorToRGB = (c) => {
     if (!c) return null;
     c = c.replace(/\s+/g, '');
-    // rgba(...)
     if (c.startsWith('rgba') || c.startsWith('rgb')) {
       const nums = c.match(/[\d.]+/g).map(Number);
       return { r: nums[0], g: nums[1], b: nums[2], a: nums[3] ?? 1 };
     }
-    // hex #rrggbb or #rgb
     if (c[0] === '#') {
       let hex = c.slice(1);
       if (hex.length === 3) hex = hex.split('').map(h => h + h).join('');
@@ -84,20 +232,48 @@ function initRadarChart() {
     return 0.2126 * srgb[0] + 0.7152 * srgb[1] + 0.0722 * srgb[2];
   };
 
-  // Tenta ler --bg (definida no CSS). Se não existir, pega background do body.
-  let bgVar = cssVar('--bg') || getComputedStyle(document.body).backgroundColor;
-  const bgRGB = parseColorToRGB(bgVar);
-  const lum = luminance(bgRGB);
-  const isLightBg = lum > 0.5; // threshold: >0.5 = claro
+  // função que decide paleta do radar com base no contexto atual
+  function computeRadarColors() {
+    // detecta forced dark class (Samsung) e prefers-color-scheme
+    const forcedSamsung = document.documentElement.classList.contains('samsung-forced-dark');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  // Lê as variáveis do radar (fallbacks caso não existam)
-  const radarGrid = cssVar('--radar-grid') || (isLightBg ? 'rgba(0,0,0,0.06)' : 'rgba(251,227,155,0.12)');
-  const radarAngle = cssVar('--radar-angle-lines') || radarGrid;
-  const radarLabel = cssVar('--radar-label') || (isLightBg ? '#1b1b1b' : '#FBE39B');
-  const radarStroke = cssVar('--radar-stroke') || (isLightBg ? '#A57234' : '#FBE39B');
-  const radarFill = cssVar('--radar-fill') || (isLightBg ? 'rgba(251,227,155,0.18)' : 'rgba(251,227,155,0.18)');
-  const radarPoint = cssVar('--radar-point') || radarStroke;
-  const radarTick = cssVar('--radar-tick') || radarGrid;
+    // tenta ler --bg; se não existir, usa body
+    let bgVar = cssVar('--bg') || getComputedStyle(document.body).backgroundColor;
+    const bgRGB = parseColorToRGB(bgVar);
+    const lum = luminance(bgRGB);
+    const isLightBg = lum > 0.5;
+
+    // se for forced Samsung, tratamos como dark (mas queremos radar claro)
+    const treatAsDark = globalDarkSamsung;
+
+    // cores claras para o radar quando em dark forced (quer branco/alto contraste)
+    if (treatAsDark) {
+      return {
+        radarGrid: 'rgba(255,255,255,0.08)',        // linhas de grid mais suaves
+        radarAngle: 'rgba(255,255,255,0.06)',
+        radarLabel: '#FFFFFF',                      // labels brancas
+        radarStroke: 'rgba(255,255,255,0.95)',      // contorno do dataset (quase branco)
+        radarFill: 'rgba(255,255,255,0.12)',        // preenchimento translúcido claro
+        radarPoint: '#FFFFFF',
+        radarTick: 'rgba(255,255,255,0.06)'
+      };
+    }
+
+    // caso normal (light)
+    return {
+      radarGrid: cssVar('--radar-grid') || 'rgba(0,0,0,0.06)',
+      radarAngle: cssVar('--radar-angle-lines') || 'rgba(0,0,0,0.06)',
+      radarLabel: cssVar('--radar-label') || '#1b1b1b',
+      radarStroke: cssVar('--radar-stroke') || '#A57234',
+      radarFill: cssVar('--radar-fill') || 'rgba(251,227,155,0.18)',
+      radarPoint: cssVar('--radar-point') || '#A57234',
+      radarTick: cssVar('--radar-tick') || 'rgba(0,0,0,0.06)'
+    };
+  }
+
+  // cria chart com as cores calculadas
+  let colors = computeRadarColors();
 
   const chart = new Chart(ctx, {
     type: 'radar',
@@ -111,10 +287,10 @@ function initRadarChart() {
       ],
       datasets: [{
         data: [0,0,0,0,0],
-        borderColor: radarStroke,
-        backgroundColor: radarFill,
-        pointBackgroundColor: radarPoint,
-        pointBorderColor: radarPoint,
+        borderColor: colors.radarStroke,
+        backgroundColor: colors.radarFill,
+        pointBackgroundColor: colors.radarPoint,
+        pointBorderColor: colors.radarPoint,
         pointRadius: 4,
         borderWidth: 2
       }]
@@ -129,16 +305,16 @@ function initRadarChart() {
           max: 10,
           ticks: {
             display: false,
-            color: radarTick
+            color: colors.radarTick
           },
           grid: {
-            color: radarGrid
+            color: colors.radarGrid
           },
           angleLines: {
-            color: radarAngle
+            color: colors.radarAngle
           },
           pointLabels: {
-            color: radarLabel,
+            color: colors.radarLabel,
             font: { size: getFontSize(), weight: 600 }
           }
         }
@@ -155,9 +331,43 @@ function initRadarChart() {
     }
   }, { threshold: 0.6 });
 
-  obs.observe(document.getElementById('sec-habilidades'));
-}
+  const sec = document.getElementById('sec-habilidades');
+  if (sec) obs.observe(sec);
 
+  // função para recalcular cores e atualizar o chart (usada por observer)
+  function refreshChartColors() {
+    const newColors = computeRadarColors();
+    // atualiza dataset e opções
+    chart.data.datasets[0].borderColor = newColors.radarStroke;
+    chart.data.datasets[0].backgroundColor = newColors.radarFill;
+    chart.data.datasets[0].pointBackgroundColor = newColors.radarPoint;
+    chart.data.datasets[0].pointBorderColor = newColors.radarPoint;
+    // atualiza opções de escala
+    chart.options.scales.r.grid.color = newColors.radarGrid;
+    chart.options.scales.r.angleLines.color = newColors.radarAngle;
+    chart.options.scales.r.ticks.color = newColors.radarTick;
+    chart.options.scales.r.pointLabels.color = newColors.radarLabel;
+    // força update
+    chart.update();
+  }
+
+  // observa mudanças na classe do <html> (ex.: samsung-forced-dark adicionada/removida)
+  const htmlObserver = new MutationObserver(muts => {
+    for (const m of muts) {
+      if (m.type === 'attributes' && m.attributeName === 'class') {
+        // se a classe samsung-forced-dark foi adicionada/retirada, atualiza cores
+        refreshChartColors();
+      }
+    }
+  });
+  htmlObserver.observe(document.documentElement, { attributes: true });
+
+  // também atualiza no resize (ajusta font-size)
+  window.addEventListener('resize', () => {
+    chart.options.scales.r.pointLabels.font.size = getFontSize();
+    chart.update();
+  });
+}
 
 /* ================= CAROUSEL (SEM SALTO) ================= */
 function initCarousel() {
@@ -408,3 +618,4 @@ function initGSAPReveal() {
     });
   });
 }
+
