@@ -286,7 +286,8 @@ section {
 
 .hero {
   text-align: center;
-  padding-top: 60px;
+  //padding-top: 60px;
+  padding: 70px 20px 80px;
 }
 .hero h1 {
   font-size: 44px;
@@ -495,7 +496,7 @@ section {
 ========================== */
 footer {
   text-align: center;
-  padding: 30px;
+  padding: 40px, 30px, 100px, 30px;
   padding-bottom: 100px;
   opacity: 0.8;
 }
@@ -504,6 +505,9 @@ footer {
   justify-content: center;
   gap: 22px;
   margin-bottom: 15px;
+}
+.social-footer p{
+  color: var(--accent-light);
 }
 .social-footer a {
   font-size: 28px;
@@ -1459,3 +1463,219 @@ html.samsung-forced-dark body .btn-agendar {
   background-color: #A57234 !important;
   color: #16261B !important;
 }
+
+
+
+/* ==========================
+   FONTES (Preservadas)
+========================== */
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../fonts/myriad-pro-webfont/MYRIADPRO-REGULAR.woff') format('woff');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Belly Betty';
+  src: url('../fonts/Belly_Betty.ttf') format('truetype');
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+
+/* ==========================
+   VARIÁVEIS DE TEMA
+========================== */
+:root {
+  --bg-offwhite: #F7F5F2;
+  --bg: var(--bg-offwhite);
+  --bg-gradient: linear-gradient(135deg, #FBF8F5, #F7F5F2 40%, #EFECE8 100%);
+  --text: #1b1b1b;
+  //--accent: #A57234;
+  //--accent-light: #FBE39B;
+  //--h1-accent: #25301f;
+  --nav-bg: rgba(247, 245, 242, 0.0); /* Inicial transparente */
+  --nav-glass: rgba(247, 245, 242, 0.7);
+  --nav-text: #1b1b1b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16261B;
+    --bg-gradient: linear-gradient(135deg, #25301F, #16261B, #3C4E32);
+    --text: #ffffff;
+    --nav-glass: rgba(22, 38, 27, 0.8);
+    --nav-text: #ffffff;
+  }
+}
+
+/* ==========================
+   RESET & BASE
+========================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Myriad Pro', sans-serif; }
+html, body { 
+  background: var(--bg-gradient) !important; 
+  color: var(--text) !important; 
+  overflow-x: hidden; 
+  scroll-behavior: smooth;
+}
+
+
+
+/* ==========================
+   NAVBAR GLASSMOPHISM
+========================== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 7px 0; /* Padding inicial maior */
+}
+
+/* Container para alinhar conteúdo da nav */
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Estado Scrollado (Trigger via JS) */
+header.scrolled {
+  padding: 12px 0;
+  background-color: var(--nav-glass);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  max-width: 280px;
+  height: auto;
+  transition: max-width 0.4s ease;
+}
+
+header.scrolled .logo {
+  max-width: 180px; /* Redução ao rolar */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  padding-right: 25px
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--nav-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.nav-btn-agendar {
+  background: linear-gradient(to right, var(--accent-light), var(--accent));
+  color: #16261B !important;
+  padding: 10px 22px !important;
+  border-radius: 6px;
+  font-weight: 700 !important;
+}
+
+/* ==========================
+   HAMBURGER & MOBILE
+========================== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  padding-right: 25px
+}
+
+.hamburger span {
+  width: 28px;
+  height: 2px;
+  background: var(--nav-text);
+  transition: 0.3s;
+}
+
+@media (max-width: 992px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg);
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+    transition: 0.4s ease;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+  }
+  .nav-links.active { right: 0; }
+  .logo { max-width: 200px; }
+}
+
+/* ==========================
+   RESTO DO CSS (Mantido)
+========================== */
+/* .hero { padding: 160px 20px 80px; text-align: center; } */
+/* .hero h1 { font-size: 44px; margin-bottom: 30px; background: radial-gradient(circle, var(--h1-accent), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; } */
+.section-title { font-size: 46px; margin-bottom: 30px; font-family: 'Belly Betty', cursive; }
+.btn-agendar { background: linear-gradient(to right, var(--accent-light), var(--accent)); color: #16261B; padding: 16px 32px; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-block; transition: transform 0.3s; }
+.btn-agendar:hover { transform: scale(1.05); }
+
+/* Proteções Samsung Forced Dark (Sua Versão Original) */
+html.samsung-forced-dark {
+  --bg: #16261B !important;
+  --text: #ffffff !important;
+  forced-color-adjust: none !important;
+}
+html.samsung-forced-dark header.scrolled {
+  background-color: #16261B !important;
+  backdrop-filter: none !important;
+}
+
+
+/* ===== GLASS NAVBAR REAL ===== */
+
+.glass-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  background: rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  z-index: 997;
+  pointer-events: none;
+}
+
+/* header fica por cima do vidro */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 998;
+  background: transparent !important;
+}
+
+/* empurra o conteúdo pra não ficar escondido */
+body {
+  padding-top: 73px;
+}
+
+

@@ -163,6 +163,7 @@ function init() {
   initFloatingButtons();
   initKenBurns();
   initAppSection();
+  initNavbar();
 }
 
 /* ================= COUNTERS ================= */
@@ -600,6 +601,8 @@ function initAppSection() {
 
   observerApp.observe(sessaoApp);
 }
+
+
 /* ================= GSAP REVEAL (AJUSTADO) ================= */
 function initGSAPReveal() {
   // O ":not(.mensagem-aplicativo)" impede que o GSAP tente animar 
@@ -619,3 +622,51 @@ function initGSAPReveal() {
   });
 }
 
+
+
+/* ============================================================
+   LÓGICA DA NAVBAR (SCROLL & MOBILE)
+============================================================ */
+
+function initNavbar() {
+    const header = document.querySelector('header');
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.querySelector('.nav-links');
+    const navLinks = document.querySelectorAll('nav.nav-links a.nav-button');
+
+    // Scroll
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Toggle menu
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation(); // impede fechar na mesma hora
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('open');
+    });
+
+    // Fecha ao clicar em link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeMenu();
+        });
+    });
+
+    // 🔥 Fecha ao clicar fora
+    document.addEventListener('click', (e) => {
+        const clickDentroMenu = navMenu.contains(e.target);
+        const clickNoHamburger = hamburger.contains(e.target);
+
+        if (!clickDentroMenu && !clickNoHamburger) {
+            closeMenu();
+        }
+    });
+
+    function closeMenu() {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('open');
+    }
+}
+
+// document.addEventListener('DOMContentLoaded', initNavbar);
