@@ -73,7 +73,7 @@
   /* Accessibility tuning (can be adjusted) */
   --link-hover-contrast: var(--accent-light);
 }
-**/Radar**/
+/*Radar*/
 
 /* Radar colors (light base) */
 :root {
@@ -1678,4 +1678,140 @@ body {
   padding-top: 73px;
 }
 
+/* ==========================
+   FAQ - ESTILO PERSONALIZADO
+========================== */
+.faq-section {
+  padding: 100px 20px;
+  max-width: 900px; /* FAQ mais estreito para melhor leitura */
+  margin: auto;
+}
 
+.faq-intro {
+  text-align: center;
+  margin-top: -15px;
+  margin-bottom: 50px;
+  opacity: 0.8;
+  font-size: 1.1rem;
+}
+
+.faq-category {
+  margin-bottom: 40px;
+}
+
+.faq-category h3 {
+  color: var(--accent);
+  font-family: 'Belly Betty', cursive;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 10px;
+}
+
+.faq-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.faq-item:hover {
+  border-color: var(--accent-light);
+  transform: translateX(5px);
+}
+
+.faq-item summary {
+  padding: 20px 25px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  outline: none;
+  font-size: 1.05rem;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '→';
+  color: var(--accent);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-item[open] summary::after {
+  transform: rotate(90deg);
+  content: '↓';
+}
+
+.faq-content {
+  padding: 0 25px 25px;
+  line-height: 1.7;
+  color: var(--text);
+  opacity: 0.95;
+  font-size: 1rem;
+  border-top: 1px solid var(--card-border);
+  padding-top: 15px;
+  animation: slideDown 0.4s ease;
+}
+
+.faq-content ul {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.faq-content li {
+  margin-bottom: 8px;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .faq-section { padding: 60px 15px; }
+  .faq-category h3 { font-size: 1.5rem; }
+  .faq-item summary { padding: 15px; font-size: 1rem; }
+}
+
+/* Header fixo e efeito glass ao rolar */
+#main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* Estado quando a página é rolada */
+#main-header.scrolled {
+  background: rgba(255,255,255,0.18); /* ajuste para light mode */
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  backdrop-filter: blur(8px) saturate(120%);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Dark mode variant (mantém contraste no escuro) */
+@media (prefers-color-scheme: dark) {
+  #main-header.scrolled {
+    background: rgba(22,38,27,0.48);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+}
