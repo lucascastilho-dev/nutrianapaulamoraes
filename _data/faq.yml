@@ -1,0 +1,93 @@
+- category: "A Consulta e o Método"
+  items:
+    - question: "Como funciona a consulta nutricional?"
+      answer: "A consulta é um momento de escuta, acolhimento e planejamento estratégico. Mas, antes de falar sobre alimentos, eu quero entender quem você é: sua rotina, história com a comida, objetivos e desafios. Cada detalhe importa para construirmos juntos um plano alimentar totalmente personalizado, alinhado ao seu corpo, estilo de vida e metas."
+
+    - question: "A consulta é presencial ou online?"
+      answer: "O atendimento é 100% online, pensado para se adaptar à sua rotina. Você recebe atenção total, conforto e privacidade, com a mesma profundidade de um atendimento presencial, sem precisar se deslocar."
+
+    - question: "Como é feita a avaliação corporal no online?"
+      answer: |
+        <p>Mesmo à distância, conseguimos avaliar seu corpo usando:</p>
+        <ul>
+          <li>Peso e altura;</li>
+          <li>Medidas corporais;</li>
+          <li>Fotos e observação de roupas;</li>
+          <li>Sinais do corpo: pele, unhas, cabelo e língua.</li>
+        </ul>
+        <p>Isso garante que o plano seja preciso, seguro e ajustado à sua evolução.</p>
+
+    - question: "Nutricionista online funciona para emagrecimento?"
+      answer: "Sim! Quando o acompanhamento é personalizado, estratégico e com suporte contínuo, pode ser tão eficaz quanto presencial. A diferença está no método, atenção aos detalhes e individualização, garantindo resultados reais e duradouros."
+
+- category: "Emagrecimento e Resultados"
+  items:
+    - question: "Vale a pena procurar um nutricionista para emagrecer?"
+      answer: "Vale muito, principalmente se você já tentou dietas que não deram certo. Muitas vezes, o desafio não é falta de esforço, mas sim falta de orientação correta. Um nutricionista te ajuda a: Comer melhor e de forma prazerosa, organizar horários e rotina, emagrecer de forma sustentável."
+
+    - question: "Nutricionista emagrece mesmo?"
+      answer: "Sim, mas os resultados aparecem quando o plano faz sentido para sua rotina e objetivos. Não se trata de seguir dietas prontas, mas de estratégias inteligentes que funcionam para você, respeitando seu corpo e seu dia a dia."
+
+    - question: "Preciso passar fome para emagrecer?"
+      answer: "Não. Emagrecer não precisa ser sofrimento. O foco é: Ter saciedade e prazer ao comer, alimentação equilibrada e sustentável, resultados duradouros e saudáveis."
+
+    - question: "Consigo emagrecer sem cortar tudo que gosto de comer?"
+      answer: "Sim! A ideia é aprender a equilibrar sua alimentação, mantendo prazer e motivação para continuar. Em vez de restrição extrema, buscamos moderação inteligente e escolhas estratégicas."
+
+    - question: "Preciso cortar carboidratos para emagrecer?"
+      answer: "Não. O emagrecimento depende de equilíbrio, estratégia e constância, não de cortes radicais. O que importa é: Quantidade adequada, qualidade dos alimentos e momento de consumo."
+
+    - question: "É possível emagrecer sem contar calorias?"
+      answer: "Sim! Em muitos casos, não é necessário contar calorias diariamente. O foco está em: Qualidade da alimentação, organização das refeições e escuta dos sinais do corpo."
+
+    - question: "Por que faço dieta e não emagreço?"
+      answer: "Muitos fatores podem influenciar: Efeito sanfona, ansiedade e estresse, escolhas alimentares inadequadas e restrição excessiva. O nutricionista identifica os erros e ajustes necessários, criando estratégias personalizadas e eficientes."
+
+    - question: "Em quanto tempo vejo resultados com o nutricionista?"
+      answer: "Cada corpo responde de forma diferente. Fatores importantes: Metabolismo, rotina e sono, nível de estresse e adesão ao plano. Com acompanhamento adequado, resultados visíveis podem surgir nas primeiras semanas."
+
+- category: "Saúde, Exames e Suplementação"
+  items:
+    - question: "Preciso fazer exames para acompanhamento nutricional?"
+      answer: "Não são obrigatórios para iniciar. Mas, ao longo do acompanhamento, exames podem ser recomendados para ajustar o plano, aumentar a segurança e potencializar resultados."
+
+    - question: "Nutricionista pode prescrever medicamentos injetáveis (Ozempic/Mounjaro)?"
+      answer: "Não. Apenas médicos podem prescrever medicamentos como Ozempic ou Mounjaro. Mas o acompanhamento nutricional: Potencializa resultados com orientação médica, previne deficiências nutricionais, preserva massa muscular e equilíbrio hormonal."
+
+    - question: "Nutricionista prescreve suplementos?"
+      answer: "Sim, mas sempre como complemento, nunca substituindo a alimentação. O objetivo é otimizar resultados de forma segura e personalizada."
+
+    - question: "Alimentação ajuda na ansiedade e compulsão alimentar?"
+      answer: "Sim! A nutrição comportamental analisa: Emoções e gatilhos; Hábitos diários e relação com a comida. O objetivo é reduzir episódios de compulsão e melhorar a relação com a comida."
+
+- category: "Metabolismo e Estética"
+  items:
+    - question: "Posso emagrecer mesmo com metabolismo lento?"
+      answer: "Sim. O metabolismo é influenciado por: Alimentação, massa muscular, sono, estresse e rotina. Com estratégias personalizadas, é possível acelerar resultados e emagrecer com saúde."
+
+    - question: "Alimentação influencia na flacidez e saúde da pele?"
+      answer: "Sim! Nutrientes adequados ajudam na: Produção de colágeno, hidratação da pele, firmeza e elasticidade. Resultados visíveis aparecem quando o plano é estratégico e individualizado."
+
+    - question: "Alimentação ajuda na redução de gordura localizada e barriga inchada?"
+      answer: "Sim! A nutrição atua na: Redução de gordura corporal total, diminuição de inchaço e gases e melhora do formato do corpo."
+
+    - question: "O intestino pode atrapalhar o emagrecimento?"
+      answer: "Sim! Sintomas como: Inchaço, sensação de peso, fadiga e alterações de humor podem indicar desajustes intestinais, que influenciam metabolismo e inflamação."
+
+    - question: "Por que engordo fácil ou vivo inchado mesmo comendo pouco?"
+      answer: "Fatores incluem: Genética, metabolismo, efeito sanfona, rotina e escolhas alimentares. O nutricionista cria estratégias personalizadas para resultados consistentes."
+
+    - question: "Alimentação pode ajudar após o uso de medicamentos para emagrecer?"
+      answer: "Sim! O acompanhamento nutricional: Reorganiza a alimentação, preserva massa muscular, evita efeito sanfona e mantém resultados de forma saudável."
+
+- category: "Investimento e Adesão"
+  items:
+    - question: "Quantas consultas preciso para emagrecer?"
+      answer: "Depende do seu objetivo, rotina e adesão. Muitos pacientes percebem mudanças já nas primeiras semanas. O plano é ajustado continuamente para resultados duradouros."
+
+    - question: "Quanto custa uma consulta online com nutricionista?"
+      answer: |
+        O valor varia conforme o tipo de atendimento e acompanhamento. Para informações detalhadas e agendamento imediato, <a href="agenda.html" style="color:var(--accent); font-weight:bold;">clique aqui e fale conosco</a>.
+
+    - question: "Por que escolher um nutricionista ao invés de dietas prontas?"
+      answer: "Dietas prontas não consideram sua rotina, preferências e metabolismo. Um plano personalizado garante resultados sustentáveis e ajuda a melhorar relação com a comida e hábitos para a vida inteira."

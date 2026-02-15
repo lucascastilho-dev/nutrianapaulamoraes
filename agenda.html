@@ -1,32 +1,25 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.nutrianapaulamoraes/faq.html" />
-<link rel="icon" type="image/ico" href="img/favicon.ico">
-<!-- BASE CSS -->
-<link rel="stylesheet" href="css/base.css">
-<!-- FONT AWESOME -->
-<link rel="stylesheet" href="css/all.min.css">
-<title>Agendar Consulta | Dra. Ana Paula Moraes</title>
-
-<style>
+---
+layout: default
+title: Agendar Consulta | Dra. Ana Paula Moraes
+custom_css: |
   :root {
     --bg-color: #0f1a14;
     --card-bg: #16261b;
     --accent: #FBE39B;
     --text-white: #ffffff;
   }
-
-  body {
+  
+  /* Ajuste para o layout default */
+  main {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 20px;
-    background: var(--bg-color);
-    color: var(--text-white);
+    padding-top: 100px; /* Compensar header fixo */
+    /*background: var(--bg-color);
+    color: var(--text-white);*/
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
   }
 
   .container { max-width: 600px; width: 100%; text-align: center; }
@@ -102,11 +95,7 @@
     background: transparent; color: #ff6b6b;
     width: 100%; margin-top: 10px; font-size: 0.8rem;
   }
-</style>
-</head>
-<body>
-
-
+---
 
 <div class="container">
   <h2 class="section-title cursive center">Agendamento Online</h2>
@@ -119,7 +108,6 @@
 	</div>
 
 	<div id="calendar" class="week"></div>
-  
 </div>
 
 <div id="bookingModal" class="modal">
@@ -170,9 +158,9 @@ let currentWeekStart = getStartOfWeek(new Date());
 function getStartOfWeek(date) {
   const d = new Date(date);
   const day = d.getDay();
-  const diff = d.getDate() - day + (day === 0 ? -6 : 1); // Segunda-feira
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1); 
   const monday = new Date(d.setDate(diff));
-  monday.setHours(12, 0, 0, 0); // Trava o fuso horário no meio do dia
+  monday.setHours(12, 0, 0, 0); 
   return monday;
 }
 
@@ -180,28 +168,21 @@ function formatISO(date){
   return date.toISOString().split('T')[0];
 }
 
-/* ================= CARREGA A SEMANA INTEIRA ================= */
-
 async function loadWeek() {
   calendarEl.innerHTML = "<p>Carregando agenda...</p>";
-
-  // IMPORTANTE: Gerar os dias sempre a partir da currentWeekStart atualizada
   const days = [];
   for(let i=0; i<5; i++){
-    const d = new Date(currentWeekStart.getTime()); // Use getTime() para copiar o valor real
+    const d = new Date(currentWeekStart.getTime()); 
     d.setDate(d.getDate() + i);
     d.setHours(12, 0, 0, 0); 
     days.push(d);
   }
 
-  // Atualiza a legenda IMEDIATAMENTE antes de fazer o fetch
-  // Isso garante que mesmo que a API demore, a data no topo já mudou
   const label = document.getElementById('weekLabel');
   if(label) {
     label.innerText = `${days[0].toLocaleDateString('pt-BR')} — ${days[4].toLocaleDateString('pt-BR')}`;
   }
 
-  // Agora segue com a busca dos dados...
   const responses = await Promise.all(
     days.map(d =>
       fetch(`${API}/availability?date=${formatISO(d)}`)
@@ -213,8 +194,6 @@ async function loadWeek() {
   renderWeekGrid(days, responses);
 }
 
-/* ===== CORREÇÃO DEFINITIVA DO FUSO DO GOOGLE ===== */
-
 function getUTCTimeKey(date){
   const h = String(date.getUTCHours()).padStart(2,'0');
   const m = String(date.getUTCMinutes()).padStart(2,'0');
@@ -225,28 +204,22 @@ function sortTimes(a,b){
   return a.localeCompare(b);
 }
 
-/* ================= MONTA O GRID ================= */
 function renderWeekGrid(days, weekData) {
   calendarEl.innerHTML = '';
   const agora = new Date();
 
-  // 1. Consolidamos os horários (se houver algum)
   const allTimes = new Set();
   weekData.forEach(daySlots => {
     daySlots.forEach(d => allTimes.add(getUTCTimeKey(d)));
   });
 
   const times = Array.from(allTimes).sort(sortTimes);
-
-  // 2. Verificação de conteúdo
   const isSemanaPassada = days[4] < agora; 
   
-  // Contamos se existe qualquer slot retornado que ainda não passou da hora atual
   const totalSlotsAtivos = weekData.reduce((acc, daySlots) => {
     return acc + daySlots.filter(d => new Date(d) > agora).length;
   }, 0);
 
-  // 3. Lógica de Mensagens
   if (isSemanaPassada) {
     calendarEl.innerHTML = `
       <div style="text-align:center; padding:50px; opacity:0.6;">
@@ -255,7 +228,6 @@ function renderWeekGrid(days, weekData) {
     return;
   }
 
-  // Se a semana é atual/futura mas não há nenhum slot disponível para o usuário clicar
   if (totalSlotsAtivos === 0) {
     calendarEl.innerHTML = `
       <div style="text-align:center; padding:50px; border: 1px dashed rgba(255,255,255,0.1); border-radius: 20px;">
@@ -267,7 +239,6 @@ function renderWeekGrid(days, weekData) {
     return;
   }
 
-  // 4. Renderização do Grid (Só acontece se totalSlotsAtivos > 0)
   const grid = document.createElement('div');
   grid.className = 'week-grid';
 
@@ -305,12 +276,9 @@ function renderWeekGrid(days, weekData) {
   });
 
   calendarEl.appendChild(grid);
-
- // Atualiza o texto do intervalo de datas no topo
   document.getElementById('weekLabel').innerText =
     `${days[0].toLocaleDateString('pt-BR')} — ${days[4].toLocaleDateString('pt-BR')}`;
 }
-/* ================= ENVIAR AGENDAMENTO ================= */
 
 document.getElementById('formAgendamento').onsubmit = async (e) => {
   e.preventDefault();
@@ -338,10 +306,7 @@ document.getElementById('formAgendamento').onsubmit = async (e) => {
 
     if(result.ok) {
       mostrarSucesso();
-
-      // 🔥 atualiza a semana após agendar
       loadWeek();
-
     } else {
       alert("Erro: " + result.error);
     }
@@ -358,36 +323,22 @@ function mostrarSucesso() {
   document.getElementById('successMessage').style.display = 'block';
 }
 
-/* ================= FECHAR MODAL CLICANDO FORA ================= */
-
 window.onclick = (event) => {
   if (event.target == modal) fecharModal();
 };
 
-/* ================= NAVEGAÇÃO SEMANA ================= */
-
 function changeWeek(offset) {
-  // 1. Calculamos a nova data baseada na atual
   const novaData = new Date(currentWeekStart.getTime());
   novaData.setDate(novaData.getDate() + (offset * 7));
-  
-  // 2. Forçamos a volta para a segunda-feira e limpamos o fuso
   currentWeekStart = getStartOfWeek(novaData);
   currentWeekStart.setHours(12, 0, 0, 0);
-
-  // 3. Chamamos o carregamento
   loadWeek();
 }
-/* ================= MODAL ================= */
 
 function abrirModal(dateISO, horaFormatada) {
   document.getElementById('inputISO').value = dateISO;
-
   const dataBR = new Date(dateISO).toLocaleDateString('pt-BR');
-
-  document.getElementById('infoDataHora').innerText =
-    `Dia: ${dataBR} às ${horaFormatada}`;
-
+  document.getElementById('infoDataHora').innerText = `Dia: ${dataBR} às ${horaFormatada}`;
   modal.style.display = 'block';
 }
 
@@ -397,8 +348,6 @@ function fecharModal() {
   document.getElementById('formAgendamento').style.display = 'block';
   document.getElementById('successMessage').style.display = 'none';
 }
-
-/* ================= BUSCA SEMANA DISPONÍVEL COM ATUALIZAÇÃO DE DATA ================= */
 
 async function findFirstAvailableWeek() {
   let attempts = 0;
@@ -425,7 +374,6 @@ async function findFirstAvailableWeek() {
 
     if (totalSlotsAtivos > 0) {
       found = true;
-      // Atualiza a variável global para que a legenda e o loadWeek leiam a semana certa
       currentWeekStart = new Date(tempStart); 
     } else {
       tempStart.setDate(tempStart.getDate() + 7);
@@ -435,28 +383,14 @@ async function findFirstAvailableWeek() {
   loadWeek();
 }
 
-/* ================= INICIALIZA ================= */
-
-/* ================= INICIALIZAÇÃO INTELIGENTE ================= */
-
-// Criamos uma variável para controlar se é a primeira carga
 let isFirstLoad = true;
-
 async function inicializarAgenda() {
   if (isFirstLoad) {
     isFirstLoad = false;
-    // findFirstAvailableWeek já termina chamando loadWeek()
     await findFirstAvailableWeek();
   } else {
     loadWeek();
   }
 }
-
-// Inicia o processo
 inicializarAgenda();
-
-//loadWeek();
 </script>
-
-</body>
-</html>

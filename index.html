@@ -1,30 +1,11 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/ico" href="img/favicon.ico">
-<link rel="preload" as="image" href="img/logo.webp">
-<link rel="canonical" href="https://www.nutrianapaulamoraes/index.html" />
-<title>Ana Paula de Moraes | Nutricionista</title>
-<meta name="description" content="Nutricionista Ana Paula de Moraes - atendimento online, personalizado e focado em performance, estética corporal e resultados reais.">
-<meta property="og:title" content="Ana Paula de Moraes | Nutricionista">
-<meta property="og:description" content="Atendimento nutricional online, personalizado e focado em performance, estética corporal e resultados reais.">
-<meta property="og:image" content="img/perfil.webp">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="light">
-
-<script rel="stylesheet">
-
-</script>
-
-<script type="application/ld+json">
-{
+---
+layout: default
+title: Ana Paula de Moraes | Nutricionista
+schema: '{
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Ana Paula de Moraes",
-  "image": "https://nutrianapaulamoraes.com.br/img/perfil.webpp",
+  "image": "https://nutrianapaulamoraes.com.br/assets/img/perfil.webp",
   "description": "Nutricionista com atendimento online, focado em performance, estética corporal e resultados reais.",
   "address": {
     "@type": "06763-060",
@@ -33,67 +14,19 @@
   },
   "telephone": "+5512982055557",
   "url": "https://nutrianapaulamoraes.com.br"
-}
-</script>
+}'
+---
 
+<section class="hero">
+  <h1><span class="cursive">Acompanhamento nutricional</span>
+  para transformar sua saúde, sua performance e sua qualidade de vida</h1>
+  <p>Atendimento nutricional personalizado, 100% online, com foco em performance, estética corporal e resultados reais.</p>
+  <a href="{{ '/agenda' | relative_url }}" target="_blank" class="btn-agendar">Quero agendar minha consulta</a>
+</section>  
 
-<!-- BASE CSS -->
-<link rel="stylesheet" href="css/base.css">
-
-<!-- FONT AWESOME -->
-<!-- <link rel="stylesheet" href="css/all.min.css"> -->
-
-<!-- CSS Tailwind CDN -->
-<!-- <link href="css/tailwind.min.css" rel="stylesheet"> -->
-
-
-
-</head>
-
-<body>
-
-<!-- <div class="glass-layer"></div> -->
-<header class="flex justify-between items-center p-5 px-10">
-  <img fetchpriority="high" src="img/logo.webp" alt="Ana Paula de Moraes - Nutricionista Clínica, Funcional, Estética e UAN" class="logo">
-  
-  <nav class="nav-links">
-    <a class="nav-button" href="#">Início</a>
-    <a class="nav-button" href="faq.html">FAQ</a>
-    <!-- <a class="nav-button" href="#sobre">Sobre</a> -->
-    <!-- <a class="nav-button" href="agenda.html" class="nav-btn-agendar">Agendar Consulta</a> -->
-  </nav>
-
-  <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-  
-</header>
-
-<a href="https://wa.me/5512982055557?text=Olá! Vim pelo site e gostaria de agendar uma consulta nutricional online." 
-   target="_blank" 
-   class="btn-whatsapp" 
-   aria-label="WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="30" height="30">
-        <path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-93.9-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.6-16.5-14.7-27.6-32.8-30.8-38.4-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.8 2.8-3.3 3.7-5.6 5.5-9.3 1.8-3.7.9-6.9-.5-9.8-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-    </svg>
-</a>
-<a href="agenda.html" target="_blank" class="floating-btn">Agendar Agora</a>
-<main>
-  <!-- HERO -->
-  <section class="hero">
-    <h1><span class="cursive">Acompanhamento nutricional</span>
-	para transformar sua saúde, sua performance e sua qualidade de vida</h1>
-    <p>Atendimento nutricional personalizado, 100% online, com foco em performance, estética corporal e resultados reais.</p>
-    <a href="agenda.html" target="_blank" class="btn-agendar">Quero agendar minha consulta</a>
-  </section>  
-  
 <section id="app-section" class="mensagem-aplicativo" style="content-visibility: auto">
   <div class="flex justify-center items-center">
-    <img src="img/imagem-celular-app-transparent.webp" alt="Aplicativo exclusivo de acompanhamento nutricional" class="mockup-app"
-	loading="lazy">
+    <img src="{{ '/assets/img/imagem-celular-app-transparent.webp' | relative_url }}" alt="Aplicativo exclusivo de acompanhamento nutricional" class="mockup-app" loading="lazy">
   </div>
 
   <div class="texto-coluna">
@@ -106,259 +39,154 @@
   </div>
 </section>
 
-  <!-- SOBRE -->
-  <section style="content-visibility: auto">
-    <div class="section-title cursive">Sobre Ana Paula</div>
-    <div class="crn">CRN-3 75260</div>
+<section style="content-visibility: auto">
+  <div class="section-title cursive">Sobre Ana Paula</div>
+  <div class="crn">{{ site.author.crn }}</div>
 
-    <div class="about-container">
-      <div class="about-photo">
-        <img fetchpriority="high" src="img/perfil.webp" alt="Ana Paula de Moraes" loading="lazy">
-      </div>
-      <div class="about-text">
-        <p class="about-paragrafo">
-		 <span class="dropcap">N</span>utricionista com atuação focada em nutrição clínica e funcional, 
-        em constante aprimoramento profissional por meio de formações complementares na área.				
-        Seu trabalho é baseado na compreensão da rotina, do biotipo e dos objetivos de cada paciente, 
-        construindo estratégias alimentares realistas e sustentáveis.</p>
-        <p>O objetivo é transformar sua relação com a alimentação e promover resultados consistentes
-        na saúde, estética corporal e performance.</p>
-      </div>
+  <div class="about-container">
+    <div class="about-photo">
+      <img fetchpriority="high" src="{{ '/assets/img/perfil.webp' | relative_url }}" alt="Ana Paula de Moraes" loading="lazy">
     </div>
-  </section>  
-
-
-  <!-- STATS -->
-  <section class="stats" style="content-visibility: auto">
-    <div class="stat">
-      <div class="stat-number" data-target="4920" data-suffix="+">0</div>
-      <div class="stat-label">Horas dedicadas em estudos</div>
+    <div class="about-text">
+      <p class="about-paragrafo">
+       <span class="dropcap">N</span>utricionista com atuação focada em nutrição clínica e funcional, 
+      em constante aprimoramento profissional por meio de formações complementares na área.				
+      Seu trabalho é baseado na compreensão da rotina, do biotipo e dos objetivos de cada paciente, 
+      construindo estratégias alimentares realistas e sustentáveis.</p>
+      <p>O objetivo é transformar sua relação com a alimentação e promover resultados consistentes
+      na saúde, estética corporal e performance.</p>
     </div>
-    <div class="stat">
-      <div class="stat-number" data-target="2500" data-suffix="+">0</div>
-      <div class="stat-label">Pessoas Impactadas</div>            
-    </div>
-    <div class="stat">
-      <div class="stat-number" data-target="98">0</div>
-      <div class="stat-label">% de Satisfação</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number" data-target="4">0</div>
-      <div class="stat-label">Anos de Atuação</div>
-    </div>
-  </section>
-  
-  <section class="secao-split" style="content-visibility: auto">
-    <div class="split-imagem">
-        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-1.webp');"></div>
-        <div class="fade-lateral"></div>
-    </div>
-
-    <div class="split-conteudo">
-        <i class="fa-solid fa-baby icone-dourado-grande"></i>
-        <h2 class="texto-destaque">
-             A nutrição começa desde o nascimento, é o cuidado silencioso que constrói a saúde, escolhas e impactos por toda a vida
-        </h2>
-    </div>
-</section>
-
-  <!-- HABILIDADES -->
-	<section class="habilidades" id="sec-habilidades" style="content-visibility: auto">
-	  <div class="section-title cursive center">Áreas de Atuação</div>
-	  <p class="sub">Distribuição das principais frentes de trabalho</p>
-	  <div class="radar-wrapper">
-		<canvas id="radarChart"></canvas>
-	  </div>
-	</section>
-  
-  <section class="secao-split">
-    <div class="split-imagem">
-        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-2.webp');"></div>
-        <div class="fade-lateral"></div>
-    </div>
-
-    <div class="split-conteudo">
-        <i class="fa-solid fa-bolt icone-dourado-grande"></i>
-        <h2 class="texto-destaque">
-            Sua performance, estética e energia começam na alimentação e no cuidado diário com a própria saúde
-        </h2>
-    </div>
-</section>
-  
-  <!-- SERVIÇOS -->
-  <section style="content-visibility: auto">
-    <div class="section-title cursive">Serviços</div>
-    <div class="cards">
-      <div class="card">
-        <h3>Consulta Nutricional</h3>
-        <p>Avaliação completa do seu perfil e objetivos</p>
-      </div>
-      <div class="card">
-        <h3>Plano Alimentar Personalizado</h3>
-        <p>Plano alimentar estratégico para seu biotipo</p>
-      </div>
-      <div class="card">
-        <h3>Acompanhamento Online</h3>
-        <p>Suporte contínuo durante toda sua jornada</p>
-      </div>
-    </div>
-  </section> 
-  
-    <section class="secao-split" tyle="content-visibility: auto">
-    <div class="split-imagem">
-        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-3.webp');"></div>
-        <div class="fade-lateral"></div>
-    </div>
-
-    <div class="split-conteudo">
-        <i class="fa-solid fa-shield-heart icone-dourado-grande"></i>
-        <h2 class="texto-destaque">
-            A longevidade e a autonomia que você deseja dependem do acompanhamento nutricional que você decide ter hoje
-        </h2>
-    </div>
-    </section>
-  
-  <!-- JORNADA -->
-  <section>
-    <div class="section-title cursive" tyle="content-visibility: auto">Sua Jornada</div>
-    <div class="journey">
-      <div class="step"><p class="step-number">01</p><h3>Agendamento</h3><p>Você escolhe o melhor horário e inicia seu processo de cuidado nutricional</p></div>
-      <div class="step"><p class="step-number">02</p><h3>Avaliação Completa</h3><p>Análise detalhada do seu histórico, rotina, exames e objetivos</p></div>
-      <div class="step"><p class="step-number">03</p><h3>Plano Alimentar Personalizado</h3><p>Estratégia alimentar exclusiva, pensada para o seu biotipo e metas</p></div>
-      <div class="step"><p class="step-number">04</p><h3>Acompanhamento Contínuo</h3><p>Suporte via aplicativo para ajustes, dúvidas e evolução constante</p></div>
-    </div>
-  </section>
-
-  
-  <section class="secao-split" style="content-visibility: auto">
-    <div class="split-imagem">
-        <div class="foto-ken-burns" style="background-image: url('img/imagem-impacto-4.webp');"></div>
-        <div class="fade-lateral"></div>
-    </div>
-
-    <div class="split-conteudo">
-        <i class="fa-solid fa-person-walking icone-dourado-grande"></i>
-        <h2 class="texto-destaque">
-            Qualidade de vida na maturidade é o resultado direto do cuidado contínuo com a saúde e a nutrição
-        </h2>
-    </div>
-  </section>
-
-  <!-- DEPOIMENTOS -->
- <section style="content-visibility: auto">
-    <div class="section-title cursive">O jeito de pensar de quem se cuida de verdade</div>
-
-	<sub>Frases inspiradas em perfis comportamentais de pessoas que alcançam resultados reais</sub>
-    <div class="testimonial-carousel">
-        <div class="testimonial-track">
-            <div class="testimonial-item">
-                “Hoje me sinto no controle da minha saúde, e sei que posso ir ainda mais longe!”<br><strong>- Herói</strong>
-            </div>
-            <div class="testimonial-item">
-                “Percebi que pequenas escolhas consistentes mudam mais do que semanas de esforço intenso.”<br><strong>- Sábio</strong>
-            </div>
-            <div class="testimonial-item">
-                “Não espere pelo momento perfeito - comece hoje e veja a transformação acontecer.”<br><strong>- Mentor</strong>
-            </div>
-            <div class="testimonial-item">
-                “Cada passo que dei me revelou um caminho que eu nem sabia que existia.”<br><strong>- Explorador</strong>
-            </div>
-            <div class="testimonial-item">
-                “Nunca acreditei que poderia me sentir tão bem comendo de forma prazerosa e equilibrada.”<br><strong>- Rebelde</strong>
-            </div>
-            <div class="testimonial-item">
-                “Aprendi a me valorizar de verdade cuidando da minha alimentação e do meu corpo.”<br><strong>- Amante</strong>
-            </div>
-            <div class="testimonial-item">
-                “Transformar minha rotina parecia impossível, mas cada pequeno passo me deu confiança.”<br><strong>- Herói</strong>
-            </div>
-            <div class="testimonial-item">
-                “Compreendi que mudança real vem de hábitos consistentes, não de soluções rápidas.”<br><strong>- Sábio</strong>
-            </div>
-            <div class="testimonial-item">
-                “Ao dar o primeiro passo, descobri que meu potencial era maior do que imaginava.”<br><strong>- Mentor</strong>
-            </div>
-            <div class="testimonial-item">
-                “Cada nova estratégia de alimentação me abriu portas para energia e disposição que eu nem lembrava.”<br><strong>- Explorador</strong>
-            </div>
-            <div class="testimonial-item">
-                “Quebrar velhos padrões me deu liberdade de viver melhor e mais leve.”<br><strong>- Rebelde</strong>
-            </div>
-            <div class="testimonial-item">
-                “Cuidar de mim se tornou um ato de amor próprio, e não uma obrigação.”<br><strong>- Amante</strong>
-            </div>
-            <div class="testimonial-item">
-                “Senti que cada conquista, por menor que fosse, me aproximava da minha melhor versão.”<br><strong>- Herói</strong>
-            </div>
-            <div class="testimonial-item">
-                “Percebi que o verdadeiro progresso não está na rapidez, mas na consistência diária.”<br><strong>- Sábio</strong>
-            </div>
-            <div class="testimonial-item">
-                “Aprender a escutar meu corpo me deu clareza e motivação que nunca tive antes.”<br><strong>- Mentor</strong>
-            </div>
-            <div class="testimonial-item">
-                “Explorar novas formas de me alimentar me trouxe energia e confiança inéditas.”<br><strong>- Explorador</strong>
-            </div>
-            <div class="testimonial-item">
-                “Decidi desafiar minhas crenças sobre alimentação e me surpreendi com os resultados.”<br><strong>- Rebelde</strong>
-            </div>
-            <div class="testimonial-item">
-                “Ame-se no processo - cuidar de si mesmo é a maior transformação que existe.”<br><strong>- Amante</strong>
-            </div>
-            <div class="testimonial-item">
-                “Cada meta atingida me mostrou que sou capaz de superar meus próprios limites.”<br><strong>- Herói</strong>
-            </div>
-            <div class="testimonial-item">
-                “Aprender sobre meu corpo me deu ferramentas para decisões mais inteligentes e duradouras.”<br><strong>- Sábio</strong>
-            </div>
-
-            <!-- duplicado para loop infinito -->
-            <div class="testimonial-item">
-                “Hoje me sinto no controle da minha saúde, e sei que posso ir ainda mais longe!”<br><strong>- Herói</strong>
-            </div>
-            <div class="testimonial-item">
-                “Percebi que pequenas escolhas consistentes mudam mais do que semanas de esforço intenso.”<br><strong>- Sábio</strong>
-            </div>
-        </div>
-    </div>
-</section>
-
-</main>
-
-<footer>
-  <div class="social-footer">
-    <svg width="0" height="0" style="position: absolute;">
-      <defs>
-        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style="stop-color:#FBE39B; stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#A57234; stop-opacity:1" />
-        </linearGradient>
-      </defs>
-    </svg>
-
-    <a href="https://instagram.com/nutri.anapaulamoraes" target="_blank" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="url(#goldGradient)">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-      </svg>
-    </a>
-
-    <a href="https://linkedin.com/in/nutrianapaulamoraes" target="_blank" aria-label="LinkedIn">
-      <svg viewBox="0 0 24 24" width="28" height="28" fill="url(#goldGradient)">
-        <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
-      </svg>
-    </a>
   </div>
-  <p>
-    © 2026 Ana Paula de Moraes - Nutricionista • CRN-3 75260 - Todos os direitos reservados
-  </p>
-</footer>
+</section>  
 
-<!-- GSAP para Parallax -->
-<script src="js/gsap.min.js" defer></script>
-<script src="js/ScrollTrigger.min.js" defer></script>
-<!-- Chart.js -->
-<script src="js/chart.js" defer></script>
-<script src="js/animations.js" type="module" defer></script>
+<section class="stats" style="content-visibility: auto">
+  <div class="stat">
+    <div class="stat-number" data-target="4920" data-suffix="+">0</div>
+    <div class="stat-label">Horas dedicadas em estudos</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number" data-target="2500" data-suffix="+">0</div>
+    <div class="stat-label">Pessoas Impactadas</div>            
+  </div>
+  <div class="stat">
+    <div class="stat-number" data-target="98">0</div>
+    <div class="stat-label">% de Satisfação</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number" data-target="4">0</div>
+    <div class="stat-label">Anos de Atuação</div>
+  </div>
+</section>
 
-</body>
-</html>
+<section class="secao-split" style="content-visibility: auto">
+  <div class="split-imagem">
+      <div class="foto-ken-burns" style="background-image: url('{{ "/assets/img/imagem-impacto-1.webp" | relative_url }}');"></div>
+      <div class="fade-lateral"></div>
+  </div>
+
+  <div class="split-conteudo">
+      <i class="fa-solid fa-baby icone-dourado-grande"></i>
+      <h2 class="texto-destaque">
+           A nutrição começa desde o nascimento, é o cuidado silencioso que constrói a saúde, escolhas e impactos por toda a vida
+      </h2>
+  </div>
+</section>
+
+<section class="habilidades" id="sec-habilidades" style="content-visibility: auto">
+  <div class="section-title cursive center">Áreas de Atuação</div>
+  <p class="sub">Distribuição das principais frentes de trabalho</p>
+  <div class="radar-wrapper">
+  <canvas id="radarChart"></canvas>
+  </div>
+</section>
+
+<section class="secao-split">
+  <div class="split-imagem">
+      <div class="foto-ken-burns" style="background-image: url('{{ "/assets/img/imagem-impacto-2.webp" | relative_url }}');"></div>
+      <div class="fade-lateral"></div>
+  </div>
+
+  <div class="split-conteudo">
+      <i class="fa-solid fa-bolt icone-dourado-grande"></i>
+      <h2 class="texto-destaque">
+          Sua performance, estética e energia começam na alimentação e no cuidado diário com a própria saúde
+      </h2>
+  </div>
+</section>
+
+<section style="content-visibility: auto">
+  <div class="section-title cursive">Serviços</div>
+  <div class="cards">
+    <div class="card">
+      <h3>Consulta Nutricional</h3>
+      <p>Avaliação completa do seu perfil e objetivos</p>
+    </div>
+    <div class="card">
+      <h3>Plano Alimentar Personalizado</h3>
+      <p>Plano alimentar estratégico para seu biotipo</p>
+    </div>
+    <div class="card">
+      <h3>Acompanhamento Online</h3>
+      <p>Suporte contínuo durante toda sua jornada</p>
+    </div>
+  </div>
+</section> 
+
+<section class="secao-split" style="content-visibility: auto">
+  <div class="split-imagem">
+      <div class="foto-ken-burns" style="background-image: url('{{ "/assets/img/imagem-impacto-3.webp" | relative_url }}');"></div>
+      <div class="fade-lateral"></div>
+  </div>
+
+  <div class="split-conteudo">
+      <i class="fa-solid fa-shield-heart icone-dourado-grande"></i>
+      <h2 class="texto-destaque">
+          A longevidade e a autonomia que você deseja dependem do acompanhamento nutricional que você decide ter hoje
+      </h2>
+  </div>
+</section>
+
+<section>
+  <div class="section-title cursive" style="content-visibility: auto">Sua Jornada</div>
+  <div class="journey">
+    <div class="step"><p class="step-number">01</p><h3>Agendamento</h3><p>Você escolhe o melhor horário e inicia seu processo de cuidado nutricional</p></div>
+    <div class="step"><p class="step-number">02</p><h3>Avaliação Completa</h3><p>Análise detalhada do seu histórico, rotina, exames e objetivos</p></div>
+    <div class="step"><p class="step-number">03</p><h3>Plano Alimentar Personalizado</h3><p>Estratégia alimentar exclusiva, pensada para o seu biotipo e metas</p></div>
+    <div class="step"><p class="step-number">04</p><h3>Acompanhamento Contínuo</h3><p>Suporte via aplicativo para ajustes, dúvidas e evolução constante</p></div>
+  </div>
+</section>
+
+<section class="secao-split" style="content-visibility: auto">
+  <div class="split-imagem">
+      <div class="foto-ken-burns" style="background-image: url('{{ "/assets/img/imagem-impacto-4.webp" | relative_url }}');"></div>
+      <div class="fade-lateral"></div>
+  </div>
+
+  <div class="split-conteudo">
+      <i class="fa-solid fa-person-walking icone-dourado-grande"></i>
+      <h2 class="texto-destaque">
+          Qualidade de vida na maturidade é o resultado direto do cuidado contínuo com a saúde e a nutrição
+      </h2>
+  </div>
+</section>
+
+<section style="content-visibility: auto">
+  <div class="section-title cursive">O jeito de pensar de quem se cuida de verdade</div>
+
+  <sub>Frases inspiradas em perfis comportamentais de pessoas que alcançam resultados reais</sub>
+  <div class="testimonial-carousel">
+      <div class="testimonial-track">
+          {% for testimonial in site.data.testimonials %}
+          <div class="testimonial-item">
+              “{{ testimonial.text }}”<br><strong>- {{ testimonial.author }}</strong>
+          </div>
+          {% endfor %}
+          
+          {% for testimonial in site.data.testimonials limit:2 %}
+          <div class="testimonial-item">
+              “{{ testimonial.text }}”<br><strong>- {{ testimonial.author }}</strong>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+</section>

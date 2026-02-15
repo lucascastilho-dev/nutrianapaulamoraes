@@ -287,7 +287,7 @@ section {
 
 .hero {
   text-align: center;
-  //padding-top: 60px;
+  /*padding-top: 60px; */
   padding: 70px 20px 80px;
 }
 .hero h1 {
@@ -295,6 +295,7 @@ section {
   margin-bottom: 30px;
   margin-top: 40px;
   background: radial-gradient(circle, var(--h1-accent-light) 0%, var(--h1-accent) 70%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: 2.9px; line-height: 1.5; font-weight: 200;
@@ -320,6 +321,7 @@ section {
   font-size: 46px;
   margin-bottom: 30px;
   background: linear-gradient(0deg, var(--text-section), var(--text-section-light));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -366,6 +368,7 @@ section {
   font-weight: bold;
   margin-bottom: 15px;
   background: radial-gradient(circle, var(--accent-light) 0%, var(--accent) 70%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -400,6 +403,7 @@ section {
   font-size: 48px;
   font-weight: bold;
   background: radial-gradient(circle, var(--accent-light) 0%, var(--accent) 70%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -522,6 +526,7 @@ footer {
   font-size: 28px;
   text-decoration: none;
   background: linear-gradient(to right, var(--accent-light), var(--accent));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: transform 0.3s;
@@ -608,6 +613,7 @@ section::before {
   font-family: 'Myriad Pro', sans-serif;
   font-size: 15px;
   background: var(--text);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   opacity: 0.7;
@@ -643,6 +649,7 @@ section::before {
 .icone-dourado-grande {
   font-size: 120px;
   background: linear-gradient(to right, var(--accent-light) 40%, var(--accent) 60%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
@@ -671,6 +678,7 @@ section::before {
   padding-bottom: 12px;
 
   background: linear-gradient(to bottom, var(--accent-light), var(--accent));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -1276,7 +1284,7 @@ box-shadow: 0 18px 40px rgba(0,0,0,0.6);
 @media (max-width: 768px) {
 .testimonial-carousel {
 padding: 28px 12px;
--- border-radius: 10px;
+/* border-radius: 10px; */
 }
 .testimonial-item {
 min-width: 280px;
@@ -1376,6 +1384,7 @@ html.samsung-forced-dark .hero h1,
 html.samsung-forced-dark .section-title,
 html.samsung-forced-dark .step-number,
 html.samsung-forced-dark .stat-number {
+  background-clip: text !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   color: inherit !important;
@@ -1497,9 +1506,9 @@ html.samsung-forced-dark body .btn-agendar {
   --bg: var(--bg-offwhite);
   --bg-gradient: linear-gradient(135deg, #FBF8F5, #F7F5F2 40%, #EFECE8 100%);
   --text: #1b1b1b;
-  //--accent: #A57234;
-  //--accent-light: #FBE39B;
-  //--h1-accent: #25301f;
+  /* --accent: #A57234;
+   --accent-light: #FBE39B;
+  --h1-accent: #25301f; */
   --nav-bg: rgba(247, 245, 242, 0.0); /* Inicial transparente */
   --nav-glass: rgba(247, 245, 242, 0.7);
   --nav-text: #1b1b1b;

@@ -1,0 +1,20 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for category in site.data.faq %}
+      {% for item in category.items %}
+      {
+        "@type": "Question",
+        "name": "{{ item.question | escape }}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ item.answer | strip_html | strip_newlines | escape }}"
+        }
+      }{% unless forloop.last and forloop.parentloop.last %},{% endunless %}
+      {% endfor %}
+    {% endfor %}
+  ]
+}
+</script>
