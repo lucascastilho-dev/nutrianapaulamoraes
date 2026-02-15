@@ -1,0 +1,79 @@
+<!-- <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  {% seo %}
+
+  <link rel="icon" type="image/ico" href="{{ '/assets/img/favicon.ico' | relative_url }}">
+  <link rel="preload" as="image" href="{{ '/assets/img/logo.webp' | relative_url }}">
+  <meta name="color-scheme" content="light">
+
+  <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  {% if page.schema %}
+  <script type="application/ld+json">
+    {{ page.schema }}
+  </script>
+  {% endif %}
+
+ 
+</head> -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  {% seo %}
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+  <link rel="icon" type="image/ico" href="{{ '/assets/img/favicon.ico' | relative_url }}">
+  {% if page.url == "/" %}
+  <link rel="preload" as="image" href="{{ '/assets/img/perfil.webp' | relative_url }}">
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}"></noscript>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    {% if page.layout == 'post' %}
+    "@type": "BlogPosting",
+    "headline": "{{ page.title }}",
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.author.name }}"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}"
+    },
+    "image": "{{ page.image | default: site.author.image | absolute_url }}"
+    {% else %}
+    "@type": "ProfessionalService",
+    "name": "{{ site.author.name }}",
+    "image": "{{ site.author.image | absolute_url }}",
+    "telephone": "+{{ site.author.whatsapp }}",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Taboão da Serra",
+      "addressCountry": "BR"
+    }
+    {% endif %}
+  }
+  </script>
+   {% if page.custom_css %}
+  <style>
+    {{ page.custom_css }}
+  </style>
+  {% endif %}
+</head>

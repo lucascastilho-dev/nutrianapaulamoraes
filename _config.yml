@@ -1,0 +1,35 @@
+title: "Ana Paula de Moraes | Nutricionista"
+email: contato@nutrianapaulamoraes.com.br
+description: >-
+  Nutricionista clínica e esportiva. Atendimento online focado em performance, emagrecimento e estética corporal.
+baseurl: ""
+url: "https://www.nutrianapaulamoraes.com.br"
+lang: pt-BR
+timezone: America/Sao_Paulo
+
+# Configuração de SEO e Blog
+permalink: /blog/:title/
+paginate: 6
+paginate_path: "/blog/page:num/"
+
+# Plugins Obrigatórios
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-feed # Gera RSS feed para leitores
+
+# Dados do Autor (Centralizado para SEO)
+author:
+  name: "Ana Paula de Moraes"
+  crn: "CRN-3 75260" #
+  whatsapp: "5512982055557" #
+  image: "/assets/img/perfil.webp"
+  bio: "Nutricionista com atuação focada em nutrição clínica e funcional, construindo estratégias alimentares realistas e sustentáveis." #
+
+# Performance: Excluir arquivos pesados do build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - README.md
