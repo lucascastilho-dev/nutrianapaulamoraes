@@ -47,7 +47,7 @@ jobs:
           git config user.email "github-actions@github.com"
           git add _posts/
           git commit -m "Add auto-generated posts" || echo "No posts to commit"
-          git push origin main
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/lucascastilho-dev/nutrianapaulamoraes.git HEAD:main
 
       # 👇 SETUP RUBY
       - name: Setup Ruby
