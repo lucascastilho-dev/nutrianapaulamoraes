@@ -36,7 +36,10 @@ jobs:
 
       # 👇 EXECUTA AUTPOST
       - name: Generate posts from Google Sheets
-        run: node scripts/generate-posts.js
+        run: |
+          pwd
+          ls -R
+          node --trace-warnings scripts/generate-posts.js
 
       # 👇 SETUP RUBY
       - name: Setup Ruby
