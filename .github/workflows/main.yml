@@ -41,6 +41,14 @@ jobs:
           ls -R
           node --trace-warnings scripts/generate-posts.js
 
+      - name: Commit auto-generated posts
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add _posts/
+          git commit -m "Add auto-generated posts" || echo "No posts to commit"
+          git push origin main
+
       # 👇 SETUP RUBY
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
