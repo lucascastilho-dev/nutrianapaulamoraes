@@ -19,6 +19,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Add these lines:
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
