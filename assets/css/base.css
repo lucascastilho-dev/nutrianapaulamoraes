@@ -17,7 +17,7 @@
 }
 @font-face {
   font-family: 'Belly Betty';
-  src: url('../fonts/Belly_Betty.ttf') format('truetype');
+  src: url('../fonts/Belly_Betty.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -1494,7 +1494,7 @@ html.samsung-forced-dark body .btn-agendar {
 }
 @font-face {
   font-family: 'Belly Betty';
-  src: url('../fonts/Belly_Betty.ttf') format('truetype');
+  src: url('../fonts/Belly_Betty.woff') format('woff');
   font-weight: normal; font-style: normal; font-display: swap;
 }
 
