@@ -1,0 +1,108 @@
+---
+layout: default
+---
+
+<!-- <div style="height: 100px; width: 100%; clear: both;"></div> -->
+
+<main id="post-content-root" style="position: relative; z-index: 1; overflow: visible;">
+  
+  <article class="post-container animate-in" style="max-width: 800px; margin: 0 auto 60px; padding: 0 20px;">
+   
+    <header class="post-header" style="margin-bottom: 50px; position: relative">
+  
+  <h1 class="post-title section-title" style="text-align: left; line-height: 1.2; font-size: 2.8rem; margin-bottom: 10px; color: var(--accent);">
+    {{ page.title }}
+  </h1>
+
+  {% if page.subtitle %}
+    <p class="post-subtitle" style="text-align: left; font-size: 1.05rem; opacity: 0.85; font-style: italic; margin-bottom: 15px; line-height: 1.5; padding: 4px;">
+      {{ page.subtitle }}
+    </p>
+  {% endif %}
+
+  <div class="meta" style="color: var(--accent); font-weight: bold; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; text-align: left;">
+    <i class="far fa-calendar-alt"></i> 
+    <time datetime="{{ page.date | date_to_xmlschema }}">
+      {{ page.date | date: "%d de %B de %Y" }}
+    </time>
+  </div>
+
+</header>
+
+   {% if page.image %}
+    <img src="{{ page.image }}" alt="{{ page.title }}" style="width: 100%; border-radius: 15px; margin-top: 20px;">
+  {% endif %}
+
+<section>
+   <div class="post-content about-text" style="text-align: justify; font-size: 1.15rem; line-height: 1.9; color: var(--text);">
+      {{ content }}
+    </div>
+
+    <div class="author-card" style="margin-top: 80px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 35px; display: flex; align-items: center; gap: 25px;">
+      <img src="{{ site.author.image | relative_url }}" alt="{{ site.author.name }}" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent);">
+      <div>
+        <h3 style="color: var(--accent); font-family: 'Belly Betty', sans-serif; font-size: 1.6rem; margin-bottom: 8px;">Dra. {{ site.author.name }}</h3>
+        <p style="font-size: 0.95rem; opacity: 0.8; line-height: 1.5;">{{ site.author.bio }}</p>
+      </div>
+    </div>
+</section>
+   
+
+  </article>
+</main>
+
+<style>
+  /* Garante que o conteúdo não 'encavale' no header */
+  h1.post-title {
+    padding-left: 5px; /* Pequeno espaçamento para evitar colapso de margem */
+    padding-bottom: 10px;
+  }
+  #post-content-root {
+    display: block;
+    width: 100%;
+  }
+
+  .post-content p { margin-bottom: 1.6rem; }
+  .post-content h2, .post-content h3 { color: var(--accent); margin-top: 2.5rem; margin-bottom: 1rem; }
+  
+  /* Imagens Otimizadas para Blog */
+  .post-content img { 
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 15px; 
+    margin: 2.5rem 0;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.4);
+    display: block;
+  }
+
+  /* Animação suave para evitar CLS (Cumulative Layout Shift) */
+  .animate-in {
+    animation: fadeInUpPost 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes fadeInUpPost {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .post-title { font-size: 2.1rem !important; }
+    .author-card { flex-direction: column; text-align: center; }
+  }
+  /* ===== Correção definitiva de header fixo ===== */
+
+/* Ajuste para header fixo */
+body {
+  padding-top: 120px; /* ajuste se seu header for maior/menor */
+}
+
+/* Garante que o conteúdo não fique atrás do header */
+#post-content-root {
+  margin-top: 0;
+}
+
+/* Evita colapso de margem do h1 */
+.post-title {
+  margin-top: 20px;
+}
+</style>

@@ -3,6 +3,9 @@ name: Deploy Jekyll site to Pages
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 10 * * *" # roda todo dia às 10h UTC
 
 permissions:
   contents: read
@@ -16,16 +19,33 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 👇 INSTALA NODE (para rodar o script)
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # 👇 INSTALA DEPENDÊNCIA DO SCRIPT
+      - name: Install Node dependencies
+        run: npm install csv-parser
+
+      # 👇 EXECUTA AUTPOST
+      - name: Generate posts from Google Sheets
+        run: node generate-posts.js
+
+      # 👇 SETUP RUBY
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
           bundler-cache: true
 
+      # 👇 BUILD JEKYLL
       - name: Build with Jekyll
         run: bundle exec jekyll build
 
