@@ -3,7 +3,7 @@ layout: post
 title: "Como emagrecer sem passar fome: Estratégias Nutricionais"
 subtitle: "Descubra como a densidade calórica e a escolha dos alimentos influenciam sua saciedade."
 date: 2026-02-15 10:00:00 -0300
-image: /assets/img/blog/emagrecimento-saudavel.webp
+image: /assets/img/blog/post3.jpg
 categories: [Emagrecimento, Nutrição Comportamental]
 description: "É possível emagrecer comendo bem? Entenda como o volume dos alimentos e as fibras ajudam no processo de perda de peso."
 robots: "noindex, nofollow"
