@@ -25,6 +25,7 @@ author:
   crn: "CRN-3 75260" #
   whatsapp: "5512982055557" #
   image: "/assets/img/perfil.webp"
+  image-square: "/assets/img/perfil-square.webp"
   bio: "Nutricionista com atuação focada em nutrição clínica e funcional, construindo estratégias alimentares realistas e sustentáveis." #
 
 # Performance: Excluir arquivos pesados do build
