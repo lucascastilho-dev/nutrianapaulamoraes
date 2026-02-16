@@ -87,7 +87,7 @@
 
     - question: "Quanto custa uma consulta online com nutricionista?"
       answer: |
-        O valor varia conforme o tipo de atendimento e acompanhamento. Para informações detalhadas e agendamento imediato, <a href="agenda" style="color:var(--accent); font-weight:bold;">clique aqui e fale conosco</a>.
+        O valor varia conforme o tipo de atendimento e acompanhamento. Para informações detalhadas e agendamento imediato, <a href="../agenda" style="color:var(--accent); font-weight:bold;">clique aqui e fale conosco</a>.
 
     - question: "Por que escolher um nutricionista ao invés de dietas prontas?"
       answer: "Dietas prontas não consideram sua rotina, preferências e metabolismo. Um plano personalizado garante resultados sustentáveis e ajuda a melhorar relação com a comida e hábitos para a vida inteira."
