@@ -11,12 +11,14 @@
   {% if page.url == "/" %}
   <link rel="preload" as="image" href="{{ '/assets/img/perfil.webp' | relative_url }}">
   {% endif %}
-
-  <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}" media="print" onload="this.media='all'">
+  
+  
+  <link rel="preload" href="{{ '/assets/css/base.css' | relative_url }}" as="style">
+  <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}">
   <noscript><link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}"></noscript>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'"> -->
+  {% include critical-css.html %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

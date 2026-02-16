@@ -1,0 +1,304 @@
+<style>
+/* ==========================
+   FONTES
+========================== */
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../assets/fonts/myriad-pro-webfont/MYRIADPRO-REGULAR.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('../assets/fonts/myriad-pro-webfont/MYRIADPRO-BOLD.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Belly Betty';
+  src: url('../assets/fonts/Belly_Betty.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ==========================
+   VARIÁVEIS DE TEMA (BASE LIGHT)
+   - Light mode é a base técnica com off-white harmonizado.
+   - Dark mode é aplicado via prefers-color-scheme.
+========================== */
+:root {
+  /* Backgrounds */
+  --bg-offwhite: #F7F5F2; /* off-white harmonizado com tons dourados/terrosos */
+  --bg: var(--bg-offwhite);
+  --bg-gradient: linear-gradient(135deg, #FBF8F5, #F7F5F2 40%, #EFECE8 100%);
+
+  /* Text */
+  --text: #1b1b1b;            /* texto principal em light base */
+  --text-inverse: #ffffff;    /* texto claro usado no dark */
+  --text-section-light: #25301F;
+  --text-section: #25301F;
+
+  /* Accent / Brand (mantidos) */
+  --accent: #A57234;          /* marrom/dourado escuro */
+  --accent-light: #FBE39B;    /* dourado claro */  
+  --h1-accent: #25301f;          /* verde escuro escuro */
+  --h1-accent-light: #3c4e32;    /* ver mais claro claro */
+
+  /* Cards / surfaces */
+  --card-bg: rgba(0,0,0,0.03);    /* superfície sutil em light */
+  --card-border: rgba(0,0,0,0.06);
+
+  /* Overlay / dark layer */
+  --overlay: rgba(0,0,0,0.06);
+
+  /* Split / seção com cor sólida (light variant) */
+  --split-bg: #E9E6E2;
+
+  /* Gold tone */
+  --gold: #D4AF37;
+
+  /* Sombras */
+  --shadow-1: 0 8px 20px rgba(0,0,0,.06);
+  --shadow-2: 0 12px 30px rgba(0,0,0,.08);
+
+  /* Botão texto (contraste sobre gradiente) */
+  --btn-text-dark: #16261B;
+
+  /* Scrollbar thumb fallback */
+  --scroll-thumb: var(--accent);
+
+  /* Accessibility tuning (can be adjusted) */
+  --link-hover-contrast: var(--accent-light);
+}
+/*Radar*/
+
+/* Radar colors (light base) */
+:root {
+  --radar-grid: rgba(0,0,0,0.06);
+  --radar-angle-lines: rgba(0,0,0,0.06);
+  --radar-label: #1b1b1b;
+  --radar-stroke: #A57234;            /* usa seu accent */
+  --radar-fill: rgba(251,227,155,0.18);
+  --radar-point: #A57234;
+  --radar-tick: rgba(0,0,0,0.06);
+}
+
+
+/* Dark theme overrides (preserva visual escuro original) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --radar-grid: rgba(251,227,155,0.12);
+    --radar-angle-lines: rgba(251,227,155,0.12);
+    --radar-label: #FBE39B;
+    --radar-stroke: #FBE39B;
+    --radar-fill: rgba(251,227,155,0.18);
+    --radar-point: #FBE39B;
+    --radar-tick: rgba(251,227,155,0.12);
+  }
+}
+
+
+/* Dark mode: redefine variáveis para reproduzir o design escuro original */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16261B;
+    --bg-gradient: linear-gradient(135deg, #25301F, #16261B, #3C4E32);
+    --text: #ffffff;
+    --text-inverse: #111111;
+
+    --accent: #A57234;
+    --accent-light: #FBE39B;
+    --h1-accent: #A57234;         
+    --h1-accent-light: #FBE39B;    
+    --text-section-light: #FBE39B;
+    --text-section: #A57234;
+
+    --card-bg: rgba(255,255,255,0.05);
+    --card-border: rgba(255,255,255,0.1);
+
+    --overlay: rgba(0,30,20,0.5);
+
+    --split-bg: #001E14;
+
+    --gold: #D4AF37;
+
+    --btn-text-dark: #16261B;
+
+    --scroll-thumb: var(--accent);
+  }
+}
+
+/* ==========================
+   RESET & BASE
+========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Myriad Pro', sans-serif;
+  caret-color: transparent;
+}
+
+html, body {
+  background: var(--bg-gradient) !important;
+  color: var(--text) !important;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light dark;
+}
+
+/* ==========================
+   FORÇAR MODO CLARO (compat)
+   - Mantive color-scheme para preservar controles nativos.
+========================== */
+:root {
+  color-scheme: light;
+}
+
+/* Forçar cores do body (variável já controla) */
+body, html {
+  background: var(--bg-gradient) !important;
+  color: var(--text) !important;
+}
+
+/* Forçar cores para elementos comuns */
+section, header {
+  background: unset !important;
+  color: inherit !important;
+}
+
+/* Se o navegador respeitar prefers-color-scheme: dark, usamos as variáveis do dark */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: transparent !important;
+    color: inherit !important;
+  }
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+a:hover {
+  color: var(--link-hover-contrast);
+}
+
+/* ==========================
+   LOGO & HEADER
+========================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 7px;
+}
+
+.logo {
+  max-width: 280px; /* ajustável */
+  width: 100%;
+  height: auto;
+}
+
+h3 {
+  margin-bottom: 9px;
+}
+
+/* ==========================
+   BOTÕES
+========================== */
+.btn-agendar, .floating-btn {
+  background: linear-gradient(to right, var(--accent-light), var(--accent));
+  color: var(--btn-text-dark);
+  padding: 14px 26px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.3s;
+  display: inline-block;
+  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(20px); /* leve subida elegante */
+}
+
+/* ==========================
+   SEÇÕES & HERO
+========================== */
+section {
+  padding: 80px 20px;
+  max-width: 1100px;
+  margin: auto;
+  position: relative;
+}
+
+.hero {
+  text-align: center;
+  /*padding-top: 60px; */
+  padding: 70px 20px 80px;
+}
+.hero h1 {
+  font-size: 44px;
+  margin-bottom: 30px;
+  margin-top: 40px;
+  background: radial-gradient(circle, var(--h1-accent-light) 0%, var(--h1-accent) 70%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2.9px; line-height: 1.5; font-weight: 200;
+  white-space: pre-wrap;
+  
+}
+
+/* Aplica cursiva apenas a uma palavra de destaque no H1 */
+/*.hero h1 { letter-spacing: 0.6px; Sfont-size: 44px; line-height: 1.05; font-weight: 300; font-family: 'Myriad Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+*/.hero h1 .cursive { font-family: 'Belly Betty', 'Segoe Script', cursive; font-weight: 400; font-style: normal; letter-spacing: 0.6px; font-size: 1.5em; display: inline-block; vertical-align: middle; }
+
+.hero p {
+  font-size: 22px;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+/* ===== SAMSUNG FORCED DARK — OVERRIDES SEGUROS (append only) ===== */
+
+/* 1) Variáveis e modo escuro (mantém sua paleta) */
+html.samsung-forced-dark {
+  --bg: #16261B !important;
+  --bg-gradient: linear-gradient(135deg, #25301F, #16261B, #3C4E32) !important;
+  --text: #ffffff !important;
+  --accent: #A57234 !important;
+  --accent-light: #FBE39B !important;
+  --card-bg: rgba(255,255,255,0.05) !important;
+  --card-border: rgba(255,255,255,0.1) !important;
+  color-scheme: dark !important;
+  forced-color-adjust: none !important;
+}
+
+/* 2) Proteções restritas: NÃO aplicar a imagens, canvas, svg, picture, video, elementos de gráfico */
+html.samsung-forced-dark *:not(img):not(svg):not(canvas):not(picture):not(video):not(.chartjs-render-monitor):not(.d3-chart) {
+  /* apenas propriedades que realmente precisam ser neutralizadas */
+  mix-blend-mode: normal !important;
+  -webkit-text-fill-color: unset !important;
+  forced-color-adjust: none !important;
+}
+section {
+  position: relative; /* necessário para ::before */
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0; /* no topo da seção */
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--text-section), transparent);
+  pointer-events: none; /* não interfere em cliques */
+  z-index: 1;
+}
+</style>
