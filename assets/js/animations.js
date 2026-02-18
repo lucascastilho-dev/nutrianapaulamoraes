@@ -251,7 +251,7 @@ function initCarousel() {
   }
   track.addEventListener('mouseenter', () => isPaused = true);
   track.addEventListener('mouseleave', () => isPaused = false);
-  track.addEventListener('pointerdown', (e) => { isDragging = true; startX = e.clientX; lastX = pos; track.style.cursor = 'grabbing'; });
+  track.addEventListener('pointerdown', (e) => { isDragging = true; startX = e.clientX; lastX = pos; track.style.cursor = 'grabbing'; track.setPointerCapture(e.pointerId); });
   window.addEventListener('pointermove', (e) => { if (!isDragging) return; const dx = e.clientX - startX; pos = lastX + dx; track.style.transform = `translate3d(${pos}px,0,0)`; });
   window.addEventListener('pointerup', () => { isDragging = false; track.style.cursor = 'grab'; });
   loop();

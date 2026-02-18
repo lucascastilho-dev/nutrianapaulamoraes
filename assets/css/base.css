@@ -483,7 +483,10 @@ section {
 .testimonial-item {
   position: relative;
   overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
 }
+
 
 .testimonial-item .sparkle {
   position: absolute;
