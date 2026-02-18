@@ -201,7 +201,7 @@ header {
 }
 
 .logo {
-  max-width: 280px; /* ajustável */
+  max-width: 220px; /* ajustável */
   width: 100%;
   height: auto;
 }
@@ -252,7 +252,14 @@ section {
   white-space: pre-wrap;
   
 }
-
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    .section-title.cursive {
+    text-align: center;
+    }
+}
 /* Aplica cursiva apenas a uma palavra de destaque no H1 */
 /*.hero h1 { letter-spacing: 0.6px; Sfont-size: 44px; line-height: 1.05; font-weight: 300; font-family: 'Myriad Pro', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
 */.hero h1 .cursive { font-family: 'Belly Betty', 'Segoe Script', cursive; font-weight: 400; font-style: normal; letter-spacing: 0.6px; font-size: 1.5em; display: inline-block; vertical-align: middle; }
