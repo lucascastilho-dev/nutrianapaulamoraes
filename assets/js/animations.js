@@ -259,46 +259,24 @@ function initCarousel() {
 
 /* ================= SPARKLES ================= */
 function initSparkles() {
-  document.querySelectorAll('.testimonial-item .sparkle').forEach(s => { if (s._stop) s._stop(); s.remove(); });
-  const TICK_MS = 1000;
-  const rand = (min, max) => Math.random() * (max - min) + min;
-  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-  const randomPos = () => [Math.round(rand(8, 92)), Math.round(rand(8, 92))];
-  const sparkleInstances = [];
+   const testimonials = document.querySelectorAll('.testimonial-item');
 
-  document.querySelectorAll('.testimonial-item').forEach(item => {
-    const count = randInt(1, 2);
-    for (let i = 0; i < count; i++) {
-      const s = document.createElement('span');
-      s.className = 'sparkle';
-      const [l, t] = randomPos();
-      s.style.left = l + '%'; s.style.top = t + '%';
-      s.style.background = 'radial-gradient(circle, rgba(255,243,198,0.95) 0%, rgba(251,227,155,0.9) 45%, rgba(165,114,52,0.9) 100%)';
-      item.appendChild(s);
-      sparkleInstances.push({ el: s, isOn: false, offset: Math.round(rand(0, 0)) });
-    }
+  testimonials.forEach(item => {
+    for (let i = 0; i < 5; i++) {
+      const sparkle = document.createElement('span');
+      sparkle.classList.add('sparkle');
+      
+      sparkle.style.top = `${Math.random() * 90}%`;
+      sparkle.style.left = `${Math.random() * 90}%`;
+      const size = Math.random() * 6 + 4; // 4px a 10px
+      sparkle.style.width = `${size}px`;
+      sparkle.style.height = `${size}px`;
+      sparkle.style.animationDelay = `${Math.random() * 3}s`;
+
+      item.appendChild(sparkle); }
   });
 
-  let startTime = performance.now();
-  const masterTick = () => {
-    const now = performance.now();
-    sparkleInstances.forEach(inst => {
-      if (now - startTime < inst.offset) return;
-      if (!inst.isOn) {
-        const [nl, nt] = randomPos();
-        inst.el.style.left = nl + '%'; inst.el.style.top = nt + '%';
-        inst.el.classList.add('sparkle--visible');
-        inst.isOn = true;
-      } else {
-        inst.el.classList.remove('sparkle--visible');
-        inst.isOn = false;
-      }
-    });
-  };
-  let masterTimer = setInterval(masterTick, TICK_MS);
-  window.__sparkles_stop_all && window.__sparkles_stop_all();
-  window.__sparkles_stop_all = () => { clearInterval(masterTimer); sparkleInstances.forEach(i => i.el.remove()); };
-}
+  }
 
 /* ================= FLOATING BUTTONS ================= */
 function initFloatingButtons() {

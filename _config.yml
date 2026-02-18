@@ -8,6 +8,8 @@ baseurl: ""
 url: "https://www.nutrianapaulamoraes.com.br"
 lang: pt-BR
 timezone: America/Sao_Paulo
+site_developer: "Lucas Castilho"
+site_developer_email: "ti@techdev.com.br"
 
 # Configuração de SEO e Blog
 permalink: /blog/:title/
