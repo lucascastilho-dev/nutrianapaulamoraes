@@ -360,6 +360,14 @@ function initNavbar() {
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('#mobile-menu a.nav-button');
 
+  const closeBtn = document.getElementById('close-menu');
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+  }
+
   if (!header || !hamburger || !mobileMenu) return;
 
   // Scroll effect no header

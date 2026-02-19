@@ -35,6 +35,9 @@
   --bg: var(--bg-offwhite);
   --bg-gradient: linear-gradient(135deg, #FBF8F5, #F7F5F2 40%, #EFECE8 100%);
 
+  /*nav-mobile*/
+  --nav-mobile-glass-bg: rgba(255,255,255,0.45);
+
   /* Text */
   --text: #1b1b1b;            /* texto principal em light base */
   --text-inverse: #ffffff;    /* texto claro usado no dark */
@@ -109,6 +112,7 @@
     --text: #ffffff;
     --text-inverse: #111111;
 
+    --nav-mobile-glass-bg: rgba(25, 22, 10, 0.45);
     --accent: #A57234;
     --accent-light: #FBE39B;
     --h1-accent: #A57234;         
@@ -150,6 +154,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   color-scheme: light dark;
 }
+
 
 /* svg { */
 /*   fill: currentColor; */
@@ -1655,15 +1660,20 @@ header.scrolled .logo {
 
     backdrop-filter: blur(8px) saturate(120%);
     -webkit-backdrop-filter: blur(8px) saturate(120%);
+    background: var(--nav-mobile-glass-bg);
 
     transform: translateX(100%);
-    transition: transform .4s ease;
+    transition: transform .4s ease, box-shadow .3s ease;
 
     z-index: 1100;
   }
 
   .mobile-menu.active {
     transform: translateX(0);
+     box-shadow:
+    -8px 0 20px rgba(0, 0, 0, 0.15),
+    -20px 0 60px rgba(0, 0, 0, 0.25);
+
   }
 
   .logo {
@@ -1679,9 +1689,19 @@ header.scrolled .logo {
   transition: color 0.3s;
 }
 
-.mobile-menu a:hover { color: var(--accent); }
+.mobile-menu a:hover { color: var(--accent); }}
 
+.close-menu {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--nav-text);
+  cursor: pointer;
 }
+
 /* ==========================
    RESTO DO CSS (Mantido)
 ========================== */
