@@ -10,7 +10,7 @@ image: "/assets/img/blog/faq-canetas-emagrecimento.webp"
 robots: "index, follow"
 ---
 
-#Os análogos de GLP-1 revolucionaram o tratamento da obesidade e do emagrecimento.
+# Os análogos de GLP-1 revolucionaram o tratamento da obesidade e do emagrecimento.
 
 Medicamentos como **Ozempic, Wegovy, Mounjaro, Zepbound e Saxenda** têm apresentado resultados expressivos na redução de peso e no controle metabólico.
 
