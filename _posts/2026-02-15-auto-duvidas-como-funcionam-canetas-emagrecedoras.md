@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Canetas emagrecedoras:"
+title: "Como funcionam as canetas emagrecedoras"
 subtitle: "Dúvidas frequentes que você precisa saber antes de usar"
 date: 2026-02-15
 description: "Descubra como funcionam os análogos de GLP-1 (Ozempic, Mounjaro e outros) no emagrecimento. Tire suas dúvidas sobre efeitos colaterais, perda de massa muscular e como manter o peso com estratégia nutricional científica. Leia o guia completo."
@@ -10,7 +10,9 @@ image: "/assets/img/blog/faq-canetas-emagrecimento.webp"
 robots: "index, follow"
 ---
 
-Os análogos de GLP-1 revolucionaram o tratamento da obesidade e do emagrecimento. Medicamentos como **Ozempic, Wegovy, Mounjaro, Zepbound e Saxenda** têm apresentado resultados expressivos na redução de peso e no controle metabólico.
+#Os análogos de GLP-1 revolucionaram o tratamento da obesidade e do emagrecimento.
+
+Medicamentos como **Ozempic, Wegovy, Mounjaro, Zepbound e Saxenda** têm apresentado resultados expressivos na redução de peso e no controle metabólico.
 
 Mas, junto com a popularização, surgem muitas dúvidas, expectativas irreais e também informações incompletas. A seguir, estão as respostas completas e baseadas em ciência para as perguntas mais frequentes.
 
