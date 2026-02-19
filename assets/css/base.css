@@ -1567,8 +1567,6 @@ header {
 header.scrolled {
   padding: 4px 0;
   background-color: var(--nav-glass);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -1588,6 +1586,9 @@ header.scrolled .logo {
   align-items: center;
   gap: 35px;
   padding-right: 25px
+}
+.mobile-menu {
+  display: none;
 }
 
 .nav-links a {
@@ -1629,25 +1630,58 @@ header.scrolled .logo {
 }
 
 @media (max-width: 992px) {
-  .hamburger { display: flex; }
+
   .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-menu {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 280px;
     height: 100vh;
-    /* background: var(--bg); */
-    backdrop-filter: blur(8px) saturate(120%);
+
+    display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* ← centraliza vertical */
+    align-items: center; /* ← centraliza horizontal */
     padding: 50px;
-    transition: 0.4s ease;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+    gap: 20px;
+
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+
+    transform: translateX(100%);
+    transition: transform .4s ease;
+
+    z-index: 1100;
   }
-  .nav-links.active { right: 0; }
-  .logo { max-width: 200px; }
+
+  .mobile-menu.active {
+    transform: translateX(0);
+  }
+
+  .logo {
+    max-width: 200px;
+  }
+  .mobile-menu a {
+  text-decoration: none;
+  color: var(--nav-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
 }
 
+.mobile-menu a:hover { color: var(--accent); }
+
+}
 /* ==========================
    RESTO DO CSS (Mantido)
 ========================== */
@@ -1814,18 +1848,16 @@ body {
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 999;
   transition: background-color 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
   background: transparent;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
 }
 
 /* Estado quando a página é rolada */
 #main-header.scrolled {
   background: rgba(255,255,255,0.18); /* ajuste para light mode */
-  -webkit-backdrop-filter: blur(8px) saturate(120%);
-  backdrop-filter: blur(8px) saturate(120%);
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }

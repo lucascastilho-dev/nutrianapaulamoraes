@@ -254,7 +254,7 @@ function initCarousel() {
   track.addEventListener('mouseleave', () => isPaused = false);
   track.addEventListener('pointerdown', (e) => { isDragging = true; startX = e.clientX; lastX = pos; track.style.cursor = 'grabbing'; track.setPointerCapture(e.pointerId); });
   window.addEventListener('pointermove', (e) => { if (!isDragging) return; const dx = e.clientX - startX; pos = lastX + dx; track.style.transform = `translate3d(${pos}px,0,0)`; });
-  window.addEventListener('pointerup', () => { isDragging = false; track.style.cursor = 'grab'; track.setPointerCapture(e.pointerId); });
+  window.addEventListener('pointerup', (e) => { isDragging = false; track.style.cursor = 'grab'; track.setPointerCapture(e.pointerId); });
   loop();
 }
 
@@ -355,23 +355,43 @@ function initGSAPReveal() {
 
 /* ================= NAVBAR ================= */
 function initNavbar() {
-    const header = document.querySelector('header');
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('nav.nav-links a.nav-button');
-    if(!header || !hamburger || !navMenu) return;
+  const header = document.getElementById('main-header');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('#mobile-menu a.nav-button');
 
-    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('open');
+  if (!header || !hamburger || !mobileMenu) return;
+
+  // Scroll effect no header
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Abrir / fechar menu mobile
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileMenu.classList.toggle('active');
+    hamburger.classList.toggle('open');
+
+    // trava scroll quando menu abre (premium UX)
+    document.body.classList.toggle('menu-open');
+  });
+
+  // Fechar ao clicar em link
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      hamburger.classList.remove('open');
+      document.body.classList.remove('menu-open');
     });
-    navLinks.forEach(link => { link.addEventListener('click', () => { navMenu.classList.remove('active'); hamburger.classList.remove('open'); }); });
-    document.addEventListener('click', (e) => {
-        if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('open');
-        }
-    });
+  });
+
+  // Fechar ao clicar fora
+  document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && !hamburger.contains(e.target)) {
+      mobileMenu.classList.remove('active');
+      hamburger.classList.remove('open');
+      document.body.classList.remove('menu-open');
+    }
+  });
 }
