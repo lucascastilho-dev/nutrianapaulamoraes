@@ -102,7 +102,8 @@ function init() {
   if(document.querySelector('.testimonial-track')) initCarousel();
   initGSAPReveal(); 
   if(document.querySelector('.testimonial-item')) initSparkles();
-  if(document.querySelector('.hero')) initFloatingButtons();
+  // if(document.querySelector('.hero')) initFloatingButtons();
+  initFloatingButtons();
   if(document.querySelectorAll('.secao-split').length > 0) initKenBurns();
   if(document.getElementById('app-section')) initAppSection();
   initNavbar();
@@ -253,7 +254,7 @@ function initCarousel() {
   track.addEventListener('mouseleave', () => isPaused = false);
   track.addEventListener('pointerdown', (e) => { isDragging = true; startX = e.clientX; lastX = pos; track.style.cursor = 'grabbing'; track.setPointerCapture(e.pointerId); });
   window.addEventListener('pointermove', (e) => { if (!isDragging) return; const dx = e.clientX - startX; pos = lastX + dx; track.style.transform = `translate3d(${pos}px,0,0)`; });
-  window.addEventListener('pointerup', () => { isDragging = false; track.style.cursor = 'grab'; });
+  window.addEventListener('pointerup', () => { isDragging = false; track.style.cursor = 'grab'; track.setPointerCapture(e.pointerId); });
   loop();
 }
 
@@ -279,16 +280,36 @@ function initSparkles() {
   }
 
 /* ================= FLOATING BUTTONS ================= */
+// function initFloatingButtons() {
+//   const hero = document.querySelector('.hero');
+//   const floatingBtn = document.querySelector('.floating-btn');
+//   const whatsappBtn = document.querySelector('.btn-whatsapp');
+//   if(!hero || !floatingBtn || !whatsappBtn) return;
+//   const observer = new IntersectionObserver(([entry]) => {
+//     const show = !entry.isIntersecting;
+//     floatingBtn.classList.toggle('show', show);
+//     whatsappBtn.classList.toggle('show', show);
+//   }, { threshold: 0.1 });
+//   observer.observe(hero);
+// }
 function initFloatingButtons() {
   const hero = document.querySelector('.hero');
-  const floatingBtn = document.querySelector('.floating-btn');
   const whatsappBtn = document.querySelector('.btn-whatsapp');
-  if(!hero || !floatingBtn || !whatsappBtn) return;
+  const floatingBtn = document.querySelector('.floating-btn');
+  if(!whatsappBtn || !floatingBtn)  return;
+
+  if (!hero) {
+    // Se não existe hero, botão sempre visível
+    whatsappBtn.classList.add('show');
+    floatingBtn.classList.add('show');
+    return;
+  }
+
   const observer = new IntersectionObserver(([entry]) => {
-    const show = !entry.isIntersecting;
-    floatingBtn.classList.toggle('show', show);
-    whatsappBtn.classList.toggle('show', show);
+    whatsappBtn.classList.toggle('show', !entry.isIntersecting);
+    floatingBtn.classList.toggle('show', !entry.isIntersecting);
   }, { threshold: 0.1 });
+
   observer.observe(hero);
 }
 
