@@ -2,7 +2,7 @@
 layout: post
 title: "Como funcionam as canetas emagrecedoras"
 subtitle: "Dúvidas frequentes que você precisa saber antes de usar"
-date: 2026-02-15
+date: 2026-02-18
 description: "Descubra como funcionam os análogos de GLP-1 (Ozempic, Mounjaro e outros) no emagrecimento. Tire suas dúvidas sobre efeitos colaterais, perda de massa muscular e como manter o peso com estratégia nutricional científica. Leia o guia completo."
 categories: ["emagrecimento"]
 tags: ["dieta", "saúde"]
