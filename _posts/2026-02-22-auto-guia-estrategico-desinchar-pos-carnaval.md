@@ -23,19 +23,19 @@ E quando entendemos a fisiologia, conseguimos reorganizar o metabolismo com estr
 ## O que realmente acontece no corpo após o Carnaval?
 
 Durante períodos como o Carnaval, é comum ocorrer:
-● Maior consumo de álcool
-● Excesso de sódio
-● Aumento de carboidratos simples
-● Privação de sono
-● Alteração da rotina alimentar
+* Maior consumo de álcool
+* Excesso de sódio
+* Aumento de carboidratos simples
+* Privação de sono
+* Alteração da rotina alimentar
 Essa combinação impacta diretamente a homeostase metabólica.
 
 Do ponto de vista fisiológico, observamos:
-● Retenção hídrica por desequilíbrio eletrolítico
-● Aumento do armazenamento de glicogênio (cada 1g de glicogênio retém 3–4g de água)
-● Elevação de cortisol pela privação de sono
-● Redução temporária da sensibilidade à insulina
-● Inflamação subclínica transitória
+* Retenção hídrica por desequilíbrio eletrolítico
+* Aumento do armazenamento de glicogênio (cada 1g de glicogênio retém 3–4g de água)
+* Elevação de cortisol pela privação de sono
+* Redução temporária da sensibilidade à insulina
+* Inflamação subclínica transitória
 
 O resultado?
 Um aumento de 1 a 3 kg em poucos dias, predominantemente por líquido.
@@ -47,16 +47,16 @@ Na prática clínica, a maioria dos casos pós-festas envolve retenção e não 
 Saber diferenciar isso muda completamente sua conduta.
 
 **Sinais de retenção hídrica:**
-● Aumento rápido de peso (1–3 kg)
-● Inchaço abdominal e facial
-● Sensação de “estufamento”
-● Oscilação ao longo do dia
-● Melhora em poucos dias com ajustes simples
+* Aumento rápido de peso (1–3 kg)
+* Inchaço abdominal e facial
+* Sensação de “estufamento”
+* Oscilação ao longo do dia
+* Melhora em poucos dias com ajustes simples
 
 **Sinais de ganho real de gordura:**
-● Aumento progressivo ao longo de semanas
-● Alteração consistente na composição corporal
-● Não reduz apenas com hidratação
+* Aumento progressivo ao longo de semanas
+* Alteração consistente na composição corporal
+* Não reduz apenas com hidratação
 
 Peso isolado não define resultado metabólico.
 Composição corporal é o que realmente importa.
@@ -82,18 +82,18 @@ O que o corpo precisa agora não é radicalismo.
 ### 1. Reidratação inteligente
 Ingestão média: 30–35 ml por kg de peso corporal ao dia.
 Estratégia prática:
-● 500 ml ao acordar
-● Água distribuída ao longo do dia
-● Água de coco natural como repositor eletrolítico
-● Suspensão temporária do álcool
+* 500 ml ao acordar
+* Água distribuída ao longo do dia
+* Água de coco natural como repositor eletrolítico
+* Suspensão temporária do álcool
 Quanto mais o organismo percebe equilíbrio hídrico, menor a retenção compensatória.
 
 ### 2. Redução estratégica de sódio (3–5 dias)
 Evite temporariamente:
-● Embutidos
-● Molhos industrializados
-● Snacks salgados
-● Fast food
+* Embutidos
+* Molhos industrializados
+* Snacks salgados
+* Fast food
 Não é zerar o sal.
 É reduzir o excesso e permitir ajuste hidroeletrolítico.
 Prefira temperos naturais, ervas, limão e azeite extra virgem.
@@ -102,44 +102,44 @@ Prefira temperos naturais, ervas, limão e azeite extra virgem.
 Não é cortar carboidrato.
 É modular.
 Prefira:
-● Arroz integral
-● Batata-doce
-● Quinoa
-● Aveia
-● Abóbora
-● Mandioca
+* Arroz integral
+* Batata-doce
+* Quinoa
+* Aveia
+* Abóbora
+* Mandioca
 Evite temporariamente:
-● Açúcares refinados
-● Refrigerantes
-● Bebidas adoçadas
-● Doces ultraprocessados
+* Açúcares refinados
+* Refrigerantes
+* Bebidas adoçadas
+* Doces ultraprocessados
 O objetivo é estabilizar glicemia e favorecer regulação neuroendócrina.
 
 ### 4. Proteína adequada para preservar massa magra
 Faixa média: 1,6–2,2 g/kg/dia (ajuste individualizado).
 A proteína:
-● Preserva massa magra
-● Controla apetite
-● Estabiliza glicemia
-● Minimiza perda muscular no retorno à rotina
+* Preserva massa magra
+* Controla apetite
+* Estabiliza glicemia
+* Minimiza perda muscular no retorno à rotina
 Boas fontes:
-● Frango
-● Peixes
-● Ovos
-● Carne magra
-● Iogurte natural
-● Tofu
-● Leguminosas
+* Frango
+* Peixes
+* Ovos
+* Carne magra
+* Iogurte natural
+* Tofu
+* Leguminosas
 
 ### 5. Fibras e microbiota intestinal
 Após excessos, o intestino frequentemente fica desregulado.
 Inclua diariamente:
-● Folhas verdes
-● Feijão, lentilha, grão-de-bico
-● Aveia
-● Chia e linhaça
-● Brócolis
-● Espinafre
+* Folhas verdes
+* Feijão, lentilha, grão-de-bico
+* Aveia
+* Chia e linhaça
+* Brócolis
+* Espinafre
 As fibras produzem ácidos graxos de cadeia curta, que modulam inflamação, integridade intestinal e sensibilidade metabólica.
 
 ---
@@ -148,55 +148,55 @@ As fibras produzem ácidos graxos de cadeia curta, que modulam inflamação, int
 
 ### Bowl metabólico anti-inflamatório
 **Ingredientes:**
-● ½ xícara de quinoa cozida
-● 120g de frango grelhado
-● 1 xícara de brócolis no vapor
-● ¼ de abacate
-● 1 colher de sopa de azeite extra virgem
-● 1 colher de sopa de sementes de abóbora
+* ½ xícara de quinoa cozida
+* 120g de frango grelhado
+* 1 xícara de brócolis no vapor
+* ¼ de abacate
+* 1 colher de sopa de azeite extra virgem
+* 1 colher de sopa de sementes de abóbora
 **Passo a passo:**
-● Cozinhe a quinoa por 12–15 minutos.
-● Grelhe o frango com ervas naturais.
-● Cozinhe o brócolis no vapor.
-● Monte o bowl equilibrando proteína, fibras e gorduras boas.
-● Finalize com azeite e sementes.
+* Cozinhe a quinoa por 12–15 minutos.
+* Grelhe o frango com ervas naturais.
+* Cozinhe o brócolis no vapor.
+* Monte o bowl equilibrando proteína, fibras e gorduras boas.
+* Finalize com azeite e sementes.
 
 ### Omelete reguladora de apetite
 **Ingredientes:**
-● 2 ovos
-● Espinafre e tomate
-● 1 colher de chia
-● 1 fruta rica em vitamina C
+* 2 ovos
+* Espinafre e tomate
+* 1 colher de chia
+* 1 fruta rica em vitamina C
 **Modo de preparo:**
-● Bata os ovos.
-● Refogue os vegetais.
-● Cozinhe até firmar.
-● Finalize com chia.
-● Consuma junto com a fruta.
+* Bata os ovos.
+* Refogue os vegetais.
+* Cozinhe até firmar.
+* Finalize com chia.
+* Consuma junto com a fruta.
 Saciedade, estabilidade glicêmica e suporte antioxidante.
 
 ### Sopa leve de reorganização metabólica
 **Ingredientes:**
-● Abóbora
-● Cenoura
-● Gengibe
-● Frango desfiado
-● Azeite extra virgem
+* Abóbora
+* Cenoura
+* Gengibe
+* Frango desfiado
+* Azeite extra virgem
 **Preparo:**
-● Cozinhe os vegetais.
-● Bata até formar creme.
-● Acrescente gengibre.
-● Adicione frango.
-● Finalize com azeite.
+* Cozinhe os vegetais.
+* Bata até formar creme.
+* Acrescente gengibre.
+* Adicione frango.
+* Finalize com azeite.
 
 ---
 
 ## O papel crítico do sono
 Dormir pouco:
-● Aumenta grelina (fome)
-● Reduz leptina (saciedade)
-● Eleva cortisol
-● Reduz sensibilidade à insulina
+* Aumenta grelina (fome)
+* Reduz leptina (saciedade)
+* Eleva cortisol
+* Reduz sensibilidade à insulina
 Sem sono adequado, o emagrecimento se torna metabolicamente mais desafador.
 Priorize 7–8 horas por noite.
 
@@ -205,21 +205,21 @@ Priorize 7–8 horas por noite.
 Ao retornar à rotina equilibrada, pode haver resistência inicial.
 Não é falta de disciplina. É neurobiologia.
 Estratégia:
-● Metas pequenas
-● Foco comportamental
-● Constância > intensidade
-● Sem culpa
+* Metas pequenas
+* Foco comportamental
+* Constância > intensidade
+* Sem culpa
 
 ## Conclusão: Carnaval não destrói constância
 Se você quer saber como emagrecer após o Carnaval ou como desinchar rápido, entenda:
 Na maioria das vezes, o peso é retenção temporária.
 O caminho estratégico é:
-● Reidratar
-● Modular sódio
-● Ajustar proteína
-● Regular carboidratos
-● Priorizar sono
-● Retomar treino gradualmente
+* Reidratar
+* Modular sódio
+* Ajustar proteína
+* Regular carboidratos
+* Priorizar sono
+* Retomar treino gradualmente
 
 Metabolismo responde a direção clínica.
 Não a punição.
