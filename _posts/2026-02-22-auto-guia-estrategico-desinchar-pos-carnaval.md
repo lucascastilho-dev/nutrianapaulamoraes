@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Como emagrecer após o Carnaval: "
+title: "Como emagrecer após o Carnaval: guia nutricional"
 subtitle: "Guia estratégico para desinchar, reduzir retenção e reorganizar o metabolismo"
 date: 2026-02-22
 description: "Guia estratégico da Nutri Ana Paula Moraes sobre como emagrecer após o Carnaval de forma saudável. Aprenda a desinchar e reduzir retenção hídrica com protocolo clínico."
