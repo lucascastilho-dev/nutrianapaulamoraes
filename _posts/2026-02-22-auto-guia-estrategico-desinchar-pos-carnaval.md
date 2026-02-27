@@ -154,6 +154,7 @@ As fibras produzem ácidos graxos de cadeia curta, que modulam inflamação, int
 * ¼ de abacate
 * 1 colher de sopa de azeite extra virgem
 * 1 colher de sopa de sementes de abóbora
+
 **Passo a passo:**
 * Cozinhe a quinoa por 12–15 minutos.
 * Grelhe o frango com ervas naturais.
@@ -167,6 +168,7 @@ As fibras produzem ácidos graxos de cadeia curta, que modulam inflamação, int
 * Espinafre e tomate
 * 1 colher de chia
 * 1 fruta rica em vitamina C
+
 **Modo de preparo:**
 * Bata os ovos.
 * Refogue os vegetais.
@@ -182,6 +184,7 @@ Saciedade, estabilidade glicêmica e suporte antioxidante.
 * Gengibe
 * Frango desfiado
 * Azeite extra virgem
+
 **Preparo:**
 * Cozinhe os vegetais.
 * Bata até formar creme.
