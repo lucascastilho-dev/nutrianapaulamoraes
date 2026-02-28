@@ -38,3 +38,11 @@ exclude:
   - Gemfile.lock
   - node_modules
   - README.md
+  # - assets
+  # - vendor
+
+defaults:
+  - scope:
+      path: "assets/fonts"
+    values:
+      sitemap: false
